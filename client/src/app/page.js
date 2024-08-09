@@ -10,10 +10,11 @@ import mainpic from '../assets/doctor3.png'
 import Image from 'next/image';
 
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 
 export default function Home() {
-  fetch("http:localhost:3000/")
+
   return (
     
     <div >
