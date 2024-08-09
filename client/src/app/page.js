@@ -9,6 +9,8 @@ import { CardServices } from '@/components/ui/Servicescard';
 import mainpic from '../assets/doctor3.png'
 import Image from 'next/image';
 
+import { useState, useEffect } from 'react';
+
 
 export default function Home() {
   fetch("http:localhost:3000/")
