@@ -11,6 +11,7 @@ import Image from 'next/image';
 
 
 export default function Home() {
+  fetch("http:localhost:3000/")
   return (
     
     <div >
