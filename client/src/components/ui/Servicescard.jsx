@@ -25,8 +25,8 @@ import labtestimage from '../assets/labtests.png'
 
 export function CardServices() {
   return (
-    <div className="flex gap-4">
-    <Card className="w-[350px] border-white" >
+    <div className="flex gap-4 ">
+    <Card className="w-[350px] transform  rounded-xl transition duration-300 hover:scale-105" >
     <CardContent>
     <Image src={deliveryimage} height="100" width="400" alt="delivery"></Image>
     </CardContent>
@@ -37,7 +37,7 @@ export function CardServices() {
       </CardHeader>
     </Card>
 
-    <Card className="w-[350px]">
+    <Card className="w-[350px] transform border-white rounded-xl transition duration-300 hover:scale-105">
     <CardContent>
     <Image src={petsimage} height="100" width="400" alt="dog"></Image>
     </CardContent>
@@ -49,7 +49,7 @@ export function CardServices() {
     </Card>
     
 
-    <Card className="w-[350px]">
+    <Card className="w-[350px] transform  rounded-xl  transition duration-300 hover:scale-105">
     <CardContent>
     <Image src={labtestimage} height="100" width="400" alt="labtest"></Image>
     </CardContent>

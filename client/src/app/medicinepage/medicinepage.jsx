@@ -144,7 +144,7 @@ export function Content() {
     <div className="object-cover">
     <div className="flex gap-4 justify-center mb-20   ">
 
-      <Card className="w-[350px]">
+      <Card className="w-[350px] transform  rounded-xl transition duration-300 hover:scale-105">
       <CardContent>
       <Image src={musthave} height ="50" width="266"></Image>
       </CardContent>
@@ -155,7 +155,7 @@ export function Content() {
         </CardHeader>
       </Card>
 
-      <Card className="w-[350px]">
+      <Card className="w-[350px] transform  rounded-xl transition duration-300 hover:scale-105">
       <CardContent>
       <Image src={skincare} height ="50" width="266"></Image>
       </CardContent>
@@ -166,7 +166,7 @@ export function Content() {
         </CardHeader>
       </Card>
 
-      <Card className="w-[350px]">
+      <Card className="w-[350px] transform  rounded-xl transition duration-300 hover:scale-105">
       <CardContent>
       <Image src={Elderly} height ="50" width="266"></Image>
       </CardContent>

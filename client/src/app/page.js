@@ -22,7 +22,7 @@ export default function Home() {
         <div className='flex-wrap w-1/2 justify-center items-start content-center'>
           <SeparatorDemo/>
         </div>
-        <div className='flex-wrap w-1/2 justify-center'>
+        <div className='flex-wrap w-1/2 justify-center transform  rounded-xl transition duration-300 hover:scale-105'>
           {/*<Lottie animationData={animationData} className='w-full h-full'></Lottie>*/}
           <Image src={mainpic} alt="mainpic"></Image>
         </div>
