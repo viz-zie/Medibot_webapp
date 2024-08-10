@@ -71,16 +71,16 @@ import { toast } from "sonner"
         <CardDescription>Login to access the website</CardDescription>
       </CardHeader>
       <CardContent>
-        <form>
+        <form action="loginpage/ctrllogin.jsx" method='POST' >
           <div className="grid w-full items-center gap-4">
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="username">Username</Label>
-              <Input id="username" placeholder="Enter your username" onChange={updateName} value={name}  type="text" />
+              <Input id="username" name="username" placeholder="Enter your username" onChange={updateName} value={name}  type="text" />
             </div>
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="framework">Role</Label>
               <Select>
-                <SelectTrigger id="framework">
+                <SelectTrigger id="framework" name="role">
                   <SelectValue placeholder="Select" />
                 </SelectTrigger>
                 <SelectContent position="popper">
@@ -91,14 +91,14 @@ import { toast } from "sonner"
             </div>
             
             <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="name">Password</Label>
-              <Input id="name" placeholder="Enter your password" type="password" />
+              <Label htmlFor="pwd">Password</Label>
+              <Input id="pwd" name="pwd" placeholder="Enter your password" type="password" />
             </div>
           </div>
         </form>
       </CardContent>
       <CardFooter className="flex justify-between">
-        <Button variant="outline" onClick={handleClick}>Reset</Button>
+        <Button variant="outline">Reset</Button>
         <Link href="/"><Button
           onClick={() =>
             toast("Login is Successful", {
