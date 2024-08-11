@@ -34,7 +34,10 @@ export function CardServices(props) {
             <CardHeader>
               <CardTitle>{props.title}</CardTitle>
               <CardDescription>{props.description}</CardDescription>
-              <Button>Click here</Button>
+              <div>
+                <Link href={props.link}><Button className="w-full">Click here</Button></Link>
+              </div>
+              
             </CardHeader>
           </Card>
         </div>

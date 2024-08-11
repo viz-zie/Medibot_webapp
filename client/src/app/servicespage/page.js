@@ -19,7 +19,7 @@ export default function servicespage()
             </div>
 
             <div className='flex flex-wrap justify-center align-center'>
-            {details.map(details => <CardServices key={details.id} imgurl={details.imgurl} title = {details.title} description = {details.description}/>)}
+            {details.map(details => <CardServices key={details.id} imgurl={details.imgurl} title = {details.title} description = {details.description} link = {details.link}/>)}
             </div>
         
 
