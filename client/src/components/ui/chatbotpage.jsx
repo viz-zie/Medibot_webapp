@@ -22,7 +22,7 @@ export function DrawerDemo() {
 
   return (
 <Drawer>
-  <DrawerTrigger className="animate-text bg-gradient-to-r from-teal-500 via-purple-500 to-orange-500 bg-clip-text text-transparent text-sm font-black">chatbot</DrawerTrigger>
+  <DrawerTrigger>chatbot</DrawerTrigger>
   <DrawerContent>
     <DrawerHeader>
       <DrawerTitle>Welcome to MediBot !</DrawerTitle>

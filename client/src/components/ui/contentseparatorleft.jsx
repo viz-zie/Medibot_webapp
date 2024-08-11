@@ -16,7 +16,7 @@ export function SeparatorDemo() {
         </p>
         <div className="flex gap-4">
           <Button>Get Started</Button>
-          <DrawerDemo className="border-white-50 "/>
+          {/*<DrawerDemo className="border-white-50 "/>*/}
         </div>
         
       </div>
