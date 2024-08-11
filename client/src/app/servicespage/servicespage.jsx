@@ -31,14 +31,14 @@ export function CardServices() {
       <div>
         <div className=''>
             <div className="flex items-center justify-center">
-            <h4 className="text-3xl font-bold leading-none mt-20" >Services We Offer</h4>
+            <h4 className="text-3xl font-bold leading-none mt-10" >Services We Offer</h4>
             </div>
             <div className='flex items-center justify-center'>
             <p className="text-sm text-muted-foreground">Service is what life is all about</p>
             </div>
         </div>
       </div>
-      <div className="flex gap-4 justify-center items-center ">
+      <div className="flex gap-4 justify-center items-center mb-10">
     
         <Card className="w-[350px] transform  rounded-xl transition duration-300 hover:scale-105" >
         <CardContent>
@@ -47,7 +47,7 @@ export function CardServices() {
           <CardHeader>
             <CardTitle>Medicine Delivery</CardTitle>
             <CardDescription>Free delivery within 10 minutes from your nearest store </CardDescription>
-            <Link href='./medicinepage'><Button className='w-full' >Click here </Button></Link>
+            <Link href='./servicespage/medicinepage'><Button className='w-full' >Click here </Button></Link>
           </CardHeader>
         </Card>
 
