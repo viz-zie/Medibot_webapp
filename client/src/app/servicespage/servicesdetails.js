@@ -9,26 +9,49 @@ const details =[
         id : 1,
         imgurl : deliveryimage,
         title : "Medicine Delivery",
-        description :"delivery hogayi"
+        description :"We deliver medicine from near by pharmacies at reasonable prices "
     },
     {
         id:2,
         imgurl : petsimage,
         title : "Pets Care",
-        description :"mass kaatreengalae"
+        description :"Care You Can Trust, Tails Wag, Hearts Smile. Treat Your Pets to Unforgettable Care"
     },
     {
         id:3,
         imgurl : labtestimage,
         title : "Lab tests ",
-        description :"hola gola hola"
+        description :"Affordable lab tests in a single window , offers offers offers ! "
     },
     {
         id:4,
         imgurl : labtestimage,
         title : "Lab tests ",
-        description :"hola gola hola"
-    }
+        description :"Affordable lab tests in a single window , offers offers offers ! "
+    },
+    {
+        id:5,
+        imgurl : labtestimage,
+        title : "Lab tests ",
+        description :"Affordable lab tests in a single window , offers offers offers ! "
+    },
+    {
+        id:6,
+        imgurl : labtestimage,
+        title : "Lab tests ",
+        description :"Affordable lab tests in a single window , offers offers offers ! "
+    },
+    {
+        id:7,
+        imgurl : labtestimage,
+        title : "Lab tests ",
+        description :"Affordable lab tests in a single window , offers offers offers ! "
+    },
+    {
+        imgurl : labtestimage,
+        title : "Lab tests ",
+        description :"Affordable lab tests in a single window , offers offers offers ! "
+    },
 ];
 
 export default details

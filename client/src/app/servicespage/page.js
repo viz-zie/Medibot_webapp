@@ -17,8 +17,8 @@ export default function servicespage()
                     </div>
                 </div>
             </div>
-            
-            <div className='flex justify-center align-center'>
+
+            <div className='flex flex-wrap justify-center align-center'>
             {details.map(details => <CardServices key={details.id} imgurl={details.imgurl} title = {details.title} description = {details.description}/>)}
             </div>
         
