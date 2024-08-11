@@ -53,7 +53,7 @@ import headericon from '../assets/vercel.png'
         <MenubarTrigger><Link href="/">Home</Link></MenubarTrigger>
       </MenubarMenu>
       <MenubarMenu>
-        <MenubarTrigger><Link href="#serviceSection">Services</Link></MenubarTrigger>
+        <MenubarTrigger><Link href="/servicespage">Services</Link></MenubarTrigger>
       </MenubarMenu>
         <MenubarMenu>
           <MenubarTrigger>About Us</MenubarTrigger>
