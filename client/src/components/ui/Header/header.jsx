@@ -33,7 +33,7 @@ import {
 import { SheetDemo } from '@/components/ui/sidenotificationbar'
 import { DrawerDemo } from '@/components/ui/chatbotpage'
 import Image from 'next/image'
-import headericon from '@/components/assets/headerlogo5.png'
+import headericon from '@/components/assets/headerlogo.png'
 
  
 
