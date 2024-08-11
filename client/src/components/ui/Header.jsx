@@ -1,9 +1,8 @@
 'use client'
 import Lottie from 'lottie-react'
-import animationdata from '../assets/headericon.json'
+
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { AvatarDemo } from '@/components/ui/profileicon'
 import { ModeToggle } from "@/components/ui/toggle"
 import {
     Menubar,
@@ -34,7 +33,7 @@ import {
 import { SheetDemo } from '@/components/ui/sidenotificationbar'
 import { DrawerDemo } from '@/components/ui/chatbotpage'
 import Image from 'next/image'
-import headericon from '../assets/vercel.png'
+import headericon from '../assets/headerlogo5.png'
 
  
 
@@ -48,7 +47,7 @@ import headericon from '../assets/vercel.png'
       <MenubarMenu>
       
       {/*<Lottie animationData={animationdata} className='w-10 h-10'></Lottie>*/}
-      <Image src={headericon} width={50} height={50} alt='mainlogo'></Image>
+      <Image src={headericon} width={40} height={40} alt='mainlogo'></Image>
       
         <MenubarTrigger><Link href="/">Home</Link></MenubarTrigger>
       </MenubarMenu>
