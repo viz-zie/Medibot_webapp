@@ -24,7 +24,7 @@ const details =[
         id:3,
         imgurl : labtestimage,
         title : "Lab tests ",
-        description :"Affordable lab tests in a single window , offers offers offers ! ",
+        description :"Affordable lab tests in a single window , offers offers offers !! ",
         link : "/servicespage/medicinepage"
     },
     /*
