@@ -18,14 +18,14 @@ const details =[
         imgurl : petsimage,
         title : "Pets Care",
         description :"Care You Can Trust, Tails Wag, Hearts Smile. Treat Your Pets to Unforgettable Care",
-        link : "/servicespage/medicinepage"
+        link : "/servicespage/petcarepage"
     },
     {
         id:3,
         imgurl : labtestimage,
         title : "Lab tests ",
         description :"Affordable lab tests in a single window , offers offers offers !! ",
-        link : "/servicespage/medicinepage"
+        link : "/servicespage/labtestspage"
     },
     /*
     {
