@@ -10,7 +10,7 @@ export function RadioGroupDemo() {
       </div>
       <div className="flex items-center space-x-3">
         <RadioGroupItem value="2" id="r2" />
-        <Label htmlFor="r2">Efficiently replies to patient's text messages</Label>
+        <Label htmlFor="r2">Efficiently replies to patient&apos;s text messages</Label>
       </div>
       <div className="flex items-center space-x-3">
         <RadioGroupItem value="3" id="r3" />

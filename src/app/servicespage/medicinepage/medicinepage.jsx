@@ -82,7 +82,7 @@ export function Content() {
     <div className="flex gap-4 justify-center mb-20">
     <Card className="w-[350px] border-white" >
     <CardContent>
-    <Image src={heartimage} height="50" width="200"></Image>
+    <Image src={heartimage} height="50" width="200" alt="heartimage"></Image>
     </CardContent>
       <CardHeader>
         <CardTitle>Heart Based</CardTitle>
@@ -93,7 +93,7 @@ export function Content() {
 
     <Card className="w-[350px]">
     <CardContent>
-    <Image src={lungsimage} height="50" width="238"></Image>
+    <Image src={lungsimage} height="50" width="238" alt="lungsimage"></Image>
     </CardContent>
       <CardHeader>
         <CardTitle>Lungs Based</CardTitle>
@@ -105,7 +105,7 @@ export function Content() {
 
     <Card className="w-[350px]">
     <CardContent>
-    <Image src={kidneyimage} height ="50" width="266"></Image>
+    <Image src={kidneyimage} height ="50" width="266" alt="kidneyimage"></Image>
     </CardContent>
       <CardHeader className="mt-8">
         <CardTitle>Kidney Based</CardTitle>
@@ -126,10 +126,10 @@ export function Content() {
           ]}
         >
           <CarouselContent className="">
-            <CarouselItem className="flex items-center justify-center"><Image src={banner5} height="100" width="1300"></Image></CarouselItem>
-            <CarouselItem className="flex items-center justify-center"><Image src={banner6} height="100" width="1300"></Image></CarouselItem>
-            <CarouselItem className="flex items-center justify-center"><Image src={banner7} height="100" width="1300"></Image></CarouselItem>
-            <CarouselItem className="flex items-center justify-center"><Image src={banner8} height="100" width="1300"></Image></CarouselItem>
+            <CarouselItem className="flex items-center justify-center"><Image src={banner5} height="100" width="1300" alt="banner1"></Image></CarouselItem>
+            <CarouselItem className="flex items-center justify-center"><Image src={banner6} height="100" width="1300" alt="banner1"></Image></CarouselItem>
+            <CarouselItem className="flex items-center justify-center"><Image src={banner7} height="100" width="1300" alt="banner1"></Image></CarouselItem>
+            <CarouselItem className="flex items-center justify-center"><Image src={banner8} height="100" width="1300" alt="banner1"></Image></CarouselItem>
           </CarouselContent>
         </Carousel>
      
@@ -146,7 +146,7 @@ export function Content() {
 
       <Card className="w-[350px] transform  rounded-xl transition duration-300 hover:scale-105">
       <CardContent>
-      <Image src={musthave} height ="50" width="266"></Image>
+      <Image src={musthave} height ="50" width="266" alt="banner1"></Image>
       </CardContent>
         <CardHeader className="mt-3">
           <CardTitle>Must Haves</CardTitle>
@@ -157,18 +157,18 @@ export function Content() {
 
       <Card className="w-[350px] transform  rounded-xl transition duration-300 hover:scale-105">
       <CardContent>
-      <Image src={skincare} height ="50" width="266"></Image>
+      <Image src={skincare} height ="50" width="266" alt="banner1"></Image>
       </CardContent>
         <CardHeader className="mt-3">
           <CardTitle>Skin Care</CardTitle>
-          <CardDescription>Reveal your skin's true potential. </CardDescription>
+          <CardDescription>Reveal your skin&apos;s true potential.</CardDescription>
           <Button>View </Button>
         </CardHeader>
       </Card>
 
       <Card className="w-[350px] transform  rounded-xl transition duration-300 hover:scale-105">
       <CardContent>
-      <Image src={Elderly} height ="50" width="266"></Image>
+      <Image src={Elderly} height ="50" width="266" alt="banner1"></Image>
       </CardContent>
         <CardHeader className="mt-3">
           <CardTitle>Elderly Care</CardTitle>
