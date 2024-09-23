@@ -12,7 +12,7 @@ export function SeparatorDemo() {
         </p>
 
         <p className="text-3xl text-muted-foreground">
-        we are dedicated to enriching people&apos;s lives through improved health and fitness
+        {"we are dedicated to enriching people's lives through improved health and fitness"}
         </p>
         <div className="flex gap-4">
           <Button>Get Started</Button>
