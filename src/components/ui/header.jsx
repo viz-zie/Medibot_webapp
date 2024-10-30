@@ -64,11 +64,11 @@ import headericon from '@/components/assets/headerlogo.png'
           </MenubarMenu>
 
           <MenubarMenu>
-          <MenubarTrigger><Link href="/aboutuspage">About Us</Link></MenubarTrigger>
+          <MenubarTrigger><Link href="/myaccountpage">My Account</Link></MenubarTrigger>
           </MenubarMenu>
 
           <MenubarMenu>
-          <MenubarTrigger><Link href="/vendorpage">Vendor</Link></MenubarTrigger>
+          <MenubarTrigger><Link href="/aboutuspage">About Us</Link></MenubarTrigger>
           </MenubarMenu>
           
           <MenubarMenu>
