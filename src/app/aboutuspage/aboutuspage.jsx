@@ -5,24 +5,33 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Avatar } from '@/components/ui/avatar';
 import vishphoto1 from './assets/vishphoto1.jpg'
+import vishphoto2 from "@/app/aboutuspage/assets/vishphoto2.jpg"
+
 
 import Image from 'next/image';
 // Sample team member data
 const teamMembers = [
   {
+    id:1,
     name: 'Vishranth Karthikheyan',
     role: 'Founder & CEO',
-    image: 'https://via.placeholder.com/150',
+    src: vishphoto2,
+    link : 'https://viz-zie.github.io/MyPortfolio/',
   },
   {
+    id:2,
     name: 'Nitin Pranav ',
     role: 'Founder & CTO',
-    image: 'https://via.placeholder.com/150',
+    src: vishphoto2,
+    link : 'https://viz-zie.github.io/MyPortfolio/',
   },
   {
+    id:3,
     name: 'Harshad Subramaniam',
     role: 'Founder & COO',
-    image: 'https://via.placeholder.com/150',
+    src: vishphoto2,
+    link : 'https://viz-zie.github.io/MyPortfolio/',
+    
   },
 ];
 
@@ -39,12 +48,14 @@ const AboutUs = () => {
           Meet Our Team
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {teamMembers.map((member, index) => (
-            <Card key={index} className="p-6  shadow-md rounded-lg text-center">
-              <img
-                src={member.image}
+          {teamMembers.map((member) => (
+            <Card key={member.id} className="p-6  shadow-md rounded-lg text-center">
+              <Image
+                
+                src={member.src}
                 alt={member.name}
-                size="lg"
+                width={300}
+                
                 className="mx-auto mb-4 rounded-full"
               />
               <h1 as="h3" size="lg" className=" mb-2">
@@ -52,7 +63,7 @@ const AboutUs = () => {
               </h1>
               <p className="text-gray-500 mb-4">{member.role}</p>
               <Button className=" text-white  ">
-                View Profile
+              <a href={member.link}>View Profile</a>
               </Button>
             </Card>
           ))}

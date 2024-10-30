@@ -64,7 +64,7 @@ import headericon from '@/components/assets/headerlogo.png'
           </MenubarMenu>
 
           <MenubarMenu>
-          <MenubarTrigger>About Us</MenubarTrigger>
+          <MenubarTrigger><Link href="/aboutuspage">About Us</Link></MenubarTrigger>
           </MenubarMenu>
 
           <MenubarMenu>
