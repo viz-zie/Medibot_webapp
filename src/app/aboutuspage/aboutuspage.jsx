@@ -38,12 +38,12 @@ const teamMembers = [
 const AboutUs = () => {
   return (
     
-    <div className="min-h-screen  py-12">
+    <div className="min-h-screen ">
       {/* Hero Section */}
       
 
       {/* Team Section */}
-      <div className="container mx-auto px-4 mt-12">
+      <div className="container mx-auto px-4 ">
         <h1 as="h2" size="xl" className="text-center  mb-8">
           Meet Our Team
         </h1>
