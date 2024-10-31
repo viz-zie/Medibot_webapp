@@ -43,10 +43,13 @@ const AboutUs = () => {
       
 
       {/* Team Section */}
-      <div className="container mx-auto px-4 ">
-        <h1 as="h2" size="xl" className="text-center  mb-8">
-          Meet Our Team
-        </h1>
+      <div className="container mx-auto  ">
+        <div className="flex items-center justify-center">
+          <h4 className="text-3xl font-bold leading-none " >Meet Our Team</h4>
+        </div>
+        <div className='flex items-center justify-center mb-10'>
+          <p className="text-sm text-muted-foreground">The Pilliars of Medisoter</p>
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
           {teamMembers.map((member) => (
             <Card key={member.id} className="p-6   rounded-lg text-center">
