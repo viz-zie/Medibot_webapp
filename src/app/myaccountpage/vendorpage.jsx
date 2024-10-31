@@ -135,7 +135,7 @@ export function Dashboard() {
               </nav>
             </SheetContent>
             <div className="">
-              <p className="text-xl font-bold leading-none">Hello Harshad  </p>
+              <p className="text-xl font-bold leading-none">Hello User  </p>
               <p className="text-lg text-muted-foreground mb-4">
                 Welcome !
               </p>
