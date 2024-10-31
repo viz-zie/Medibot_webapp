@@ -4,7 +4,7 @@ import animationData from './assets/loginanimation7.json'
 import doctorpic from './assets/docpic3.png'
 import Link from "next/link"
 import Image from 'next/image'
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
     Card,
     CardContent,
@@ -36,16 +36,23 @@ import {
 import { toast } from "sonner"
 
 
+import { useRouter } from 'next/navigation'
+import axios from 'axios'
+
 
 
   export function CardWithForm() 
   {
+    const router = useRouter();
     const [user,setUser] = React.useState(
       {
         username : "",
         password : "",
       }
     )
+    
+    const [buttonDisabled,setButtonDisabled] = React.useState(false);
+    const [loading,setLoading] = React.useState(false);
 
     const onLogin = async () =>
     {
@@ -54,8 +61,39 @@ import { toast } from "sonner"
 
     const onSignUp = async() =>
     {
-
+      try
+      {
+        setLoading(true);
+         const response = await axios.post("@/app/api/users/signup",user)
+         console.log("SignUp Success", response.data);
+         router.push("/loginsignup")
+      }
+      catch(error)
+      {
+        console.log("SignUp failed", error.message)
+        toast.error(error.message);
+      }
+      finally
+      {
+        setLoading(false);
+      }
     }
+
+
+
+    useEffect (() =>{
+
+      if(user.username.length>0 && user.password.length>0)
+      {
+        setButtonDisabled(false);
+      }
+      else
+      {
+        setButtonDisabled(true);
+      }
+
+    },[user]);
+
 
     return (
       <Card className="w-[800px] h-[500px] flex">
@@ -73,7 +111,7 @@ import { toast } from "sonner"
       <Card className="w-[350px]">
       <CardHeader>
         <CardTitle>Hey ! </CardTitle>
-        <CardDescription>Login to access the website</CardDescription>
+        <CardDescription>{loading? "Processing" : "Login to access the website"} </CardDescription>
       </CardHeader>
       <CardContent>
         <form action="loginpage/ctrllogin.jsx" method='POST' >
@@ -104,8 +142,7 @@ import { toast } from "sonner"
       </CardContent>
       <CardFooter className="flex justify-between">
         <Button variant="outline">Reset</Button>
-        <Link href="/"><Button onClick={onLogin}>Login
-        </Button></Link>
+        <Link href="/"><Button onClick={onLogin}>{buttonDisabled ? "Fill all fields to Login" : "Login"}</Button></Link>
       </CardFooter>
 
 
@@ -156,7 +193,7 @@ import { toast } from "sonner"
       <CardFooter className="flex justify-between">
         <Button variant="outline">Reset</Button>
         {/*used a sonner button cum toast*/}
-        <Link href="/"><Button onClick={onSignUp}>SignUp</Button></Link>
+        <Link href="/"><Button onClick={onSignUp}>{buttonDisabled ? "Fill all fields to SignUp" : "SignUp"}</Button></Link>
       </CardFooter>
     </Card>
       </TabsContent>

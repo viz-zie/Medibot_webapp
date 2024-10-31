@@ -244,7 +244,7 @@ export default function userprofile({params}){
               </nav>
             </SheetContent>
             <div className="">
-              <p className="text-xl font-bold leading-none">Hello {params.user}  </p>
+              <p className="text-xl font-bold leading-none">Hi {params.user},  </p>
               <p className="text-lg text-muted-foreground mb-4">
                 Welcome !
               </p>
