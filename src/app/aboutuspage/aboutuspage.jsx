@@ -48,7 +48,7 @@ const AboutUs = () => {
           <h4 className="text-3xl font-bold leading-none " >Meet Our Team</h4>
         </div>
         <div className='flex items-center justify-center mb-10'>
-          <p className="text-sm text-muted-foreground">The Pilliars of Medisoter</p>
+          <p className="text-sm text-muted-foreground">The Pillars of Medisoter</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
           {teamMembers.map((member) => (
