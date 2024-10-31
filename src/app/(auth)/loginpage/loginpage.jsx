@@ -38,20 +38,25 @@ import { toast } from "sonner"
 
 
 
-  export function CardWithForm() {
+  export function CardWithForm() 
+  {
+    const [user,setUser] = React.useState(
+      {
+        username : "",
+        password : "",
+      }
+    )
 
-    const [name,setName] = React.useState("");
-    const [heading,setHeading] = React.useState("");
-    
-    function updateName(event)
+    const onLogin = async () =>
     {
-      setName(event.target.value);
+
     }
 
-    function handleClick()
+    const onSignUp = async() =>
     {
-      setHeading(name);
+
     }
+
     return (
       <Card className="w-[800px] h-[500px] flex">
       <div className='w-1/2'>
@@ -67,7 +72,7 @@ import { toast } from "sonner"
       <TabsContent value="Login">
       <Card className="w-[350px]">
       <CardHeader>
-        <CardTitle>Hey ! {heading}</CardTitle>
+        <CardTitle>Hey ! </CardTitle>
         <CardDescription>Login to access the website</CardDescription>
       </CardHeader>
       <CardContent>
@@ -75,7 +80,7 @@ import { toast } from "sonner"
           <div className="grid w-full items-center gap-4">
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="username">Username</Label>
-              <Input id="username" name="username" placeholder="Enter your username" onChange={updateName} value={name}  type="text" />
+              <Input id="username" name="username" placeholder="Enter your username" type="text" value={user.username} onChange={(e) => setUser({...user,username:e.target.value})} />
             </div>
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="framework">Role</Label>
@@ -92,27 +97,28 @@ import { toast } from "sonner"
             
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="pwd">Password</Label>
-              <Input id="pwd" name="pwd" placeholder="Enter your password" type="password" />
+              <Input id="pwd" name="pwd" placeholder="Enter your password" type="password" value={user.password} onChange={(e) => setUser({...user,password:e.target.value})}/>
             </div>
           </div>
         </form>
       </CardContent>
       <CardFooter className="flex justify-between">
         <Button variant="outline">Reset</Button>
-        <Link href="/"><Button
-          onClick={() =>
-            toast("Login is Successful", {
-              description: "Welcome ! ",
-              action: {
-                label: "close",
-                onClick: () => console.log("Undo"),
-              },
-            })
-            }
-
-        >Login
+        <Link href="/"><Button onClick={onLogin}>Login
         </Button></Link>
       </CardFooter>
+
+
+
+
+
+
+
+
+
+
+
+
     </Card>
       </TabsContent>
       <TabsContent value="Sign Up">
@@ -126,7 +132,7 @@ import { toast } from "sonner"
           <div className="grid w-full items-center gap-4">
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="Username">Username</Label>
-              <Input id="Username" placeholder="Enter your username" />
+              <Input id="Username" placeholder="Enter your username" value={user.username} onChange={(e) => setUser({...user,username:e.target.value})} />
             </div>
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="framework">Role</Label>
@@ -142,7 +148,7 @@ import { toast } from "sonner"
             </div>
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="Password">Password</Label>
-              <Input id="Password" placeholder="Enter your Password" type="password" />
+              <Input id="Password" placeholder="Enter your Password" type="password" value={user.password} onChange={(e) => setUser({...user,password:e.target.value})} />
             </div>
           </div>
         </form>
@@ -150,18 +156,7 @@ import { toast } from "sonner"
       <CardFooter className="flex justify-between">
         <Button variant="outline">Reset</Button>
         {/*used a sonner button cum toast*/}
-        <Link href="/"><Button
-          onClick={() =>
-            toast("Sign Up is Successful", {
-              description: "New user has been created",
-              action: {
-                label: "close",
-                onClick: () => console.log("Undo"),
-              },
-            })
-          }
-        >SignUp
-        </Button></Link>
+        <Link href="/"><Button onClick={onSignUp}>SignUp</Button></Link>
       </CardFooter>
     </Card>
       </TabsContent>
