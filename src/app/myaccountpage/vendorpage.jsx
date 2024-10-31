@@ -1,7 +1,7 @@
 import * as React from "react"
 import Image from "next/image"
 import Link from "next/link"
-import userimage from './assets/user.jpeg'
+import vishphoto2 from './assets/vishphoto2.jpg'
 import {
   ChevronLeft,
   ChevronRight,
@@ -178,7 +178,7 @@ export function Dashboard() {
                 className="overflow-hidden rounded-full"
               >
                 <Image
-                  src={userimage}
+                  src={vishphoto2}
                   width={36}
                   height={36}
                   alt="Avatar"

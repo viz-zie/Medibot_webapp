@@ -35,11 +35,14 @@ import { SheetDemo } from '@/components/ui/sidenotificationbar'
 import { DrawerDemo } from '@/components/ui/chatbotpage'
 import Image from 'next/image'
 import headericon from '@/components/assets/headerlogo.png'
-
+import { usePathname } from 'next/navigation'
+import classes from './header.module.css'
  
 
 
-  export function MenubarDemo() {
+  export function MenubarDemo() 
+  {
+    const path = usePathname();
 
     
 
@@ -56,19 +59,19 @@ import headericon from '@/components/assets/headerlogo.png'
           </MenubarMenu>
 
           <MenubarMenu>
-          <MenubarTrigger><Link href="/" >Home</Link></MenubarTrigger>
+          <MenubarTrigger><Link href="/">Home</Link></MenubarTrigger>
           </MenubarMenu>
 
           <MenubarMenu>
-            <MenubarTrigger><Link href="/servicespage">Services</Link></MenubarTrigger>
+            <MenubarTrigger><Link href="/servicespage" className={path.startsWith('/servicespage')? classes.active:undefined}>Services</Link></MenubarTrigger>
           </MenubarMenu>
 
           <MenubarMenu>
-          <MenubarTrigger><Link href="/myaccountpage">My Account</Link></MenubarTrigger>
+          <MenubarTrigger><Link href="/myaccountpage" className={path.startsWith('/myaccountpage')? classes.active:undefined} >My Account</Link></MenubarTrigger>
           </MenubarMenu>
 
           <MenubarMenu>
-          <MenubarTrigger><Link href="/aboutuspage">About Us</Link></MenubarTrigger>
+          <MenubarTrigger><Link href="/aboutuspage" className={path.startsWith('/aboutuspage')? classes.active:undefined}>About Us</Link></MenubarTrigger>
           </MenubarMenu>
           
           <MenubarMenu>

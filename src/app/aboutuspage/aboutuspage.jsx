@@ -47,9 +47,9 @@ const AboutUs = () => {
         <h1 as="h2" size="xl" className="text-center  mb-8">
           Meet Our Team
         </h1>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
           {teamMembers.map((member) => (
-            <Card key={member.id} className="p-6  shadow-md rounded-lg text-center">
+            <Card key={member.id} className="p-6   rounded-lg text-center">
               <Image
                 
                 src={member.src}
