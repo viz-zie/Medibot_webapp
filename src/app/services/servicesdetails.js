@@ -10,7 +10,7 @@ const details =[
         imgurl : deliveryimage,
         title : "Medicine Delivery",
         description :"We deliver medicine from near by pharmacies at reasonable prices ",
-        link : "/servicespage/medicinepage"
+        link : "/services/medicines"
 
     },
     {
@@ -18,14 +18,14 @@ const details =[
         imgurl : petsimage,
         title : "Pets Care",
         description :"Care You Can Trust, Tails Wag, Hearts Smile. Treat Your Pets to Unforgettable Care",
-        link : "/servicespage/petcarepage"
+        link : "/services/petcare"
     },
     {
         id:3,
         imgurl : labtestimage,
         title : "Lab tests ",
         description :"Affordable lab tests in a single window , offers offers offers !! ",
-        link : "/servicespage/labtestspage"
+        link : "/services/labtests"
     },
     /*
     {

@@ -63,15 +63,15 @@ import classes from './header.module.css'
           </MenubarMenu>
 
           <MenubarMenu>
-            <MenubarTrigger><Link href="/servicespage" className={path.startsWith('/servicespage')? classes.active:undefined}>Services</Link></MenubarTrigger>
+            <MenubarTrigger><Link href="/services" className={path.startsWith('/services')? classes.active:undefined}>Services</Link></MenubarTrigger>
           </MenubarMenu>
 
           <MenubarMenu>
-          <MenubarTrigger><Link href="/myaccountpage" className={path.startsWith('/myaccountpage')? classes.active:undefined} >My Account</Link></MenubarTrigger>
+          <MenubarTrigger><Link href="/dashboard" className={path.startsWith('/dashboard')? classes.active:undefined} >My Dashboard</Link></MenubarTrigger>
           </MenubarMenu>
 
           <MenubarMenu>
-          <MenubarTrigger><Link href="/aboutuspage" className={path.startsWith('/aboutuspage')? classes.active:undefined}>About Us</Link></MenubarTrigger>
+          <MenubarTrigger><Link href="/aboutus" className={path.startsWith('/aboutus')? classes.active:undefined}>About Us</Link></MenubarTrigger>
           </MenubarMenu>
           
           <MenubarMenu>
@@ -84,7 +84,7 @@ import classes from './header.module.css'
         <MenubarMenu>
         <div className=" container ml-auto flex items-center gap-4 justify-end">
             <SheetDemo className="flex items-center justify-end"/>
-            <Link href='./loginpage'><Button>Login / Signup</Button></Link>
+            <Link href='./loginsignup'><Button>Login / Signup</Button></Link>
         </div>
         </MenubarMenu>
       </Menubar>

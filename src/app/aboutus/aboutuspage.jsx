@@ -5,7 +5,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Avatar } from '@/components/ui/avatar';
 import vishphoto1 from './assets/vishphoto1.jpg'
-import vishphoto2 from "@/app/aboutuspage/assets/vishphoto2.jpg"
+import vishphoto2 from "@/app/aboutus/assets/vishphoto2.jpg"
 
 
 import Image from 'next/image';
