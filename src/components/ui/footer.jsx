@@ -18,21 +18,21 @@ export default function Footer() {
             Home
           </Link>
           <Link
-            href="/"
-            className="text-sm font-medium hover:underline hover:text-gray-900 dark:hover:text-gray-50"
-            prefetch={false}
-          >
-            Chat Bot
-          </Link>
-          <Link
-            href="/"
+            href="/servicespage"
             className="text-sm font-medium hover:underline hover:text-gray-900 dark:hover:text-gray-50"
             prefetch={false}
           >
             Services
           </Link>
           <Link
-            href="/"
+            href="myaccountpage"
+            className="text-sm font-medium hover:underline hover:text-gray-900 dark:hover:text-gray-50"
+            prefetch={false}
+          >
+            My Account
+          </Link>
+          <Link
+            href="aboutuspage"
             className="text-sm font-medium hover:underline hover:text-gray-900 dark:hover:text-gray-50"
             prefetch={false}
           >
