@@ -193,7 +193,7 @@ export default function Loginpage()
       <CardFooter className="flex justify-between">
         <Button variant="outline">Reset</Button>
         {/*used a sonner button cum toast*/}
-        <Link href="/"><Button onClick={onSignUp}>{buttonDisabled ? "Fill all fields to SignUp" : "SignUp"}</Button></Link>
+        <Link href="/loginsignup"><Button onClick={onSignUp}>{buttonDisabled ? "Fill all fields to SignUp" : "SignUp"}</Button></Link>
       </CardFooter>
     </Card>
       </TabsContent>
