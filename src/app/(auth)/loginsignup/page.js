@@ -69,6 +69,7 @@ export default function Loginpage()
         setLoading(true);
          const response = await axios.post("/api/users/signup",user)
          console.log("SignUp Success", response.data);
+         toast("Sign Up is successfull , Please Login !")
          router.push("/loginsignup")
       }
       catch(error)
