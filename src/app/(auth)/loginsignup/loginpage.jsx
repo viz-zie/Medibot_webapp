@@ -64,7 +64,7 @@ import axios from 'axios'
       try
       {
         setLoading(true);
-         const response = await axios.post("@/app/api/users/signup",user)
+         const response = await axios.post("@/app/api/users/signup/route.js",user)
          console.log("SignUp Success", response.data);
          router.push("/loginsignup")
       }
