@@ -17,7 +17,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { DatePickerDemo } from "@/components/ui/datepicker"
+
 import {
   Tabs,
   TabsContent,
@@ -46,7 +46,7 @@ import axios from 'axios'
 
 export default function loginpage()
 {
-  const router = useRouter();
+    const router = useRouter();
     const [user,setUser] = React.useState(
       {
         username : "",
@@ -67,7 +67,7 @@ export default function loginpage()
       try
       {
         setLoading(true);
-         const response = await axios.post("@/app/api/users/signup/route.js",user)
+         const response = await axios.post("/api/users/signup",user)
          console.log("SignUp Success", response.data);
          router.push("/loginsignup")
       }
@@ -96,14 +96,14 @@ export default function loginpage()
       }
 
     },[user]);
-    
+
   return (
     <div>
       <main className="flex max-h-screen flex-col items-center justify-between p-24 ">
       <Card className="w-[800px] h-[500px] flex">
       <div className='w-1/2'>
         {/*<Lottie animationData={animationData}></Lottie>*/}
-        {<Image src={doctorpic} alt="logindoc"></Image>}
+        <Image src={doctorpic} alt="logindoc"></Image>
       </div>
       <div className='w-1/2'>
       <Tabs defaultValue="Login" className="w-[350px]">
@@ -118,7 +118,7 @@ export default function loginpage()
         <CardDescription>{loading? "Processing" : "Login to access the website"} </CardDescription>
       </CardHeader>
       <CardContent>
-        <form action="loginpage/ctrllogin.jsx" method='POST' >
+        <form>
           <div className="grid w-full items-center gap-4">
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="username">Username</Label>
@@ -148,25 +148,21 @@ export default function loginpage()
         <Button variant="outline">Reset</Button>
         <Link href="/"><Button onClick={onLogin}>{buttonDisabled ? "Fill all fields to Login" : "Login"}</Button></Link>
       </CardFooter>
-
-
-
-
-
-
-
-
-
-
-
-
     </Card>
       </TabsContent>
+  
+
+
+
+
+
+
+
       <TabsContent value="Sign Up">
       <Card className="w-[350px]">
       <CardHeader>
         <CardTitle>Hey !</CardTitle>
-        <CardDescription>Sign Up , if you are a new user</CardDescription>
+        <CardDescription>{loading? "Processing" : "Sign Up , if you are a new user"}</CardDescription>
       </CardHeader>
       <CardContent>
         <form>
@@ -204,7 +200,6 @@ export default function loginpage()
     </Tabs>
       </div>
       </Card>
-      
       </main>
     </div>
     

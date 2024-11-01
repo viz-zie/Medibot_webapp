@@ -1,9 +1,11 @@
 import {connect} from "@/dbConfig/dbConfig"
-import User from "@/models/userModels.js"
+import User from "@/models/userModels"
 import { NextRequest, NextResponse } from "next/server"
 import bcryptjs from "bcryptjs"
 
 connect()
+
+
 
 export async function POST(request)
 {
@@ -44,3 +46,4 @@ export async function POST(request)
         return NextResponse.json({error:error.message},{status:500})
     }
 }
+
