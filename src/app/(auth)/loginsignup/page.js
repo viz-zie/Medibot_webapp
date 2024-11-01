@@ -44,7 +44,7 @@ import axios from 'axios'
 
 
 
-export default function loginpage()
+export default function Loginpage()
 {
     const router = useRouter();
     const [user,setUser] = React.useState(
