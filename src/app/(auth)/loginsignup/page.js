@@ -55,13 +55,36 @@ export default function Loginpage()
         password : "",
       }
     )
+
+    const [loginUser,setLoginUser]=React.useState({
+      username:"",
+      role:"",
+      password:"",
+    })
     
     const [buttonDisabled,setButtonDisabled] = React.useState(false);
     const [loading,setLoading] = React.useState(false);
 
     const onLogin = async () =>
     {
+      try
+      {
+        setLoading(true);
+        const response = await axios.post("/api/users/login",loginUser);
+        console.log("login Success",response.data);
+        toast.success("Login Successful");
+        router.push("/");
+      }
 
+      catch(error)
+      {
+        console.log("Login failed",error.message);
+        toast.error(error.message)
+      }
+      finally
+      {
+        setLoading(false);
+      }
     }
 
     const onSignUp = async() =>
@@ -86,10 +109,23 @@ export default function Loginpage()
     }
 
 
+    useEffect (() =>{
+
+      if(loginUser.username.length>0 && loginUser.password.length>0 && loginUser.role.length>0)
+      {
+        setButtonDisabled(false);
+      }
+      else
+      {
+        setButtonDisabled(true);
+      }
+
+    },[user]);
+
 
     useEffect (() =>{
 
-      if(user.username.length>0 && user.password.length>0 && user.role.length>0)
+      if(user.username.length>0 && user.password.length>0 && user.role.length>0 && user.email.length>0)
       {
         setButtonDisabled(false);
       }
@@ -127,24 +163,24 @@ export default function Loginpage()
           <div className="grid w-full items-center gap-4">
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="usernameLogin">Username</Label>
-              <Input id="username" name="username" placeholder="Enter your username" type="text" value={user.username} onChange={(e) => setUser({...user,username:e.target.value})} />
+              <Input id="username" name="username" placeholder="Enter your username" type="text" value={loginUser.username} onChange={(e) => setLoginUser({...loginUser,username:e.target.value})} />
             </div>
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="framework">Role</Label>
-              <Select>
-                <SelectTrigger id="framework" name="role">
-                  <SelectValue placeholder="Select" />
-                </SelectTrigger>
-                <SelectContent position="popper">
-                  <SelectItem value="Vendor">Vendor</SelectItem>
-                  <SelectItem value="Customer">Customer</SelectItem>
-                </SelectContent>
-              </Select>
+              <Select onValueChange={(value) => setLoginUser({ ...loginUser, role: value })}>
+              <SelectTrigger id="Role" name="role">
+                <SelectValue placeholder="Select" />
+              </SelectTrigger>
+              <SelectContent position="popper">
+                <SelectItem value="Vendor">Vendor</SelectItem>
+                <SelectItem value="Customer">Customer</SelectItem>
+              </SelectContent>
+            </Select>
             </div>
             
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="pwd">Password</Label>
-              <Input id="pwd" name="pwd" placeholder="Enter your password" type="password" value={user.password} onChange={(e) => setUser({...user,password:e.target.value})}/>
+              <Input id="pwd" name="pwd" placeholder="Enter your password" type="password" value={loginUser.password} onChange={(e) => setLoginUser({...loginUser,password:e.target.value})}/>
             </div>
           </div>
         </form>
