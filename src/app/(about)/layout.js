@@ -15,7 +15,7 @@ export default function aboutuslayout({ children }) {
 
   return (
     <html>
-    <body>
+    <body className={inter.className}>
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
         
         <MenubarDemo/>
