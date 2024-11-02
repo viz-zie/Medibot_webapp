@@ -178,7 +178,19 @@ export default function Loginpage()
             </div>
             <div className="flex flex-col space-y-1.5">
             <Label htmlFor="Role">Role</Label>
+            <Select onValueChange={(value) => setUser({ ...user, role: value })}>
+              <SelectTrigger id="Role" name="role">
+                <SelectValue placeholder="Select" />
+              </SelectTrigger>
+              <SelectContent position="popper">
+                <SelectItem value="Vendor">Vendor</SelectItem>
+                <SelectItem value="Customer">Customer</SelectItem>
+              </SelectContent>
+            </Select>
+            {/*
+            <Label htmlFor="Role">Role</Label>
             <Input id="Role" type="text" placeholder="Enter your role" value={user.role} onChange={(e) => setUser({...user,role:e.target.value})} />
+            */}
             </div>
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="Password">Password</Label>
