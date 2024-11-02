@@ -40,13 +40,10 @@ import classes from './header.module.css'
  
 
 
-  export function MenubarDemowithoutloginandnotifbtn() 
+  export function MenubarDemowithoutloginbtn() 
   {
     const path = usePathname();
-
     
-
-   
     return (
       <div>
 
@@ -81,7 +78,11 @@ import classes from './header.module.css'
         </MenubarMenu>
       </div>
 
-        
+        <MenubarMenu>
+        <div className=" container ml-auto flex items-center gap-4 justify-end">
+            <SheetDemo className="flex items-center justify-end"/>
+        </div>
+        </MenubarMenu>
       </Menubar>
       
           

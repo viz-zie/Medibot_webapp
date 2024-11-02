@@ -40,13 +40,9 @@ import classes from './header.module.css'
  
 
 
-  export function MenubarDemowithoutloginbtn() 
+  export function MenubarDemowithoutloginandnotifanddashboardbtn() 
   {
     const path = usePathname();
-
-    
-
-   
     return (
       <div>
 
@@ -66,9 +62,6 @@ import classes from './header.module.css'
             <MenubarTrigger><Link href="/services" className={path.startsWith('/services')? classes.active:undefined}>Services</Link></MenubarTrigger>
           </MenubarMenu>
 
-          <MenubarMenu>
-          <MenubarTrigger><Link href="/dashboard" className={path.startsWith('/dashboard')? classes.active:undefined} >My Dashboard</Link></MenubarTrigger>
-          </MenubarMenu>
 
           <MenubarMenu>
           <MenubarTrigger><Link href="/aboutus" className={path.startsWith('/aboutus')? classes.active:undefined}>About Us</Link></MenubarTrigger>
@@ -81,11 +74,7 @@ import classes from './header.module.css'
         </MenubarMenu>
       </div>
 
-        <MenubarMenu>
-        <div className=" container ml-auto flex items-center gap-4 justify-end">
-            <SheetDemo className="flex items-center justify-end"/>
-        </div>
-        </MenubarMenu>
+        
       </Menubar>
       
           
