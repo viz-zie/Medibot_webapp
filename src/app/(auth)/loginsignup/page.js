@@ -44,9 +44,11 @@ import axios from 'axios'
 
 
 
-export default function Loginpage()
+export default function LoginSignUppage()
 {
     const router = useRouter();
+
+    //signUp
     const [user,setUser] = React.useState(
       {
         username : "",
@@ -56,8 +58,9 @@ export default function Loginpage()
       }
     )
 
+    //login
     const [loginUser,setLoginUser]=React.useState({
-      username:"",
+      email:"",
       role:"",
       password:"",
     })
@@ -109,9 +112,10 @@ export default function Loginpage()
     }
 
 
+    //loginpage hook
     useEffect (() =>{
 
-      if(loginUser.username.length>0 && loginUser.password.length>0 && loginUser.role.length>0)
+      if(loginUser.email.length>0 && loginUser.password.length>0 && loginUser.role.length>0)
       {
         setButtonDisabled(false);
       }
@@ -120,9 +124,10 @@ export default function Loginpage()
         setButtonDisabled(true);
       }
 
-    },[user]);
+    },[loginUser]);
 
 
+    //signup page hook
     useEffect (() =>{
 
       if(user.username.length>0 && user.password.length>0 && user.role.length>0 && user.email.length>0)
@@ -162,8 +167,8 @@ export default function Loginpage()
         <form>
           <div className="grid w-full items-center gap-4">
             <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="usernameLogin">Username</Label>
-              <Input id="username" name="username" placeholder="Enter your username" type="text" value={loginUser.username} onChange={(e) => setLoginUser({...loginUser,username:e.target.value})} />
+              <Label htmlFor="email">email</Label>
+              <Input id="email" name="email" placeholder="Enter your email" type="text" value={loginUser.email} onChange={(e) => setLoginUser({...loginUser,email:e.target.value})} />
             </div>
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="framework">Role</Label>

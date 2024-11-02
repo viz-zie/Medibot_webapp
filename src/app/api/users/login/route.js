@@ -11,7 +11,7 @@ export async function POST(request)
 {
     try{
         const reqBody = await request.json()
-        const {username,role,password} = reqBody
+        const {email,role,password} = reqBody
 
         console.log(reqBody);
 
