@@ -1,11 +1,11 @@
 'use client'
 import React from 'react'
 import { SeparatorDemo } from "@/components/ui/contentseparatorleft";
-import animationData from '../assets/dochomepage'
+
 import Lottie from "lottie-react";
 import { Button } from '@/components/ui/button';
 
-import mainpic from '../assets/doctor3.png'
+import mainpic from './assets/doctor3.png'
 import Image from 'next/image';
 
 import { useState, useEffect } from 'react';
