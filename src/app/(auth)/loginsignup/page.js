@@ -50,6 +50,7 @@ export default function Loginpage()
     const [user,setUser] = React.useState(
       {
         username : "",
+        email : "",
         role : "",
         password : "",
       }
@@ -175,6 +176,10 @@ export default function Loginpage()
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="Username">Username</Label>
               <Input id="Username" type="text" placeholder="Enter your username" value={user.username} onChange={(e) => setUser({...user,username:e.target.value})} />
+            </div>
+            <div className="flex flex-col space-y-1.5">
+              <Label htmlFor="Email">Username</Label>
+              <Input id="Email" type="text" placeholder="Enter your email" value={user.email} onChange={(e) => setUser({...user,email:e.target.value})} />
             </div>
             <div className="flex flex-col space-y-1.5">
             <Label htmlFor="Role">Role</Label>
