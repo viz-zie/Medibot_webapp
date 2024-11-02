@@ -1,23 +1,24 @@
 import { Inter } from "next/font/google";
 import '../../../src/app/globals.css'
-import { MenubarDemowithoutloginandnotifbtn } from '@/components/ui/headerwithoutloginandnotif'
+import { MenubarDemowithoutloginandnotifanddashboardbtn } from '@/components/ui/headerwithoutloginnotifdashboard'
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner"
 import Footer from "@/components/ui/footer";
-
-
 const inter = Inter({ subsets: ["latin"] });
-
+export const metadata = {
+  title: "Medibot",
+  description: "Your go to medical Ai assistant",
+};
 
 
 export default function loginpagelayout({ children }) {
 
   return (
     <html>
-    <body>
+    <body className={inter.className}>
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
         
-        <MenubarDemowithoutloginandnotifbtn/>
+        <MenubarDemowithoutloginandnotifanddashboardbtn/>
         {children}
         <Toaster />
         <Footer/>
