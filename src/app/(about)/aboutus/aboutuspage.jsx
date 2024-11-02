@@ -7,6 +7,7 @@ import { Avatar } from '@/components/ui/avatar';
 import vishphoto1 from './assets/vishphoto1.jpg'
 import vishphoto2 from "./assets/vishphoto2.jpg"
 import nitinphoto1 from "./assets/nitinphoto1.jpg"
+import harshadphoto1 from "./assets/harshadphoto1.jpg"
 
 
 import Image from 'next/image';
@@ -30,7 +31,7 @@ const teamMembers = [
     id:3,
     name: 'Harshad Subramaniam',
     role: 'Founder & COO',
-    src: vishphoto2,
+    src: harshadphoto1,
     link : 'https://viz-zie.github.io/MyPortfolio/',
     
   },
