@@ -50,6 +50,7 @@ export default function Loginpage()
     const [user,setUser] = React.useState(
       {
         username : "",
+        role : "",
         password : "",
       }
     )
@@ -87,7 +88,7 @@ export default function Loginpage()
 
     useEffect (() =>{
 
-      if(user.username.length>0 && user.password.length>0)
+      if(user.username.length>0 && user.password.length>0 && user.role.length>0)
       {
         setButtonDisabled(false);
       }
@@ -99,6 +100,7 @@ export default function Loginpage()
     },[user]);
 
   return (
+    
     <div>
       <main className="flex max-h-screen flex-col items-center justify-between p-24 ">
       <Card className="w-[800px] h-[500px] flex">
@@ -113,6 +115,7 @@ export default function Loginpage()
         <TabsTrigger value="Sign Up">Sign Up</TabsTrigger>
       </TabsList>
       <TabsContent value="Login">
+      
       <Card className="w-[350px]">
       <CardHeader>
         <CardTitle>Hey ! </CardTitle>
@@ -122,7 +125,7 @@ export default function Loginpage()
         <form>
           <div className="grid w-full items-center gap-4">
             <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="username">Username</Label>
+              <Label htmlFor="usernameLogin">Username</Label>
               <Input id="username" name="username" placeholder="Enter your username" type="text" value={user.username} onChange={(e) => setUser({...user,username:e.target.value})} />
             </div>
             <div className="flex flex-col space-y-1.5">
@@ -150,6 +153,7 @@ export default function Loginpage()
         <Link href="/"><Button onClick={onLogin}>{buttonDisabled ? "Fill all fields to Login" : "Login"}</Button></Link>
       </CardFooter>
     </Card>
+
       </TabsContent>
   
 
@@ -170,23 +174,15 @@ export default function Loginpage()
           <div className="grid w-full items-center gap-4">
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="Username">Username</Label>
-              <Input id="Username" placeholder="Enter your username" value={user.username} onChange={(e) => setUser({...user,username:e.target.value})} />
+              <Input id="Username" type="text" placeholder="Enter your username" value={user.username} onChange={(e) => setUser({...user,username:e.target.value})} />
             </div>
             <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="framework">Role</Label>
-              <Select>
-                <SelectTrigger id="framework">
-                  <SelectValue placeholder="Select" />
-                </SelectTrigger>
-                <SelectContent position="popper">
-                  <SelectItem value="Vendor">Vendor</SelectItem>
-                  <SelectItem value="Customer">Customer</SelectItem>
-                </SelectContent>
-              </Select>
+            <Label htmlFor="Role">Role</Label>
+            <Input id="Role" type="text" placeholder="Enter your role" value={user.role} onChange={(e) => setUser({...user,role:e.target.value})} />
             </div>
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="Password">Password</Label>
-              <Input id="Password" placeholder="Enter your Password" type="password" value={user.password} onChange={(e) => setUser({...user,password:e.target.value})} />
+              <Input id="Password" type="password" placeholder="Enter your Password"  value={user.password} onChange={(e) => setUser({...user,password:e.target.value})} />
             </div>
           </div>
         </form>

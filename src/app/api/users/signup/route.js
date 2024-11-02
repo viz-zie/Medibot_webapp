@@ -11,11 +11,11 @@ export async function POST(request)
 {
     try{
         const reqBody = await request.json()
-        const {username,password} = reqBody
+        const {username,role,password} = reqBody
 
         console.log(reqBody);
 
-        //check if user already exisits
+        //check if user already exists
         const user = await User.findOne({username})
 
         if (user){
@@ -28,16 +28,17 @@ export async function POST(request)
 
         const newUser = new User({
             username,
+            role,
             password:hashedPassword
         })
 
         const savedUser = await newUser.save()
-        console.log(savedUser);
+        console.log(savedUser.toObject());
 
         return NextResponse.json({
             message: "User created successfully",
             success:true,
-            savedUser
+            savedUser:savedUser.toObject()
         })
 
     }

@@ -5,6 +5,11 @@ const userSchema = new mongoose.Schema({
             required: [true,"Please provide a username"],
             unique:true,
         },
+        role :{
+            type : String,
+            required : [true,"Please provide a role"],
+            unique : false,
+        },
         password : {
             type:String,
             required : [true, "Please provide a password"],
@@ -23,6 +28,6 @@ const userSchema = new mongoose.Schema({
         
     })
 
-const User = mongoose.models.users || mongoose.model("users",userSchema);
+const User = mongoose.models.users || mongoose.model("SignUp_users",userSchema);
 
 export default User;
