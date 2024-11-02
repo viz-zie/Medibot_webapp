@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Avatar } from '@/components/ui/avatar';
 import vishphoto1 from './assets/vishphoto1.jpg'
 import vishphoto2 from "./assets/vishphoto2.jpg"
+import nitinphoto1 from "./assets/nitinphoto1.jpg"
 
 
 import Image from 'next/image';
@@ -22,7 +23,7 @@ const teamMembers = [
     id:2,
     name: 'Nitin Pranav ',
     role: 'Founder & CTO',
-    src: vishphoto2,
+    src: nitinphoto1,
     link : 'https://viz-zie.github.io/MyPortfolio/',
   },
   {
