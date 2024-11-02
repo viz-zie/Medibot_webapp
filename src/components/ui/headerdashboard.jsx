@@ -38,12 +38,31 @@ import headericon from '@/components/assets/headerlogo6.png'
 import { usePathname } from 'next/navigation'
 import classes from './header.module.css'
  
+import axios from 'axios'
+
+import toast from 'react-hot-toast'
+import { useRouter } from 'next/navigation'
 
 
   export function MenubarDemowithoutloginbtn() 
   {
     const path = usePathname();
-    
+    const router =useRouter()
+    const logout = async () =>
+    {
+      try
+      {
+        await axios.get('/api/users/logout')
+        toast.success("Logout successful")
+        router.push('/loginsignup')
+      }
+      catch(error)
+      {
+        console.log(error.message);
+        toast.error(error.message);
+      }
+    }
+
     return (
       <div>
 
@@ -81,6 +100,7 @@ import classes from './header.module.css'
         <MenubarMenu>
         <div className=" container ml-auto flex items-center gap-4 justify-end">
             <SheetDemo className="flex items-center justify-end"/>
+            <Button onClick={logout}>Logout</Button>
         </div>
         </MenubarMenu>
       </Menubar>
