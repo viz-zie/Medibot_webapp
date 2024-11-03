@@ -69,14 +69,15 @@ export default function VerifyEmailPage()
 
         
         <Card className="w-[350px]">
-            <CardHeader>
-                <CardTitle>Email Verification</CardTitle>
-                <CardDescription>Get verified in jiffy</CardDescription>
-                <CardDescription>{token ? `${token}` : "no token"}</CardDescription>
-            </CardHeader>
+            
 
         {verified && (
             <div>
+            <CardHeader>
+                <CardTitle>Email Verification successful</CardTitle>
+                <CardDescription>Got verified in jiffy</CardDescription>
+                {/*<CardDescription>{token ? `${token}` : "no token"}</CardDescription>*/}
+            </CardHeader>
             <CardContent>
             <form>
             <div className="grid w-full items-center gap-4">
@@ -97,6 +98,11 @@ export default function VerifyEmailPage()
 
         {error && (
             <div>
+            <CardHeader>
+                <CardTitle>Email Unable to verify</CardTitle>
+                <CardDescription>Please try again</CardDescription>
+                {/*<CardDescription>{token ? `${token}` : "no token"}</CardDescription>*/}
+            </CardHeader>
             <CardContent>
             <form>
             <div className="grid w-full items-center gap-4">
