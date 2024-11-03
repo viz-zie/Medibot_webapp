@@ -1,4 +1,6 @@
-import * as React from "react"
+'use client'
+
+import React,{useState} from "react"
 import Image from "next/image"
 import Link from "next/link"
 import vishphoto2 from './assets/vishphoto2.jpg'
@@ -73,8 +75,19 @@ import {
   TabsTrigger,
 } from "@/components/ui/tabs"
 
+import axios from "axios"
+import  Toast  from "@/components/ui/toast"
 
-export function Dashboard() {
+
+export function Dashboard() 
+{
+  
+  const [data,setData] = useState("nothing")
+  const getUserDetails = async () => {
+    const res = await axios.get('/api/users/user')
+    console.log(res.data)
+    setData(res.data.data._id)
+  }
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40 " >
     {/*
@@ -135,7 +148,7 @@ export function Dashboard() {
               </nav>
             </SheetContent>
             <div className="">
-              <p className="text-xl font-bold leading-none">Hi User,  </p>
+              <p className="text-xl font-bold leading-none">Hi {data === 'nothing' ? "Nothing" :<Link href={'/dashboard/${data}'} >{data}</Link>} </p>
               <p className="text-lg text-muted-foreground mb-4">
                 Welcome !
               </p>
@@ -210,7 +223,7 @@ export function Dashboard() {
                   </CardDescription>
                 </CardHeader>
                 <CardFooter>
-                  <Button>Create New Order</Button>
+                  <Button onClick={getUserDetails}>Create New Order</Button>
                 </CardFooter>
               </Card>
               <Card x-chunk="dashboard-05-chunk-1">
