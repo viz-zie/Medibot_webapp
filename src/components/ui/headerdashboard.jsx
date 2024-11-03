@@ -83,9 +83,8 @@ import { useRouter } from 'next/navigation'
           </MenubarMenu>
 
           <MenubarMenu>
-          <MenubarTrigger><Link href="/dashboard" className={path.startsWith('/dashboard')? classes.active:undefined} >My Dashboard</Link></MenubarTrigger>
+          <MenubarTrigger><Link href="/dashboardcust" className={path.startsWith('/dashboardcust')? classes.active:undefined} >My Dashboard</Link></MenubarTrigger>
           </MenubarMenu>
-
           <MenubarMenu>
           <MenubarTrigger><Link href="/aboutus" className={path.startsWith('/aboutus')? classes.active:undefined}>About Us</Link></MenubarTrigger>
           </MenubarMenu>

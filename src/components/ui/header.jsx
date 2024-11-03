@@ -67,7 +67,7 @@ import classes from './header.module.css'
           </MenubarMenu>
           
           <MenubarMenu>
-          <MenubarTrigger><Link href="/dashboard" className={path.startsWith('/dashboard')? classes.active:undefined} >My Dashboard</Link></MenubarTrigger>
+          <MenubarTrigger><Link href="/dashboardvend" className={path.startsWith('/dashboardvend')? classes.active:undefined} >My Dashboard</Link></MenubarTrigger>
           </MenubarMenu>
 
           <MenubarMenu>
