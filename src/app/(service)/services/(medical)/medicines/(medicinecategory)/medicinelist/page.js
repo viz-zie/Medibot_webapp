@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { MinusIcon, PlusIcon } from "@radix-ui/react-icons"
 import { Label } from "@/components/ui/label"
-import { Suspense } from 'react';
+//import { Suspense } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card"; // Adjust based on your imports
 export default function DrugList()
 {
@@ -41,14 +41,14 @@ export default function DrugList()
     }
 
     useEffect(() => {
-        <Suspense>
+        
       fetchDrugs();
-      </Suspense>
+      
   }, []);
 
     return(
     
-    <Suspense>
+    
     
     
     <div>
@@ -124,7 +124,7 @@ export default function DrugList()
         </div>
     
     </div>
-    </Suspense>
+    
     )
     
     
