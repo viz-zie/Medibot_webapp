@@ -3,7 +3,7 @@
 import React,{useState} from "react"
 import Image from "next/image"
 import Link from "next/link"
-import vishphoto2 from './assets/vishphoto2.jpg'
+import Harsh from './assets/Harsh.jpeg'
 import {
   ChevronLeft,
   ChevronRight,
@@ -23,6 +23,18 @@ import {
   Truck,
   Users2,
 } from "lucide-react"
+
+
+import { TrendingUp } from "lucide-react"
+import {
+  Label,
+  PolarGrid,
+  PolarRadiusAxis,
+  RadialBar,
+  RadialBarChart,
+} from "recharts"
+
+import { ChartConfig, ChartContainer } from "@/components/ui/chart"
 
 import { Badge } from "@/components/ui/badge"
 import {
@@ -75,9 +87,25 @@ import {
   TabsTrigger,
 } from "@/components/ui/tabs"
 
+import { RocketIcon } from "@radix-ui/react-icons"
+import { FaInfoCircle } from "react-icons/fa";
+ 
+import {
+  Alert,
+  AlertDescription,
+  AlertTitle,
+} from "@/components/ui/alert"
+
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
+
 import axios from "axios"
 import  Toast  from "@/components/ui/toast"
-
 
 export function Dashboard() 
 {
@@ -88,6 +116,7 @@ export function Dashboard()
     console.log(res.data)
     setData(res.data.data._id)
   }
+  
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40 " >
     {/*
@@ -104,28 +133,21 @@ export function Dashboard()
             <SheetContent side="left" className="sm:max-w-xs">
               <nav className="grid gap-6 text-lg font-medium">
                 <Link
-                  href="#"
+                  href="#Home"
                   className="group flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:text-base"
                 >
-                  <Package2 className="h-5 w-5 transition-all group-hover:scale-110" />
-                  <span className="sr-only">Acme Inc</span>
-                </Link>
-                <Link
-                  href="#"
-                  className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-                >
-                  <Home className="h-5 w-5" />
+                  <Home className="h-5 w-5 transition-all group-hover:scale-110" />
                   Dashboard
                 </Link>
                 <Link
-                  href="#"
+                  href="#Orders"
                   className="flex items-center gap-4 px-2.5 text-foreground"
                 >
                   <ShoppingCart className="h-5 w-5" />
                   Orders
                 </Link>
                 <Link
-                  href="#"
+                  href="#Products"
                   className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                 >
                   <Package className="h-5 w-5" />
@@ -139,7 +161,7 @@ export function Dashboard()
                   Customers
                 </Link>
                 <Link
-                  href="#"
+                  href="Analysis"
                   className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                 >
                   <LineChart className="h-5 w-5" />
@@ -147,30 +169,19 @@ export function Dashboard()
                 </Link>
               </nav>
             </SheetContent>
-            <div className="">
+            <div className="" section id="Home">
               <p className="text-xl font-bold leading-none">Hi {data === 'nothing' ? "Nothing" :<Link href={'/dashboard/${data}'} >{data}</Link>} </p>
               <p className="text-lg text-muted-foreground mb-4">
-                Welcome !
+                Welcome back!
               </p>
-              <Breadcrumb className="hidden md:flex">
-            <BreadcrumbList>
-              <BreadcrumbItem>
-                <BreadcrumbLink asChild>
-                  <Link href="#">Dashboard</Link>
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbLink asChild>
-                  <Link href="#">Orders</Link>
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbPage>Recent Orders</BreadcrumbPage>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
+              <p>
+              <Alert>
+                <AlertTitle>Saravana Medicals , ID: #0571</AlertTitle>
+                <AlertDescription>
+                  No.35, Pillayar Koil St, Raghavendra Nagar, Nesapakkam, Chennai, Tamil Nadu 600078
+                </AlertDescription>
+              </Alert>
+              </p>
             </div>
             
           </Sheet>
@@ -191,7 +202,7 @@ export function Dashboard()
                 className="overflow-hidden rounded-full"
               >
                 <Image
-                  src={vishphoto2}
+                  src={Harsh}
                   width={36}
                   height={36}
                   alt="Avatar"
@@ -210,26 +221,26 @@ export function Dashboard()
           </DropdownMenu>
         </header>
         <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 lg:grid-cols-3 xl:grid-cols-3">
-          <div className="grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2">
-            <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
-              <Card
+          <div className="grid auto-rows-max items-start lg:col-span-2">
+            <div className="grid gap-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
+              {/*<Card
                 className="sm:col-span-2" x-chunk="dashboard-05-chunk-0"
               >
                 <CardHeader className="pb-3">
                   <CardTitle>Your Orders</CardTitle>
                   <CardDescription className="text-balance max-w-lg leading-relaxed">
-                    Introducing Our Dynamic Orders Dashboard for Seamless
+                    Order Smarter, Grow Faster! Dashboard for Seamless
                     Management and Insightful Analysis.
                   </CardDescription>
                 </CardHeader>
                 <CardFooter>
-                  <Button onClick={getUserDetails}>Create New Order</Button>
+                  <Button onClick={getUserDetails}>View Orders</Button>
                 </CardFooter>
               </Card>
               <Card x-chunk="dashboard-05-chunk-1">
                 <CardHeader className="pb-2">
                   <CardDescription>This Week</CardDescription>
-                  <CardTitle className="text-4xl">$1,329</CardTitle>
+                  <CardTitle className="text-4xl">₹1,982</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="text-xs text-muted-foreground">
@@ -243,7 +254,7 @@ export function Dashboard()
               <Card x-chunk="dashboard-05-chunk-2">
                 <CardHeader className="pb-2">
                   <CardDescription>This Month</CardDescription>
-                  <CardTitle className="text-4xl">$5,329</CardTitle>
+                  <CardTitle className="text-4xl">₹5,329</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="text-xs text-muted-foreground">
@@ -253,16 +264,11 @@ export function Dashboard()
                 <CardFooter>
                   <Progress value={12} aria-label="12% increase" />
                 </CardFooter>
-              </Card>
+              </Card>*/}
             </div>
             <Tabs defaultValue="week">
               <div className="flex items-center">
-                <TabsList>
-                  <TabsTrigger value="week">Week</TabsTrigger>
-                  <TabsTrigger value="month">Month</TabsTrigger>
-                  <TabsTrigger value="year">Year</TabsTrigger>
-                </TabsList>
-                <div className="ml-auto flex items-center gap-2">
+                <div className="ml-auto flex items-center gap-1">
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Button
@@ -278,13 +284,13 @@ export function Dashboard()
                       <DropdownMenuLabel>Filter by</DropdownMenuLabel>
                       <DropdownMenuSeparator />
                       <DropdownMenuCheckboxItem checked>
-                        Fulfilled
+                        Completed
                       </DropdownMenuCheckboxItem>
                       <DropdownMenuCheckboxItem>
-                        Declined
+                        Cancelled
                       </DropdownMenuCheckboxItem>
                       <DropdownMenuCheckboxItem>
-                        Refunded
+                        Ongoing
                       </DropdownMenuCheckboxItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
@@ -298,12 +304,12 @@ export function Dashboard()
                   </Button>
                 </div>
               </div>
-              <TabsContent value="week">
-                <Card x-chunk="dashboard-05-chunk-3">
-                  <CardHeader className="px-7">
+              <TabsContent value="week" section id="Orders">
+                <Card>
+                  <CardHeader className="px-2">
                     <CardTitle>Orders</CardTitle>
                     <CardDescription>
-                      Recent orders from your store.
+                      View your recent orders here  .
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
@@ -312,7 +318,7 @@ export function Dashboard()
                         <TableRow>
                           <TableHead>Customer</TableHead>
                           <TableHead className="hidden sm:table-cell">
-                            Type
+                            Age
                           </TableHead>
                           <TableHead className="hidden sm:table-cell">
                             Status
@@ -326,65 +332,65 @@ export function Dashboard()
                       <TableBody>
                         <TableRow className="bg-accent">
                           <TableCell>
-                            <div className="font-medium">Liam Johnson</div>
+                            <div className="font-medium">Nitin Pranav</div>
                             <div className="hidden text-sm text-muted-foreground md:inline">
-                              liam@example.com
+                              Nitin@gmail.com
                             </div>
                           </TableCell>
                           <TableCell className="hidden sm:table-cell">
-                            Sale
+                            22
                           </TableCell>
                           <TableCell className="hidden sm:table-cell">
                             <Badge className="text-xs" variant="secondary">
-                              Fulfilled
+                              Ongoing
                             </Badge>
                           </TableCell>
                           <TableCell className="hidden md:table-cell">
-                            2023-06-23
+                            4-Nov-2024
                           </TableCell>
-                          <TableCell className="text-right">$250.00</TableCell>
+                          <TableCell className="text-right">₹510.00</TableCell>
                         </TableRow>
-                        {/*<TableRow>
+                        <TableRow>
                           <TableCell>
-                            <div className="font-medium">Olivia Smith</div>
+                            <div className="font-medium">Siddharth R</div>
                             <div className="hidden text-sm text-muted-foreground md:inline">
-                              olivia@example.com
+                              kuchi@hotmail.com
                             </div>
                           </TableCell>
                           <TableCell className="hidden sm:table-cell">
-                            Refund
+                            27
                           </TableCell>
                           <TableCell className="hidden sm:table-cell">
                             <Badge className="text-xs" variant="outline">
-                              Declined
+                              Cancelled
                             </Badge>
                           </TableCell>
                           <TableCell className="hidden md:table-cell">
-                            2023-06-24
+                            3-Nov-2024
                           </TableCell>
-                          <TableCell className="text-right">$150.00</TableCell>
+                          <TableCell className="text-right">₹850.00</TableCell>
                         </TableRow>
                         <TableRow>
                           <TableCell>
-                            <div className="font-medium">Liam Johnson</div>
+                            <div className="font-medium">Raghava Krishnan</div>
                             <div className="hidden text-sm text-muted-foreground md:inline">
-                              liam@example.com
+                              raghavak@yahoo.com
                             </div>
                           </TableCell>
                           <TableCell className="hidden sm:table-cell">
-                            Sale
+                            55
                           </TableCell>
                           <TableCell className="hidden sm:table-cell">
                             <Badge className="text-xs" variant="secondary">
-                              Fulfilled
+                              Completed
                             </Badge>
                           </TableCell>
                           <TableCell className="hidden md:table-cell">
-                            2023-06-23
+                            3-Nov-2024
                           </TableCell>
-                          <TableCell className="text-right">$250.00</TableCell>
+                          <TableCell className="text-right">₹1782.00</TableCell>
                         </TableRow>
-                        <TableRow>
+                        {/*<TableRow>
                           <TableCell>
                             <div className="font-medium">Noah Williams</div>
                             <div className="hidden text-sm text-muted-foreground md:inline">
@@ -490,6 +496,42 @@ export function Dashboard()
                 </Card>
               </TabsContent>
             </Tabs>
+            <CardHeader className="px-2" section id="Products">
+                    <CardTitle>Frequently Asked</CardTitle>
+                    <CardDescription>
+                      View your Customers Favourite Product
+                    </CardDescription>
+            </CardHeader>
+            <div className="grid gap-x-2 place-items-center">
+            <Carousel
+            opts={{
+              align: "start",
+            }}
+            className="w-9/12 max-w-base"
+          >
+          <CarouselContent>
+              {Array.from({ length: 5 }).map((_, index) => (
+                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                  <div className="p-1">
+                    <Card>
+                      <CardContent className="flex aspect-square items-center justify-center p-6">
+                        <span className="text-3xl font-semibold">{index + 1}</span>
+                      </CardContent>
+                    </Card>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
+          </div>
+          <CardHeader className="px-2" section id="Analysis">
+                    <CardTitle>Business Analysis</CardTitle>
+                    <CardDescription>
+                      View your Proft and Sales Analysis here
+                    </CardDescription>
+            </CardHeader>
           </div>
           <div>
             <Card
@@ -498,7 +540,7 @@ export function Dashboard()
               <CardHeader className="flex flex-row items-start bg-muted/50">
                 <div className="grid gap-0.5">
                   <CardTitle className="group flex items-center gap-2 text-lg">
-                    Order Oe31b70H
+                    Order N10A01
                     <Button
                       size="icon"
                       variant="outline"
@@ -508,7 +550,7 @@ export function Dashboard()
                       <span className="sr-only">Copy Order ID</span>
                     </Button>
                   </CardTitle>
-                  <CardDescription>Date: November 23, 2023</CardDescription>
+                  <CardDescription>Date: November 4,2024</CardDescription>
                 </div>
                 <div className="ml-auto flex items-center gap-1">
                   <Button size="sm" variant="outline" className="h-8 gap-1">
@@ -539,34 +581,34 @@ export function Dashboard()
                   <ul className="grid gap-3">
                     <li className="flex items-center justify-between">
                       <span className="text-muted-foreground">
-                        Glimmer Lamps x <span>2</span>
+                        Dolo x <span>12</span>
                       </span>
-                      <span>$250.00</span>
+                      <span>₹300.00</span>
                     </li>
                     <li className="flex items-center justify-between">
                       <span className="text-muted-foreground">
-                        Aqua Filters x <span>1</span>
+                        Thermometer x <span>1</span>
                       </span>
-                      <span>$49.00</span>
+                      <span>₹130.00</span>
                     </li>
                   </ul>
                   <Separator className="my-2" />
                   <ul className="grid gap-3">
                     <li className="flex items-center justify-between">
                       <span className="text-muted-foreground">Subtotal</span>
-                      <span>$299.00</span>
+                      <span>₹430.00</span>
                     </li>
                     <li className="flex items-center justify-between">
                       <span className="text-muted-foreground">Shipping</span>
-                      <span>$5.00</span>
+                      <span>₹50.00</span>
                     </li>
                     <li className="flex items-center justify-between">
                       <span className="text-muted-foreground">Tax</span>
-                      <span>$25.00</span>
+                      <span>₹30.00</span>
                     </li>
                     <li className="flex items-center justify-between font-semibold">
                       <span className="text-muted-foreground">Total</span>
-                      <span>$329.00</span>
+                      <span>₹510.00</span>
                     </li>
                   </ul>
                 </div>
@@ -575,9 +617,9 @@ export function Dashboard()
                   <div className="grid gap-3">
                     <div className="font-semibold">Shipping Information</div>
                     <address className="grid gap-0.5 not-italic text-muted-foreground">
-                      <span>Liam Johnson</span>
-                      <span>1234 Main St.</span>
-                      <span>Anytown, CA 12345</span>
+                      <span>Nitin</span>
+                      <span>No:4, Kcee towers</span>
+                      <span>K.K.Nagar , Chennai 78</span>
                     </address>
                   </div>
                   <div className="grid auto-rows-max gap-3">
@@ -593,18 +635,18 @@ export function Dashboard()
                   <dl className="grid gap-3">
                     <div className="flex items-center justify-between">
                       <dt className="text-muted-foreground">Customer</dt>
-                      <dd>Liam Johnson</dd>
+                      <dd>Nitin</dd>
                     </div>
                     <div className="flex items-center justify-between">
                       <dt className="text-muted-foreground">Email</dt>
                       <dd>
-                        <a href="mailto:">liam@acme.com</a>
+                        <a href="mailto:">nitin@hotmail.com</a>
                       </dd>
                     </div>
                     <div className="flex items-center justify-between">
                       <dt className="text-muted-foreground">Phone</dt>
                       <dd>
-                        <a href="tel:">+1 234 567 890</a>
+                        <a href="tel:">+91 9222796780</a>
                       </dd>
                     </div>
                   </dl>
@@ -625,7 +667,7 @@ export function Dashboard()
               </CardContent>
               <CardFooter className="flex flex-row items-center border-t bg-muted/50 px-6 py-3">
                 <div className="text-xs text-muted-foreground">
-                  Updated <time dateTime="2023-11-23">November 23, 2023</time>
+                  Updated <time dateTime="2023-11-23">November 4, 2024</time>
                 </div>
                 <Pagination className="ml-auto mr-0 w-auto">
                   <PaginationContent>

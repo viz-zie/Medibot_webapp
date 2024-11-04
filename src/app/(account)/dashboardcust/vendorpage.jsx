@@ -3,7 +3,7 @@
 import React,{useState} from "react"
 import Image from "next/image"
 import Link from "next/link"
-import Harsh from './assets/Harsh.jpeg'
+import vishphoto2 from './assets/vishphoto2.jpg'
 import {
   ChevronLeft,
   ChevronRight,
@@ -23,6 +23,14 @@ import {
   Truck,
   Users2,
 } from "lucide-react"
+
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
 
 import { Badge } from "@/components/ui/badge"
 import {
@@ -78,6 +86,8 @@ import {
 import axios from "axios"
 import  Toast  from "@/components/ui/toast"
 
+import { MdEdit } from "react-icons/md";
+
 
 export function Dashboard() 
 {
@@ -103,13 +113,6 @@ export function Dashboard()
             </SheetTrigger>
             <SheetContent side="left" className="sm:max-w-xs">
               <nav className="grid gap-6 text-lg font-medium">
-                <Link
-                  href="#"
-                  className="group flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:text-base"
-                >
-                  <Home className="h-5 w-5 transition-all group-hover:scale-110" />
-                  Dashboard
-                </Link>
                 <Link
                   href="#"
                   className="flex items-center gap-4 px-2.5 text-foreground"
@@ -165,7 +168,7 @@ export function Dashboard()
                 className="overflow-hidden rounded-full"
               >
                 <Image
-                  src={Harsh}
+                  src={vishphoto2}
                   width={36}
                   height={36}
                   alt="Avatar"
@@ -190,48 +193,47 @@ export function Dashboard()
                 className="sm:col-span-2" x-chunk="dashboard-05-chunk-0"
               >
                 <CardHeader className="pb-3">
-                  <CardTitle>Your Orders</CardTitle>
+                  <CardTitle>Home Address</CardTitle>
+                  <CardDescription className="text-balance max-w-lg leading-relaxed py-2">
+                    No:5, Kcee Towers, K.K.Nagar, Chennai-78
+                  </CardDescription>
+                  <CardTitle>Contact</CardTitle>
                   <CardDescription className="text-balance max-w-lg leading-relaxed">
-                    Order Smarter, Grow Faster! Dashboard for Seamless
-                    Management and Insightful Analysis.
+                    cust_example@gmail.com
                   </CardDescription>
                 </CardHeader>
                 <CardFooter>
-                  <Button onClick={getUserDetails}>Create New Order</Button>
+                  <Button onClick={getUserDetails}><MdEdit/>Edit</Button>
                 </CardFooter>
               </Card>
               <Card x-chunk="dashboard-05-chunk-1">
-                <CardHeader className="pb-2">
-                  <CardDescription>This Week</CardDescription>
-                  <CardTitle className="text-4xl">₹1,982</CardTitle>
+                <CardHeader className="pb-1">
+                  <CardDescription>Gender</CardDescription>
+                  <CardTitle className="text-4xl">Male</CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <div className="text-xs text-muted-foreground">
-                    +25% from last week
-                  </div>
-                </CardContent>
-                <CardFooter>
-                  <Progress value={25} aria-label="25% increase" />
-                </CardFooter>
+                <CardHeader className="pb-2">
+                  <CardDescription>Blood Group </CardDescription>
+                  <CardTitle className="text-4xl">O+ve</CardTitle>
+                </CardHeader>
               </Card>
               <Card x-chunk="dashboard-05-chunk-2">
                 <CardHeader className="pb-2">
-                  <CardDescription>This Month</CardDescription>
-                  <CardTitle className="text-4xl">₹5,329</CardTitle>
+                  <CardDescription>This Month Savings </CardDescription>
+                  <CardTitle className="text-4xl">₹529</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="text-xs text-muted-foreground">
-                    +10% from last month
+                    +10% saved from last month using vouchers and membership
                   </div>
                 </CardContent>
                 <CardFooter>
-                  <Progress value={12} aria-label="12% increase" />
+                  <Progress value={50} aria-label="12% increase" />
                 </CardFooter>
               </Card>
             </div>
             <Tabs defaultValue="week">
               <div className="flex items-center">
-                <div className="ml-auto flex items-center gap-1">
+                <div className="ml-auto flex items-center gap-2">
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Button
@@ -247,13 +249,13 @@ export function Dashboard()
                       <DropdownMenuLabel>Filter by</DropdownMenuLabel>
                       <DropdownMenuSeparator />
                       <DropdownMenuCheckboxItem checked>
-                        Completed
+                        Fulfilled
                       </DropdownMenuCheckboxItem>
                       <DropdownMenuCheckboxItem>
-                        Cancelled
+                        Declined
                       </DropdownMenuCheckboxItem>
                       <DropdownMenuCheckboxItem>
-                        Ongoing
+                        Refunded
                       </DropdownMenuCheckboxItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
@@ -271,17 +273,14 @@ export function Dashboard()
                 <Card x-chunk="dashboard-05-chunk-3">
                   <CardHeader className="px-7">
                     <CardTitle>Orders</CardTitle>
-                    <CardDescription>
-                      View your recent orders here  .
-                    </CardDescription>
                   </CardHeader>
                   <CardContent>
                     <Table>
                       <TableHeader>
                         <TableRow>
-                          <TableHead>Customer</TableHead>
+                          <TableHead>Pharmacy Details</TableHead>
                           <TableHead className="hidden sm:table-cell">
-                            Age
+                            Type
                           </TableHead>
                           <TableHead className="hidden sm:table-cell">
                             Status
@@ -295,13 +294,13 @@ export function Dashboard()
                       <TableBody>
                         <TableRow className="bg-accent">
                           <TableCell>
-                            <div className="font-medium">Nitin Pranav</div>
+                            <div className="font-medium">Saravana Medicals</div>
                             <div className="hidden text-sm text-muted-foreground md:inline">
-                              Nitin@gmail.com
+                            No.35, Pillayar Koil St, Raghavendra Nagar, Nesapakkam, Chennai, Tamil Nadu 600078
                             </div>
                           </TableCell>
                           <TableCell className="hidden sm:table-cell">
-                            22
+                            Store-pickup
                           </TableCell>
                           <TableCell className="hidden sm:table-cell">
                             <Badge className="text-xs" variant="secondary">
@@ -309,49 +308,49 @@ export function Dashboard()
                             </Badge>
                           </TableCell>
                           <TableCell className="hidden md:table-cell">
-                            4-Nov-2024
+                            4 Nov-2024
                           </TableCell>
-                          <TableCell className="text-right">₹510.00</TableCell>
+                          <TableCell className="text-right">₹355.00</TableCell>
                         </TableRow>
                         <TableRow>
                           <TableCell>
-                            <div className="font-medium">Siddharth R</div>
+                            <div className="font-medium">Apollo Pharmacy</div>
                             <div className="hidden text-sm text-muted-foreground md:inline">
-                              kuchi@hotmail.com
+                            No 20, New, Vanniar St, Nesapakkam, Chennai, Tamil Nadu 600040
                             </div>
                           </TableCell>
                           <TableCell className="hidden sm:table-cell">
-                            27
+                            Delivery
                           </TableCell>
                           <TableCell className="hidden sm:table-cell">
                             <Badge className="text-xs" variant="outline">
-                              Cancelled
-                            </Badge>
-                          </TableCell>
-                          <TableCell className="hidden md:table-cell">
-                            3-Nov-2024
-                          </TableCell>
-                          <TableCell className="text-right">₹850.00</TableCell>
-                        </TableRow>
-                        <TableRow>
-                          <TableCell>
-                            <div className="font-medium">Raghava Krishnan</div>
-                            <div className="hidden text-sm text-muted-foreground md:inline">
-                              raghavak@yahoo.com
-                            </div>
-                          </TableCell>
-                          <TableCell className="hidden sm:table-cell">
-                            55
-                          </TableCell>
-                          <TableCell className="hidden sm:table-cell">
-                            <Badge className="text-xs" variant="secondary">
                               Completed
                             </Badge>
                           </TableCell>
                           <TableCell className="hidden md:table-cell">
-                            3-Nov-2024
+                            3 Nov-2024
                           </TableCell>
-                          <TableCell className="text-right">₹1782.00</TableCell>
+                          <TableCell className="text-right">₹3250.00</TableCell>
+                        </TableRow>
+                        <TableRow>
+                          <TableCell>
+                            <div className="font-medium">MedPlus Pharmacy</div>
+                            <div className="hidden text-sm text-muted-foreground md:inline">
+                            3A, 1st St, Virugambakkam, Chennai, Tamil Nadu 600078
+                            </div>
+                          </TableCell>
+                          <TableCell className="hidden sm:table-cell">
+                            Store-pickup
+                          </TableCell>
+                          <TableCell className="hidden sm:table-cell">
+                            <Badge className="text-xs" variant="secondary">
+                              Cancelled
+                            </Badge>
+                          </TableCell>
+                          <TableCell className="hidden md:table-cell">
+                            3 Nov-2024
+                          </TableCell>
+                          <TableCell className="text-right">₹550.00</TableCell>
                         </TableRow>
                         {/*<TableRow>
                           <TableCell>
@@ -459,6 +458,42 @@ export function Dashboard()
                 </Card>
               </TabsContent>
             </Tabs>
+            <CardHeader className="px-2" section id="Products">
+                    <CardTitle>Frequently Searched</CardTitle>
+                    <CardDescription>
+                      Know about your frequent orders
+                    </CardDescription>
+            </CardHeader>
+            <div className="grid gap-x-2 place-items-center">
+            <Carousel
+            opts={{
+              align: "start",
+            }}
+            className="w-9/12 max-w-base"
+          >
+          <CarouselContent>
+              {Array.from({ length: 5 }).map((_, index) => (
+                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                  <div className="p-1">
+                    <Card>
+                      <CardContent className="flex aspect-square items-center justify-center p-6">
+                        <span className="text-3xl font-semibold">{index + 1}</span>
+                      </CardContent>
+                    </Card>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
+          </div>
+          <CardHeader className="px-2" section id="Analysis">
+                    <CardTitle>Business Analysis</CardTitle>
+                    <CardDescription>
+                      View your Analysis
+                    </CardDescription>
+            </CardHeader>
           </div>
           <div>
             <Card
@@ -467,7 +502,7 @@ export function Dashboard()
               <CardHeader className="flex flex-row items-start bg-muted/50">
                 <div className="grid gap-0.5">
                   <CardTitle className="group flex items-center gap-2 text-lg">
-                    Order N10A01
+                    Order N09ZX01
                     <Button
                       size="icon"
                       variant="outline"
@@ -477,7 +512,7 @@ export function Dashboard()
                       <span className="sr-only">Copy Order ID</span>
                     </Button>
                   </CardTitle>
-                  <CardDescription>Date: November 4,2024</CardDescription>
+                  <CardDescription>Date: 4 November, 2024</CardDescription>
                 </div>
                 <div className="ml-auto flex items-center gap-1">
                   <Button size="sm" variant="outline" className="h-8 gap-1">
@@ -508,51 +543,52 @@ export function Dashboard()
                   <ul className="grid gap-3">
                     <li className="flex items-center justify-between">
                       <span className="text-muted-foreground">
-                        Dolo x <span>12</span>
+                        ShelCal500 x <span>2</span>
                       </span>
-                      <span>₹300.00</span>
+                      <span>₹256.00</span>
                     </li>
                     <li className="flex items-center justify-between">
                       <span className="text-muted-foreground">
-                        Thermometer x <span>1</span>
+                        Vix Vaporub x <span>1</span>
                       </span>
-                      <span>₹130.00</span>
+                      <span>₹94.00</span>
                     </li>
                   </ul>
                   <Separator className="my-2" />
                   <ul className="grid gap-3">
                     <li className="flex items-center justify-between">
                       <span className="text-muted-foreground">Subtotal</span>
-                      <span>₹430.00</span>
+                      <span>₹350.00</span>
                     </li>
                     <li className="flex items-center justify-between">
                       <span className="text-muted-foreground">Shipping</span>
-                      <span>₹50.00</span>
+                      <span>-</span>
                     </li>
                     <li className="flex items-center justify-between">
                       <span className="text-muted-foreground">Tax</span>
-                      <span>₹30.00</span>
+                      <span>₹5.00</span>
                     </li>
                     <li className="flex items-center justify-between font-semibold">
                       <span className="text-muted-foreground">Total</span>
-                      <span>₹510.00</span>
+                      <span>₹355.00</span>
                     </li>
                   </ul>
                 </div>
                 <Separator className="my-4" />
                 <div className="grid grid-cols-2 gap-4">
                   <div className="grid gap-3">
-                    <div className="font-semibold">Shipping Information</div>
+                    <div className="font-semibold">Customer Address</div>
                     <address className="grid gap-0.5 not-italic text-muted-foreground">
-                      <span>Nitin</span>
-                      <span>No:4, Kcee towers</span>
-                      <span>K.K.Nagar , Chennai 78</span>
+                      <span>{data === 'nothing' ? "Nothing" :<Link href={'/dashboard/${data}'} >{data}</Link>}</span>
+                      <div className="text-muted-foreground">
+                        No.4, Kcee Towers, K.K.Nagar, Chennai-78
+                      </div>
                     </address>
                   </div>
                   <div className="grid auto-rows-max gap-3">
-                    <div className="font-semibold">Billing Information</div>
+                    <div className="font-semibold">Store-Pickup Information</div>
                     <div className="text-muted-foreground">
-                      Same as shipping address
+                      No.35, Pillayar Koil St, Raghavendra Nagar, Nesapakkam, Chennai, Tamil Nadu 600078
                     </div>
                   </div>
                 </div>
@@ -562,18 +598,18 @@ export function Dashboard()
                   <dl className="grid gap-3">
                     <div className="flex items-center justify-between">
                       <dt className="text-muted-foreground">Customer</dt>
-                      <dd>Nitin</dd>
+                      <dd>{data === 'nothing' ? "Nothing" :<Link href={'/dashboard/${data}'} >{data}</Link>}</dd>
                     </div>
                     <div className="flex items-center justify-between">
                       <dt className="text-muted-foreground">Email</dt>
                       <dd>
-                        <a href="mailto:">nitin@hotmail.com</a>
+                        <a href="mailto:">cust_example@hotmail.com</a>
                       </dd>
                     </div>
                     <div className="flex items-center justify-between">
                       <dt className="text-muted-foreground">Phone</dt>
                       <dd>
-                        <a href="tel:">+91 9222796780</a>
+                        <a href="tel:">+91 9276266630</a>
                       </dd>
                     </div>
                   </dl>
@@ -594,7 +630,7 @@ export function Dashboard()
               </CardContent>
               <CardFooter className="flex flex-row items-center border-t bg-muted/50 px-6 py-3">
                 <div className="text-xs text-muted-foreground">
-                  Updated <time dateTime="2023-11-23">November 4, 2024</time>
+                  Updated <time dateTime="2023-11-23">4 November, 2024</time>
                 </div>
                 <Pagination className="ml-auto mr-0 w-auto">
                   <PaginationContent>

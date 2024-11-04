@@ -81,21 +81,21 @@ import {
   TabsTrigger,
 } from "@/components/ui/tabs"
 
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
 
-import vishphoto2 from '../assets/vishphoto2.jpg'
+import Harsh from '../assets/Harsh.jpeg'
 
 export default function userprofile({params}){
   return (
     <div>
     <aside className="fixed  left-0 z-10  w-14 h-0 flex-col border-r bg-background sm:flex "> 
     <nav className="flex flex-col items-center gap-4 px-2 sm:py-4">
-      <Link
-        href="#"
-        className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
-      >
-        <Package2 className="h-4 w-4 transition-all group-hover:scale-110" />
-        <span className="sr-only">Acme Inc</span>
-      </Link>
       <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>
@@ -115,7 +115,7 @@ export default function userprofile({params}){
         <TooltipTrigger asChild>
           <Link
             href="#"
-            className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-accent-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+            className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
           >
             <ShoppingCart className="h-5 w-5" />
             <span className="sr-only">Orders</span>
@@ -139,18 +139,6 @@ export default function userprofile({params}){
       </Tooltip>
       </TooltipProvider>
       <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Link
-            href="#"
-            className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-          >
-            <Users2 className="h-5 w-5" />
-            <span className="sr-only">Customers</span>
-          </Link>
-        </TooltipTrigger>
-        <TooltipContent side="right">Customers</TooltipContent>
-      </Tooltip>
       </TooltipProvider>
       <TooltipProvider>
       <Tooltip>
@@ -167,7 +155,7 @@ export default function userprofile({params}){
       </Tooltip>
       </TooltipProvider>
     </nav>
-    <nav className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-4">
+    <nav className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-2">
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>
@@ -248,27 +236,11 @@ export default function userprofile({params}){
               <p className="text-lg text-muted-foreground mb-4">
                 Welcome !
               </p>
-              <Breadcrumb className="hidden md:flex">
-            <BreadcrumbList>
-              <BreadcrumbItem>
-                <BreadcrumbLink asChild>
-                  <Link href="#">Dashboard</Link>
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbLink asChild>
-                  <Link href="#">Orders</Link>
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbPage>Recent Orders</BreadcrumbPage>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
+              <p className="text-base font-bold leading-none">Saravana Medicals</p>
+              <p className="text-sm text-muted-foreground mb-4">
+                No.35, Pillayar Koil St, Raghavendra Nagar, Nesapakkam, Chennai, Tamil Nadu 600078
+              </p>
             </div>
-            
           </Sheet>
           
           <div className="relative ml-auto flex-1 md:grow-0">
@@ -287,7 +259,7 @@ export default function userprofile({params}){
                 className="overflow-hidden rounded-full"
               >
                 <Image
-                  src={vishphoto2}
+                  src={Harsh}
                   width={36}
                   height={36}
                   alt="Avatar"
@@ -314,7 +286,7 @@ export default function userprofile({params}){
                 <CardHeader className="pb-3">
                   <CardTitle>Your Orders</CardTitle>
                   <CardDescription className="text-balance max-w-lg leading-relaxed">
-                    Introducing Our Dynamic Orders Dashboard for Seamless
+                    Order Smarter, Grow Faster! Dashboard for Seamless
                     Management and Insightful Analysis.
                   </CardDescription>
                 </CardHeader>
@@ -325,7 +297,7 @@ export default function userprofile({params}){
               <Card x-chunk="dashboard-05-chunk-1">
                 <CardHeader className="pb-2">
                   <CardDescription>This Week</CardDescription>
-                  <CardTitle className="text-4xl">$1,329</CardTitle>
+                  <CardTitle className="text-4xl">₹1,982</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="text-xs text-muted-foreground">
@@ -339,7 +311,7 @@ export default function userprofile({params}){
               <Card x-chunk="dashboard-05-chunk-2">
                 <CardHeader className="pb-2">
                   <CardDescription>This Month</CardDescription>
-                  <CardTitle className="text-4xl">$5,329</CardTitle>
+                  <CardTitle className="text-4xl">₹5,329</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="text-xs text-muted-foreground">
@@ -353,12 +325,7 @@ export default function userprofile({params}){
             </div>
             <Tabs defaultValue="week">
               <div className="flex items-center">
-                <TabsList>
-                  <TabsTrigger value="week">Week</TabsTrigger>
-                  <TabsTrigger value="month">Month</TabsTrigger>
-                  <TabsTrigger value="year">Year</TabsTrigger>
-                </TabsList>
-                <div className="ml-auto flex items-center gap-2">
+                <div className="ml-auto flex items-center gap-1">
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Button
@@ -374,13 +341,13 @@ export default function userprofile({params}){
                       <DropdownMenuLabel>Filter by</DropdownMenuLabel>
                       <DropdownMenuSeparator />
                       <DropdownMenuCheckboxItem checked>
-                        Fulfilled
+                        Completed
                       </DropdownMenuCheckboxItem>
                       <DropdownMenuCheckboxItem>
-                        Declined
+                        Cancelled
                       </DropdownMenuCheckboxItem>
                       <DropdownMenuCheckboxItem>
-                        Refunded
+                        Ongoing
                       </DropdownMenuCheckboxItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
@@ -399,7 +366,7 @@ export default function userprofile({params}){
                   <CardHeader className="px-7">
                     <CardTitle>Orders</CardTitle>
                     <CardDescription>
-                      Recent orders from your store.
+                      View your recent orders here  .
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
@@ -408,7 +375,7 @@ export default function userprofile({params}){
                         <TableRow>
                           <TableHead>Customer</TableHead>
                           <TableHead className="hidden sm:table-cell">
-                            Type
+                            Age
                           </TableHead>
                           <TableHead className="hidden sm:table-cell">
                             Status
@@ -422,65 +389,65 @@ export default function userprofile({params}){
                       <TableBody>
                         <TableRow className="bg-accent">
                           <TableCell>
-                            <div className="font-medium">Liam Johnson</div>
+                            <div className="font-medium">Nitin Pranav</div>
                             <div className="hidden text-sm text-muted-foreground md:inline">
-                              liam@example.com
+                              Nitin@gmail.com
                             </div>
                           </TableCell>
                           <TableCell className="hidden sm:table-cell">
-                            Sale
+                            22
                           </TableCell>
                           <TableCell className="hidden sm:table-cell">
                             <Badge className="text-xs" variant="secondary">
-                              Fulfilled
+                              Ongoing
                             </Badge>
                           </TableCell>
                           <TableCell className="hidden md:table-cell">
-                            2023-06-23
+                            4-Nov-2024
                           </TableCell>
-                          <TableCell className="text-right">$250.00</TableCell>
+                          <TableCell className="text-right">₹510.00</TableCell>
                         </TableRow>
-                        {/*<TableRow>
+                        <TableRow>
                           <TableCell>
-                            <div className="font-medium">Olivia Smith</div>
+                            <div className="font-medium">Siddharth R</div>
                             <div className="hidden text-sm text-muted-foreground md:inline">
-                              olivia@example.com
+                              kuchi@hotmail.com
                             </div>
                           </TableCell>
                           <TableCell className="hidden sm:table-cell">
-                            Refund
+                            27
                           </TableCell>
                           <TableCell className="hidden sm:table-cell">
                             <Badge className="text-xs" variant="outline">
-                              Declined
+                              Cancelled
                             </Badge>
                           </TableCell>
                           <TableCell className="hidden md:table-cell">
-                            2023-06-24
+                            3-Nov-2024
                           </TableCell>
-                          <TableCell className="text-right">$150.00</TableCell>
+                          <TableCell className="text-right">₹850.00</TableCell>
                         </TableRow>
                         <TableRow>
                           <TableCell>
-                            <div className="font-medium">Liam Johnson</div>
+                            <div className="font-medium">Raghava Krishnan</div>
                             <div className="hidden text-sm text-muted-foreground md:inline">
-                              liam@example.com
+                              raghavak@yahoo.com
                             </div>
                           </TableCell>
                           <TableCell className="hidden sm:table-cell">
-                            Sale
+                            55
                           </TableCell>
                           <TableCell className="hidden sm:table-cell">
                             <Badge className="text-xs" variant="secondary">
-                              Fulfilled
+                              Completed
                             </Badge>
                           </TableCell>
                           <TableCell className="hidden md:table-cell">
-                            2023-06-23
+                            3-Nov-2024
                           </TableCell>
-                          <TableCell className="text-right">$250.00</TableCell>
+                          <TableCell className="text-right">₹1782.00</TableCell>
                         </TableRow>
-                        <TableRow>
+                        {/*<TableRow>
                           <TableCell>
                             <div className="font-medium">Noah Williams</div>
                             <div className="hidden text-sm text-muted-foreground md:inline">
@@ -586,6 +553,42 @@ export default function userprofile({params}){
                 </Card>
               </TabsContent>
             </Tabs>
+            <CardHeader className="px-2">
+                    <CardTitle>Frequently Asked</CardTitle>
+                    <CardDescription>
+                      View your Customers Favourite Product
+                    </CardDescription>
+            </CardHeader>
+            <div className="grid gap-x-2 place-items-center">
+            <Carousel
+            opts={{
+              align: "start",
+            }}
+            className="w-9/12 max-w-base"
+          >
+            <CarouselContent>
+                {Array.from({ length: 5 }).map((_, index) => (
+                  <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                    <div className="p-1">
+                      <Card>
+                        <CardContent className="flex aspect-square items-center justify-center p-6">
+                          <span className="text-3xl font-semibold">{index + 1}</span>
+                        </CardContent>
+                      </Card>
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
+          </div>
+          <CardHeader className="px-2">
+                    <CardTitle>Business Analysis</CardTitle>
+                    <CardDescription>
+                      View your Proft and Sales Analysis here
+                    </CardDescription>
+            </CardHeader>
           </div>
           <div>
             <Card
@@ -594,7 +597,7 @@ export default function userprofile({params}){
               <CardHeader className="flex flex-row items-start bg-muted/50">
                 <div className="grid gap-0.5">
                   <CardTitle className="group flex items-center gap-2 text-lg">
-                    Order Oe31b70H
+                    Order N10A01
                     <Button
                       size="icon"
                       variant="outline"
@@ -604,7 +607,7 @@ export default function userprofile({params}){
                       <span className="sr-only">Copy Order ID</span>
                     </Button>
                   </CardTitle>
-                  <CardDescription>Date: November 23, 2023</CardDescription>
+                  <CardDescription>Date: November 4,2024</CardDescription>
                 </div>
                 <div className="ml-auto flex items-center gap-1">
                   <Button size="sm" variant="outline" className="h-8 gap-1">
@@ -635,34 +638,34 @@ export default function userprofile({params}){
                   <ul className="grid gap-3">
                     <li className="flex items-center justify-between">
                       <span className="text-muted-foreground">
-                        Glimmer Lamps x <span>2</span>
+                        Dolo x <span>12</span>
                       </span>
-                      <span>$250.00</span>
+                      <span>₹300.00</span>
                     </li>
                     <li className="flex items-center justify-between">
                       <span className="text-muted-foreground">
-                        Aqua Filters x <span>1</span>
+                        Thermometer x <span>1</span>
                       </span>
-                      <span>$49.00</span>
+                      <span>₹130.00</span>
                     </li>
                   </ul>
                   <Separator className="my-2" />
                   <ul className="grid gap-3">
                     <li className="flex items-center justify-between">
                       <span className="text-muted-foreground">Subtotal</span>
-                      <span>$299.00</span>
+                      <span>₹430.00</span>
                     </li>
                     <li className="flex items-center justify-between">
                       <span className="text-muted-foreground">Shipping</span>
-                      <span>$5.00</span>
+                      <span>₹50.00</span>
                     </li>
                     <li className="flex items-center justify-between">
                       <span className="text-muted-foreground">Tax</span>
-                      <span>$25.00</span>
+                      <span>₹30.00</span>
                     </li>
                     <li className="flex items-center justify-between font-semibold">
                       <span className="text-muted-foreground">Total</span>
-                      <span>$329.00</span>
+                      <span>₹510.00</span>
                     </li>
                   </ul>
                 </div>
@@ -671,9 +674,9 @@ export default function userprofile({params}){
                   <div className="grid gap-3">
                     <div className="font-semibold">Shipping Information</div>
                     <address className="grid gap-0.5 not-italic text-muted-foreground">
-                      <span>Liam Johnson</span>
-                      <span>1234 Main St.</span>
-                      <span>Anytown, CA 12345</span>
+                      <span>Nitin</span>
+                      <span>No:4, Kcee towers</span>
+                      <span>K.K.Nagar , Chennai 78</span>
                     </address>
                   </div>
                   <div className="grid auto-rows-max gap-3">
@@ -689,18 +692,18 @@ export default function userprofile({params}){
                   <dl className="grid gap-3">
                     <div className="flex items-center justify-between">
                       <dt className="text-muted-foreground">Customer</dt>
-                      <dd>Liam Johnson</dd>
+                      <dd>Nitin</dd>
                     </div>
                     <div className="flex items-center justify-between">
                       <dt className="text-muted-foreground">Email</dt>
                       <dd>
-                        <a href="mailto:">liam@acme.com</a>
+                        <a href="mailto:">nitin@hotmail.com</a>
                       </dd>
                     </div>
                     <div className="flex items-center justify-between">
                       <dt className="text-muted-foreground">Phone</dt>
                       <dd>
-                        <a href="tel:">+1 234 567 890</a>
+                        <a href="tel:">+91 9222796780</a>
                       </dd>
                     </div>
                   </dl>
@@ -721,7 +724,7 @@ export default function userprofile({params}){
               </CardContent>
               <CardFooter className="flex flex-row items-center border-t bg-muted/50 px-6 py-3">
                 <div className="text-xs text-muted-foreground">
-                  Updated <time dateTime="2023-11-23">November 23, 2023</time>
+                  Updated <time dateTime="2023-11-23">November 4, 2024</time>
                 </div>
                 <Pagination className="ml-auto mr-0 w-auto">
                   <PaginationContent>
