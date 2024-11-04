@@ -1,5 +1,5 @@
 import * as React from "react"
-
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -62,7 +62,9 @@ import {
   CommandShortcut,
 } from "@/components/ui/command"
 
-export function Content() {
+export function Content() 
+{
+  
   return (
     <div>
 
@@ -87,7 +89,7 @@ export function Content() {
       <CardHeader>
         <CardTitle>Heart Based</CardTitle>
         <CardDescription>Strong heart, strong you. </CardDescription>
-        <Button>View</Button>
+        <Link href='/services/medicines/medicinelist/?category=Heart'><Button>View</Button></Link>
       </CardHeader>
     </Card>
 
@@ -98,19 +100,19 @@ export function Content() {
       <CardHeader>
         <CardTitle>Lungs Based</CardTitle>
         <CardDescription>Breathe freely, live fully</CardDescription>
-        <Button>View</Button>
+        <Link href='/services/medicines/medicinelist/?category=Lungs'><Button>View</Button></Link>
       </CardHeader>
     </Card>
     
 
     <Card className="w-[350px]">
     <CardContent>
-    <Image src={kidneyimage} height ="50" width="266" alt="kidneyimage"></Image>
+    <Image src={kidneyimage} height ="50" width="266" alt="Kidney"></Image>
     </CardContent>
       <CardHeader className="mt-8">
         <CardTitle>Kidney Based</CardTitle>
         <CardDescription>Cherish your kidneys.</CardDescription>
-        <Button>View </Button>
+        <Link href='/services/medicines/medicinelist/?category=Kidney'><Button>View</Button></Link>
       </CardHeader>
     </Card>
     </div>
@@ -151,7 +153,7 @@ export function Content() {
         <CardHeader className="mt-3">
           <CardTitle>Must Haves</CardTitle>
           <CardDescription>Essential care, always ready. </CardDescription>
-          <Button>View </Button>
+          <Link href='/services/medicines/medicinelist/?category=MustHaves'><Button>View</Button></Link>
         </CardHeader>
       </Card>
 
@@ -162,7 +164,7 @@ export function Content() {
         <CardHeader className="mt-3">
           <CardTitle>Skin Care</CardTitle>
           <CardDescription>Reveal your skin&apos;s true potential.</CardDescription>
-          <Button>View </Button>
+          <Link href='/services/medicines/medicinelist/?category=SkinCare'><Button>View</Button></Link>
         </CardHeader>
       </Card>
 
@@ -173,7 +175,7 @@ export function Content() {
         <CardHeader className="mt-3">
           <CardTitle>Elderly Care</CardTitle>
           <CardDescription>Your golden years, our priority</CardDescription>
-          <Button>View </Button>
+          <Link href='/services/medicines/medicinelist/?category=ElderlyPeople'><Button>View</Button></Link>
         </CardHeader>
       </Card>
     </div>
