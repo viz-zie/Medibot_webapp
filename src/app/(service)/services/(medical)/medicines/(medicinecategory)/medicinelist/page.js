@@ -41,7 +41,9 @@ export default function DrugList()
     }
 
     useEffect(() => {
+        <Suspense>
       fetchDrugs();
+      </Suspense>
   }, []);
 
     return(
