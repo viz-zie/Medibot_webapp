@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { MinusIcon, PlusIcon } from "@radix-ui/react-icons"
 import { Label } from "@/components/ui/label"
-//import { Suspense } from 'react';
+import { Suspense } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card"; // Adjust based on your imports
 export default function DrugList()
 {
@@ -20,6 +20,24 @@ export default function DrugList()
     const searchParams = useSearchParams();
     const paramcategory = searchParams.get('category');
     //const { paramcategory } = router.query; // Get the category from the query parameters
+    
+    const [counts, setCounts] = useState({});
+
+    // Increment function
+    const increment = (id) => {
+      setCounts((prevCounts) => ({
+        ...prevCounts,
+        [id]: (prevCounts[id] || 0) + 1,
+      }));
+    };
+  
+    // Decrement function (optional)
+    const decrement = (id) => {
+      setCounts((prevCounts) => ({
+        ...prevCounts,
+        [id]: Math.max((prevCounts[id] || 0) - 1, 0), // Ensuring it doesn't go below zero
+      }));
+    };
     
 
     const fetchDrugs = async () => {
@@ -41,10 +59,10 @@ export default function DrugList()
     }
 
     useEffect(() => {
-        
-      fetchDrugs();
-      
-  }, []);
+        if (paramcategory) {
+            fetchDrugs();
+        }
+    }, [paramcategory]);
 
     return(
     
@@ -57,7 +75,7 @@ export default function DrugList()
      
     
         <div className="flex items-center justify-center">
-            <h4 className="text-3xl font-bold leading-none mt-10" >Heart Based Medicines</h4>
+            <h4 className="text-3xl font-bold leading-none mt-10" >{paramcategory} Based Medicines</h4>
         </div>
         <div className='flex items-center justify-center'>
             <p className="text-sm text-muted-foreground">Service is what life is all about</p>
@@ -70,7 +88,7 @@ export default function DrugList()
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {Array.isArray(Filtereddrugs) && Filtereddrugs.length > 0 ? (
                     Filtereddrugs.map((drug) => (
-                        <Card key={drug.DrugName} className="w-[350px] transform  rounded-xl transition duration-300 hover:scale-105">
+                        <Card key={drug._id} className="w-[350px] transform  rounded-xl transition duration-300 hover:scale-105">
                             <CardContent>
                                 <img src={drug.ImageURL} alt={drug.DrugName} width={200} height={200} className="object-cover rounded" />
                                 <CardHeader>
@@ -83,19 +101,20 @@ export default function DrugList()
                                     variant="outline"
                                     size="icon"
                                     className="h-8 w-8 shrink-0 rounded-full"
-                                    
+                                    onClick={() => decrement(drug._id)}
                                 >
                                     <MinusIcon className="h-4 w-4" />
                                     <span className="sr-only">Decrease</span>
                                 </Button>
 
-                                <Label>qty</Label>
+                                <Label>{counts[drug._id] || 0}</Label>
 
                                 <Button
                                     variant="outline"
                                     size="icon"
                                     className="h-8 w-8 shrink-0 rounded-full"
-                                    
+                                    onClick={() => increment(drug._id)}
+
                                 >
                                     <PlusIcon className="h-4 w-4" />
                                     <span className="sr-only">Increase</span>
