@@ -66,13 +66,13 @@ export default function DrugList()
         {error && <p>Error: {error}</p>}
 
     
-        <div className="flex flex-col items-center justify-center min-h-screen mt-28 ml-36">
+        <div className="flex flex-col items-center justify-center min-h-screen mt-28 ml-28">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {Array.isArray(Filtereddrugs) && Filtereddrugs.length > 0 ? (
                     Filtereddrugs.map((drug) => (
                         <Card key={drug.DrugName} className="w-[350px] transform  rounded-xl transition duration-300 hover:scale-105">
                             <CardContent>
-                                <img src={drug.ImageURL} alt={drug.DrugName} width={100} height={100} className="object-cover rounded" />
+                                <img src={drug.ImageURL} alt={drug.DrugName} width={200} height={200} className="object-cover rounded" />
                                 <CardHeader>
                                     <CardTitle>{drug.DrugName}</CardTitle>
                                     <CardDescription>Dosage: {drug.Dosage}</CardDescription>
