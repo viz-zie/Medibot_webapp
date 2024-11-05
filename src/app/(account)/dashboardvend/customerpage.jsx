@@ -133,7 +133,7 @@ export function Dashboard()
             <SheetContent side="left" className="sm:max-w-xs">
               <nav className="grid gap-6 text-lg font-medium">
                 <Link
-                  href="#Home"
+                  href="#"
                   className="group flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:text-base"
                 >
                   <Home className="h-5 w-5 transition-all group-hover:scale-110" />
@@ -161,7 +161,7 @@ export function Dashboard()
                   Customers
                 </Link>
                 <Link
-                  href="Analysis"
+                  href="#Analysis"
                   className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                 >
                   <LineChart className="h-5 w-5" />
@@ -174,14 +174,13 @@ export function Dashboard()
               <p className="text-lg text-muted-foreground mb-4">
                 Welcome back!
               </p>
-              <p>
               <Alert>
                 <AlertTitle>Saravana Medicals , ID: #0571</AlertTitle>
                 <AlertDescription>
                   No.35, Pillayar Koil St, Raghavendra Nagar, Nesapakkam, Chennai, Tamil Nadu 600078
                 </AlertDescription>
               </Alert>
-              </p>
+  
             </div>
             
           </Sheet>
@@ -526,8 +525,8 @@ export function Dashboard()
             <CarouselNext />
           </Carousel>
           </div>
-          <CardHeader className="px-2" section id="Analysis">
-                    <CardTitle>Business Analysis</CardTitle>
+          <CardHeader className="px-2">
+                    <CardTitle section id="Analysis">Business Analysis</CardTitle>
                     <CardDescription>
                       View your Proft and Sales Analysis here
                     </CardDescription>

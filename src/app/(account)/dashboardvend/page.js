@@ -113,7 +113,7 @@ export default function vendorpage(){
     
   </aside>
       <Dashboard/>
-      </div>
+  </div>
     
   );
 }

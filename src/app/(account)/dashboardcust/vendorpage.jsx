@@ -489,7 +489,7 @@ export function Dashboard()
           </Carousel>
           </div>
           <CardHeader className="px-2" section id="Analysis">
-                    <CardTitle>Business Analysis</CardTitle>
+                    <CardTitle>Analysis</CardTitle>
                     <CardDescription>
                       View your Analysis
                     </CardDescription>
