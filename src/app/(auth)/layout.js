@@ -6,7 +6,7 @@ import { Toaster } from "@/components/ui/sonner"
 import Footer from "@/components/ui/footer";
 const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
-  title: "Medibot",
+  title: "Medisoter",
   description: "Your go to medical Ai assistant",
 };
 
