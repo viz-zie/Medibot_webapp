@@ -535,7 +535,7 @@ export function Dashboard()
                     </CardDescription>
           </CardHeader>
 
-          <div className="flex">
+          <div className="flex gap-4">
           <RingChartComponent/>
           <BarChart1/>
           <RadialChart/>

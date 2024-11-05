@@ -491,16 +491,16 @@ export function Dashboard()
             <CarouselNext />
           </Carousel>
           </div>
-          <CardHeader className="px-2" section id="Analysis">
+          <CardHeader className="" section id="Analysis">
                     <CardTitle>Analysis</CardTitle>
                     <CardDescription>
                       View your Analysis
                     </CardDescription>
             </CardHeader>
-          <div className="flex gap-4">
-          <BarChart1/>
-          <RadialChart/>
-          {/*<RingChartComponent/>*/}
+          <div className="flex justify-center gap-4">
+            <BarChart1/>
+            <RadialChart/>
+            {/*<RingChartComponent/>*/}
           </div>
           </div>
           <div>
