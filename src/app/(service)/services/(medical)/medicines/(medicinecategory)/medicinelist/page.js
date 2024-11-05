@@ -9,19 +9,25 @@ import { MinusIcon, PlusIcon } from "@radix-ui/react-icons"
 import { Label } from "@/components/ui/label"
 import { Suspense } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card"; // Adjust based on your imports
+import react from '@heroicons/react';
+
 export default function DrugList()
 {
     console.log("i am inside Druglist")
     const [Filtereddrugs, setDrugs] = useState([]);
-    const [category, setCategory] = useState('');
-    const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    const searchParams = useSearchParams();
-    const paramcategory = searchParams.get('category');
+    const [headingvalue,setHeadingValue] = useState();
+
+    //const searchParams = useSearchParams();
+    //const paramcategory = searchParams.get('category');
     //const { paramcategory } = router.query; // Get the category from the query parameters
     
     const [counts, setCounts] = useState({});
+
+    
+   //paramcategory.append('category', paramcategory);
+    
 
     // Increment function
     const increment = (id) => {
@@ -40,12 +46,14 @@ export default function DrugList()
     };
     
 
-    const fetchDrugs = async () => {
+    const fetchDrugs = async (categoryvalue) => {
         try 
         {
             //console.log("hello broooski")
             //const res = await fetch(`/api/getDrugs?category=Heart`)
-            const res = await fetch(`/api/getDrugs?category=${paramcategory}`)
+            
+            const res = await fetch(`/api/getDrugs?category=${categoryvalue}`)
+            
             const data = await res.json();
             //console.log(data)
             setDrugs(data);
@@ -58,11 +66,19 @@ export default function DrugList()
         }
     }
 
-    useEffect(() => {
-        if (paramcategory) {
-            fetchDrugs();
-        }
-    }, [paramcategory]);
+    useEffect(() => {       
+            
+        
+            const urlParams = new URLSearchParams(window.location.search);
+            const categoryvalue = urlParams.get('category');
+            setHeadingValue(categoryvalue)
+            if(categoryvalue)
+            {
+                fetchDrugs(categoryvalue);
+            }
+            //headingvalue = categoryvalue;
+        
+    }, []);
 
     return(
     
@@ -75,7 +91,7 @@ export default function DrugList()
      
     
         <div className="flex items-center justify-center">
-            <h4 className="text-3xl font-bold leading-none mt-10" >{paramcategory} Based Medicines</h4>
+            <h4 className="text-3xl font-bold leading-none mt-10" >{headingvalue} Based Medicines</h4>
         </div>
         <div className='flex items-center justify-center'>
             <p className="text-sm text-muted-foreground">Service is what life is all about</p>
