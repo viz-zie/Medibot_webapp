@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 
 export const metadata = {
-  title: "Medibot",
+  title: "Medisoter",
   description: "Your go to medical Ai assistant",
 };
 

@@ -39,7 +39,10 @@ export const sendEmail = async ({email,emailType,userId}) =>
             from : 'medisoter@gmail.com',
             to : email,
             subject : emailType === "VERIFY" ? "verify your email" : "Reset your password",
-            html : '<p>Please click here for verification</p>'
+            html : `<img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQxBnYD0lpWOjoEYc_UA6qWj1RVxo4ZqqzaawMQ0mwZBlCMWB1clmZgKlVQhA1Bf_OeiJeisoiOfdhag41-cMgPK0QZFnLERvTobp8B-g"></img><p>Please click <a href="${process.env.DOMAIN}/verifyemail?token=${hashedToken}">here</a> 
+            to ${emailType === "VERIFY" ? "verify your email" : "reset your password"} or copy and paste the link below in your browser <br> ${process.env.DOMAIN}/verifyemail?token=${hashedToken}</p>`
+
+            //to ${emailType === "VERIFY" ? "verify your email" : "reset your password"}
             
         }
 

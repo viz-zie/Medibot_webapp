@@ -15,7 +15,7 @@ export async function POST(request)
 
         const user = await User.findOne({verifyToken:token,
             verifyTokenExpiry : {$gt:Date.now()}
-        })
+        });
 
         if(!user)
         {

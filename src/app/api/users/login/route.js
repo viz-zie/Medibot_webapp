@@ -39,17 +39,18 @@ export async function POST(request)
         }
 
         //create token
-        const token = await jwt.sign(tokenData,process.env.TOKEN_SECRET,{expiresIn:"1d"})
-
+        console.log("signing ",process.env.TOKEN_SECRET);
+        const token = await jwt.sign(tokenData,process.env.TOKEN_SECRET,{ algorithm: 'HS256' },{expiresIn:"1d"})
+        console.log('chki',token);
         const response = NextResponse.json({
             message: "Login Successful",
             success : true,
         })
         
 
-        response.cookies.set("token",token,{
+        response.cookies.set("mytoken",token,{
             httpOnly : true,
-        })
+        })       
         return response;
 
     }
