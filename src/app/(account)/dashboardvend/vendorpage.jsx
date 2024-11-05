@@ -4,6 +4,9 @@ import React,{useState} from "react"
 import Image from "next/image"
 import Link from "next/link"
 import Harsh from './assets/Harsh.jpeg'
+
+import { RingChartComponent } from "./ringchart1"
+
 import {
   ChevronLeft,
   ChevronRight,
@@ -26,6 +29,7 @@ import {
 
 
 import { TrendingUp } from "lucide-react"
+
 import {
   Label,
   PolarGrid,
@@ -37,14 +41,8 @@ import {
 import { ChartConfig, ChartContainer } from "@/components/ui/chart"
 
 import { Badge } from "@/components/ui/badge"
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
+
+
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -69,7 +67,8 @@ import {
   PaginationContent,
   PaginationItem,
 } from "@/components/ui/pagination"
-import { Progress } from "@/components/ui/progress"
+
+
 import { Separator } from "@/components/ui/separator"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import {
@@ -80,6 +79,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+
 import {
   Tabs,
   TabsContent,
@@ -106,6 +106,9 @@ import {
 
 import axios from "axios"
 import  Toast  from "@/components/ui/toast"
+
+import { BarChart1 } from "./barchart1"
+import { RadialChart } from "./radialchart1"
 
 export function Dashboard() 
 {
@@ -530,7 +533,18 @@ export function Dashboard()
                     <CardDescription>
                       View your Proft and Sales Analysis here
                     </CardDescription>
-            </CardHeader>
+          </CardHeader>
+
+          <div className="flex">
+          <RingChartComponent/>
+          <BarChart1/>
+          <RadialChart/>
+          </div>
+
+          
+
+
+
           </div>
           <div>
             <Card

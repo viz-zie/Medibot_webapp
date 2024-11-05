@@ -86,6 +86,9 @@ import {
 import axios from "axios"
 import  Toast  from "@/components/ui/toast"
 
+import { RingChartComponent } from "./ringchart1"
+import { RadialChart } from "./radialchart1"
+import { BarChart1 } from "./barchart1"
 import { MdEdit } from "react-icons/md";
 
 
@@ -494,6 +497,11 @@ export function Dashboard()
                       View your Analysis
                     </CardDescription>
             </CardHeader>
+          <div className="flex gap-4">
+          <BarChart1/>
+          <RadialChart/>
+          {/*<RingChartComponent/>*/}
+          </div>
           </div>
           <div>
             <Card

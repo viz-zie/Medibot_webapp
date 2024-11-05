@@ -1,11 +1,14 @@
+
 import { NextResponse } from 'next/server';
 import jwt from 'jsonwebtoken'; // Assuming you're using JSON Web Tokens (JWT)
 
 // Middleware function to handle requests
-export function middleware(request) {
-  console.log('Middleware is triggered.');
-  console.log('Request URL:', request.url);
-
+export function middleware(request) 
+{
+  //console.log('Middleware is triggered.');
+  //console.log('Request URL:', request.url);
+  
+  {/*
   // Extract the token from cookies
   const tokendata = request.cookies.get('mytoken');
   console.log(tokendata);
@@ -34,15 +37,20 @@ export function middleware(request) {
     console.log('Invalid token. Redirecting to login.');
     // Token is invalid, redirect to the login page
   }
+  
+  */}
 
 }
   
 
 
 // Configuration for which paths this middleware applies
+{/*
 export const config = {
   matcher: [
     '/',             // Root path (optional if you want to protect the root)
     '/dashboardvend', // Specific route
   ],
 };
+
+*/}

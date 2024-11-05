@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 
-import { Dashboard } from './vendorpage';
+import { Dashboard } from './customerpage';
 import { Button } from '@/components/ui/button';
 import {
   TooltipProvider,
