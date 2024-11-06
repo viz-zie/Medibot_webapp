@@ -23,7 +23,7 @@ export function middleware(request)
   try {
     // Validate the token (replace 'your-secret-key' with your actual secret key)
     console.log('Token checking valid before:');
-    const stringifiedTokenData = JSON.stringify(tokendata);
+    //const stringifiedTokenData = JSON.stringify(tokendata);
     console.log(process.env.TOKEN_SECRET);
     const user = jwt.verify(tokendata, process.env.TOKEN_SECRET,{ algorithm: 'HS256' });
 

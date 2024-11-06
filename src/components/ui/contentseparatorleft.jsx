@@ -1,5 +1,6 @@
 import { Separator } from "@/components/ui/separator"
 import { Button } from "@/components/ui/button"
+import Link from 'next/link'
 import { DrawerDemo } from "./chatbotpage"
 
 export function SeparatorDemo() {
@@ -15,10 +16,10 @@ export function SeparatorDemo() {
         {"we are dedicated to enriching people's lives through improved health and fitness"}
         </p>
         <div className="flex gap-4">
-          <Button>Get Started</Button>
+        <Link href="/services"><Button>Get Started</Button></Link>
           {/*<DrawerDemo className="border-white-50 "/>*/}
         </div>
-        
+ 
       </div>
       
     </div>
