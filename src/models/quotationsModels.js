@@ -1,12 +1,16 @@
 import mongoose from 'mongoose';
 
-const orderSchema = new mongoose.Schema({
-  orderId: {
+const quotationSchema = new mongoose.Schema({
+  quotationId: {
     type: String,
     required: true,
     unique: true, // Simulates a primary key by ensuring unique values
   },
-  customerId: {
+  userId: {
+    type: String,
+    required: true, // Simulating a foreign key to another collection
+  },
+  orderId: {
     type: String,
     required: true, // Simulating a foreign key to another collection
   },
@@ -14,21 +18,26 @@ const orderSchema = new mongoose.Schema({
     type: String,
     required: true, // Simulating a foreign key to another collection
   },
-  qty: {
+  rate: {
     type: Number,
     required: true, // Ensures this field is not null
-    min: [1, 'Quantity must be at least 1'], // Optional: validation for qty
+    min: [0, 'rate must be at least 0'], // Optional: validation for qty
   },
-  orderStatus: {
+  amount: {
+    type: Number,
+    required: true, // Ensures this field is not null
+    min: [0, 'amount must be at least 0'], // Optional: validation for qty
+  },
+  quotationStatus: {
     type: String,
     required: true, // Ensures this field is not null
-    enum: ['pending', 'shipped', 'delivered', 'canceled'], // Optional: define allowed values
+    enum: ['pending', 'sent','canceled'], // Optional: define allowed values
   },
 }, {
   timestamps: true, // Automatically add createdAt and updatedAt timestamps
 });
 
 // Export the model, avoiding redefinition issues in Next.js
-const Order =  mongoose.models.orders || mongoose.model('orders', orderSchema);
+const Quotation =  mongoose.models.quotations || mongoose.model('quotations', quotationSchema);
 
-export default Order;
+export default Quotation;
