@@ -25,7 +25,7 @@ const chartData = [{ month: "january", desktop: 1260, mobile: 570 }]
 const chartConfig = {
   desktop: {
     label: "Desktop",
-    color: "hsl(var(--chart-1))",
+    color: "hsl(var(--chart-5))",
   },
   mobile: {
     label: "Mobile",

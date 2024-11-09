@@ -8,7 +8,7 @@ export async function GET(request)
   //console.log(request)
   const { searchParams } = new URL(request.url);
   const category = searchParams.get('category');
-
+  console.log(category);
   
   try 
   {

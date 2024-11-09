@@ -22,7 +22,7 @@ const orderSchema = new mongoose.Schema({
   orderStatus: {
     type: String,
     required: true, // Ensures this field is not null
-    enum: ['pending', 'shipped', 'delivered', 'canceled'], // Optional: define allowed values
+    enum: ['requested', 'shipped', 'delivered', 'canceled'], // Optional: define allowed values
   },
 }, {
   timestamps: true, // Automatically add createdAt and updatedAt timestamps

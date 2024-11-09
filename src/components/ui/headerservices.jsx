@@ -32,6 +32,7 @@ import {
   } from "@/components/ui/command"
   
 import { SheetDemo } from '@/components/ui/sidenotificationbar'
+import { Addtocartbar } from './addtocartsidebar'
 import { DrawerDemo } from '@/components/ui/chatbotpage'
 import Image from 'next/image'
 import headericon from '@/components/assets/headerlogo6.png'
@@ -40,7 +41,7 @@ import classes from './header.module.css'
  
 
 
-  export function MenubarDemo() 
+  export function MenubarDemoServices() 
   {
     const path = usePathname();
 
@@ -81,8 +82,11 @@ import classes from './header.module.css'
         </MenubarMenu>
       </div>
 
+        
+        
         <MenubarMenu>
         <div className=" container ml-auto flex items-center gap-4 justify-end">
+            <Addtocartbar className="flex items-center justify-end"/>
             <SheetDemo className="flex items-center justify-end"/>
             <Link href='./loginsignup'><Button>Login / Signup</Button></Link>
         </div>
