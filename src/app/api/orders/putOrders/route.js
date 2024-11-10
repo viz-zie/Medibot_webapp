@@ -1,5 +1,5 @@
 import {connect} from '@/dbConfig/dbConfig';
-import Order from '../../../models/orderModel';
+import Order from '@/models/ordersModels';
 import { NextResponse } from 'next/server';
 
 connect();
