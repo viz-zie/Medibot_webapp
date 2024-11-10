@@ -14,7 +14,7 @@ export async function GET(request)
   {
     const drugresult = await Drugs.find(
       { Category: category },
-      { _id: 0, "DrugName": 1, Dosage: 1, Manufacturer: 1, "ImageURL": 1 }
+      { _id: 1, "DrugName": 1, Dosage: 1, Manufacturer: 1, "ImageURL": 1 }
     );
     
     return NextResponse.json(drugresult,{status:200});

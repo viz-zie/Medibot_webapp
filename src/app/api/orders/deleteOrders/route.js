@@ -1,32 +1,38 @@
 import {connect} from '@/dbConfig/dbConfig';
-import Order from '../../../models/orderModel';
+import Order from '@/models/ordersModels';
 import { NextResponse } from 'next/server';
 
 
 connect();
-export default async function handler(request) {
+export async function DELETE(request) 
+{
   
 
-  if (request.method === 'DELETE') {
-    const { orderId } = req.body;
+  //console.log(request)
+  const { searchParams } = new URL(request.url);
+  const cust = searchParams.get('customerId');
+  const item = searchParams.get('itemId');
+  //console.log(cust,item);  //null null
+  const inputJson = {cust,item}
+  console.log(inputJson)
+  
+  try 
+  {
+    const deletedOrder = await Order.deleteOne({
+    customerId: cust,
+    itemId: item
+  });
 
-    // Validate required fields
-    if (!orderId) {
-      return NextResponse.json({ success: false, error: 'Order ID is required for deleting an order' }, { status: 400 });
-    }
-
-    try {
-      const deletedOrder = await Order.findOneAndDelete({ orderId });
-
-      if (!deletedOrder) {
-        return NextResponse.json({ success: false, error: 'Order not found' }, { status: 404 });
-      }
-
-      return NextResponse.json({ success: true, message: 'Order deleted successfully' }, { status: 200 });
-    } catch (error) {
-      return NextResponse.json({ success: false, error: 'Error deleting order' }, { status: 500 });
-    }
-  } else {
-    return NextResponse.json({ success: false, error: 'Method not allowed' }, { status: 405 });
+  console.log("delted order",deletedOrder)
+    
+    return NextResponse.json(deletedOrder,{status:200});
+  } 
+  catch (error) {
+    console.error(error);
+    return NextResponse.json({error:error.message},{status:500});
   }
+
+  
+
+  
 }

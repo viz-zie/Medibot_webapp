@@ -1,17 +1,13 @@
 import mongoose from 'mongoose';
 
 const orderSchema = new mongoose.Schema({
-  orderId: {
-    type: String,
-    required: true,
-    unique: true, // Simulates a primary key by ensuring unique values
-  },
   customerId: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
     required: true, // Simulating a foreign key to another collection
   },
-  itemId: {
-    type: String,
+  itemId: 
+  {
+    type: mongoose.Schema.Types.ObjectId,
     required: true, // Simulating a foreign key to another collection
   },
   qty: {
@@ -22,7 +18,7 @@ const orderSchema = new mongoose.Schema({
   orderStatus: {
     type: String,
     required: true, // Ensures this field is not null
-    enum: ['requested', 'shipped', 'delivered', 'canceled'], // Optional: define allowed values
+    enum: ['pending', 'shipped', 'delivered', 'canceled','requested'], // Optional: define allowed values
   },
 }, {
   timestamps: true, // Automatically add createdAt and updatedAt timestamps

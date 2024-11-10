@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
 const DrugSchema = new mongoose.Schema({
+  "_id":{ type: mongoose.Schema.Types.ObjectId, required: true },
   "DrugName": { type: String, required: true },
   Dosage: { type: String, required: true },
   Manufacturer: { type: String, required: true },

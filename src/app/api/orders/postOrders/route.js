@@ -1,32 +1,39 @@
 import {connect} from '@/dbConfig/dbConfig';
-import Order from '../../../models/orderModel';
+import Order from '@/models/ordersModels';
 import { NextResponse } from 'next/server';
 
 connect();
-export default async function handler(request) {
-  
 
-  if (request.method === 'POST') {
-    const { orderId, customerId, itemId, qty, orderStatus } = request.body;
+export async function POST(request)
+{
+    try{
+        
+        const reqBody = await request.json()
+        const {customerId, itemId, qty,orderStatus} = reqBody;
+        console.log("REQUEST BODY",reqBody);
 
-    // Validate required fields
-    if (!orderId || !customerId || !itemId || qty == null || !orderStatus) {
-      return NextResponse.status.json({ success: false, error: 'All fields are required' });
-    }
+       
+        const newOrder = new Order({ customerId, itemId, qty, orderStatus });
+        console.log(newOrder);
 
-    try 
-    {
-      // Create a new order
-      const newOrder = new Order({ orderId, customerId, itemId, qty, orderStatus });
-      await newOrder.save();
 
-      return NextResponse.json(newOrder,{status:201});
-    } 
-    catch (error) {
-      // Handle unique key violation for orderId or other database errors
-      return NextResponse.json({error: 'Error creating order' },{status:500});
-    }
-  } else {
-    return NextResponse.json({error: 'Method not allowed' },{status:405});
-  }
+        const savedOrder = await newOrder.save();
+        console.log(savedOrder);
+    
+        return NextResponse.json({
+          message: "Order added successfully",
+          success:true,
+          savedOrder})
+
+      }
+      catch (error) 
+      {
+        // Handle unique key violation for orderId or other database errors
+        return NextResponse.json({error: 'Error creating order' },{status:500});
+      }  
+
 }
+    
+
+
+

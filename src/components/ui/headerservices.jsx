@@ -32,7 +32,7 @@ import {
   } from "@/components/ui/command"
   
 import { SheetDemo } from '@/components/ui/sidenotificationbar'
-import { Addtocartbar } from './addtocartsidebar'
+import Addtocartbar from './addtocartsidebar'
 import { DrawerDemo } from '@/components/ui/chatbotpage'
 import Image from 'next/image'
 import headericon from '@/components/assets/headerlogo6.png'
@@ -41,13 +41,10 @@ import classes from './header.module.css'
  
 
 
-  export function MenubarDemoServices() 
+  export default function MenubarDemoServices() 
   {
     const path = usePathname();
 
-    
-
-   
     return (
       <div>
 

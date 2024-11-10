@@ -1,6 +1,6 @@
 import { Inter } from "next/font/google";
 import "@/app/globals.css";
-import { MenubarDemoServices } from '@/components/ui/headerservices'
+import MenubarDemoServices from "@/components/ui/headerservices";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner"
 import Footer from "@/components/ui/footer";
@@ -11,6 +11,8 @@ export const metadata = {
   title: "Medisoter",
   description: "Your go to medical Ai assistant",
 };
+
+
 
 export default function serviceLayout({ children }) {
 
