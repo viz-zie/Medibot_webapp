@@ -40,6 +40,8 @@ import mongoose from 'mongoose';
 
 
 
+
+
 export default function Addtocartbar() 
 {
   
@@ -98,7 +100,7 @@ export default function Addtocartbar()
   }
 
 
-  const updateOrderStatus = async (customerId,Status) => 
+  const updateOrderStatus = async (customerId) => 
   {
     
     const objcustomerId = new mongoose.Types.ObjectId(customerId);
