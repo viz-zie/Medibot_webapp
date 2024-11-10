@@ -34,7 +34,7 @@ import { Switch } from "@/components/ui/switch"
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 import { ItemIndicator } from "@radix-ui/react-select"
 import mongoose from 'mongoose';
-import { Toast , ToastProvider} from "./toast"
+
 
 
 
@@ -97,6 +97,38 @@ export default function Addtocartbar()
     
   }
 
+
+  const updateOrderStatus = async (customerId,Status) => 
+  {
+    
+    const objcustomerId = new mongoose.Types.ObjectId(customerId);
+    const updateorderData = 
+    {
+        customerId: objcustomerId,
+        orderStatus: 'requested',
+    };
+
+          console.log(updateorderData);
+    try {
+      const response = await fetch('/api/orders/putOrders', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updateorderData),
+      });
+  
+      const data = await response.json();
+      if (data.success) {
+        console.log("Order status updated successfully");
+      } else {
+        console.error("Failed to update order status:", data.message);
+      }
+    } catch (error) {
+      console.error("Error updating order status:", error);
+    }
+  }
+
   
 
 
@@ -125,7 +157,7 @@ export default function Addtocartbar()
       <div className="grid gap-4">
           
           {customerorders.map(({ orders }) =>
-            orders.map(({ itemId,qty, drugDetails: { DrugName, Dosage, Manufacturer } }) => (
+            orders.map(({ orderStatus,itemId,qty, drugDetails: { DrugName, Dosage, Manufacturer } }) => (
               <Card className="w-[320px]" key={itemId}>
                 <CardContent className="pt-5">
                   <div className="flex items-center space-x-4 rounded-md p-4">
@@ -143,10 +175,13 @@ export default function Addtocartbar()
                           <p className="text-sm font-medium leading-none">
                             Quantity: <span className="font-normal">{qty}</span>
                           </p>
+                          <p className="text-sm font-medium leading-none">
+                            Status: <span className="font-normal">{orderStatus}</span>
+                          </p>
                         </div>
-                      <ToastProvider>
+            
                       <Button variant='Ghost' size='icon' onClick={() => deleteitemsfromcart('672f31dafb66709daea25827',itemId)}><TrashIcon className="w-5 h-5 text-red-500 cursor-pointer" /></Button>
-                      </ToastProvider>
+                      
                   </div>
                 </CardContent>
               </Card>
@@ -154,7 +189,7 @@ export default function Addtocartbar()
       )}
     </div>
   
-    <Button className="w-full">
+    <Button className="w-full" onClick={() => updateOrderStatus('672f31dafb66709daea25827','pending')}>
         <CheckIcon className="mr-2 h-4 w-4" /> Request Quotation
     </Button>
     

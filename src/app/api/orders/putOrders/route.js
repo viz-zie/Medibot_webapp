@@ -3,41 +3,44 @@ import Order from '@/models/ordersModels';
 import { NextResponse } from 'next/server';
 
 connect();
-export default async function handler(request) {
-  
-
-  if (request.method === 'PUT') 
+export async function PUT(request) 
 {
-    const { orderId, customerId, itemId, qty, orderStatus } = request.body;
+  const body = await request.json(); // Parse JSON body
+  const { customerId, orderStatus } = body;
 
-    // Validate required fields
-    if (!orderId) 
-    {
-      return NextResponse.json({ success: false, error: 'Order ID is required for updating an order' }, { status: 400 });
-    }
-
-    try 
-    {
-      const updatedOrder = await Order.findOneAndUpdate(
-        { orderId }, // Filter by orderId
-        { customerId, itemId, qty, orderStatus }, // Fields to update
-        { new: true, runValidators: true } // Return updated document and apply schema validations
-      );
-
-      if (!updatedOrder) 
-        {
-        return NextResponse.json({ success: false, error: 'Order not found' }, { status: 404 });
-        }
-
-      return NextResponse.json({ success: true, data: updatedOrder }, { status: 200 });
-    } 
-    catch (error) 
-    {
-      return NextResponse.json({ success: false, error: 'Error updating order' }, { status: 500 });
-    }
-  } 
-  else 
-  {
-    return NextResponse.json({ success: false, error: 'Method not allowed' }, { status: 405 });
+  console.log("orderstat = ",orderStatus)
+  // Check if required parameters are provided
+  if (!customerId || !orderStatus) {
+    return NextResponse.json(
+      { success: false, message: 'Customer ID and new order status are required' },
+      { status: 400 }
+    );
   }
+
+  try {
+    // Update all `orderStatus` fields in the `orders` array for the given `customerId`
+    const result = await Order.updateMany(
+      {customerId: customerId },
+      { $set: { "orderStatus": orderStatus } }
+    );
+
+    if (result.nModified === 0) {
+      return NextResponse.json(
+        { success: false, message: 'No orders found for this customer' },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json(
+      { success: true, message: 'Order status updated for all orders of the customer' },
+      { status: 200 }
+    );
+  } catch (error) {
+    return NextResponse.json(
+      { success: false, message: error.message },
+      { status: 500 }
+    );
+  }
+
+  
 }
