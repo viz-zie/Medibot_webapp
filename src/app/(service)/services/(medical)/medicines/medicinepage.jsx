@@ -19,9 +19,9 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import Image from "next/image"
-import heartimage from './assets/heart.png'
+import heartimage from './assets/heart4.png'
 import lungsimage from "./assets/lungs.png"
-import kidneyimage from './assets/kidney.png'
+import kidneyimage from './assets/kidney2.png'
 import skincare from './assets/skincare.png'
 import musthave from "./assets/musthave.png"
 import Elderly from './assets/elderly.png'
@@ -64,7 +64,7 @@ import {
 
 export function Content() 
 {
-  
+  //<Link href='/services/medicines/medicinelist/?category=Heart'></Link>
   return (
     <div>
 
@@ -81,41 +81,55 @@ export function Content()
         </p>
     </div>
     
-    <div className="flex gap-4 justify-center mb-20">
-    <Card className="w-[350px] border-white" >
-    <CardContent>
-    <Image src={heartimage} height="50" width="200" alt="heartimage"></Image>
-    </CardContent>
-      <CardHeader>
-        <CardTitle>Heart Based</CardTitle>
-        <CardDescription>Strong heart, strong you. </CardDescription>
-        <Link href='/services/medicines/medicinelist/?category=Heart'><Button>View</Button></Link>
-      </CardHeader>
-    </Card>
+    <div className="flex gap-4 ml-52"> 
+    <div className="flex gap-4 justify-center items-center mb-10 ">
+          <Card className="w-[350px] transform rounded-xl transition duration-300 hover:scale-105">
+            <CardContent>
+            <Image src={heartimage} height="100" width="400" alt="labtest"></Image>
+            </CardContent>
+            <CardHeader>
+              <CardTitle>Heart</CardTitle>
+              <CardDescription>Love is heart</CardDescription>
+              <div>
+              <Link href='/services/medicines/medicinelist/?category=Heart'><Button className="w-full">Click here</Button></Link>
+              </div>
+              
+            </CardHeader>
+          </Card>
+      </div>
 
-    <Card className="w-[350px]">
-    <CardContent>
-    <Image src={lungsimage} height="50" width="238" alt="lungsimage"></Image>
-    </CardContent>
-      <CardHeader>
-        <CardTitle>Lungs Based</CardTitle>
-        <CardDescription>Breathe freely, live fully</CardDescription>
-        <Link href='/services/medicines/medicinelist/?category=Lungs'><Button>View</Button></Link>
-      </CardHeader>
-    </Card>
-    
+      <div className="flex gap-4 justify-center items-center mb-10 ">
+          <Card className="w-[350px] transform rounded-xl transition duration-300 hover:scale-105">
+            <CardContent>
+            <Image src={lungsimage} height="100" width="400" alt="labtest"></Image>
+            </CardContent>
+            <CardHeader>
+              <CardTitle>Lungs</CardTitle>
+              <CardDescription>Love is heart</CardDescription>
+              <div>
+              <Link href='/services/medicines/medicinelist/?category=Lungs'><Button className="w-full">Click here</Button></Link>
+              </div>
+              
+            </CardHeader>
+          </Card>
+      </div>
 
-    <Card className="w-[350px]">
-    <CardContent>
-    <Image src={kidneyimage} height ="50" width="266" alt="Kidney"></Image>
-    </CardContent>
-      <CardHeader className="mt-8">
-        <CardTitle>Kidney Based</CardTitle>
-        <CardDescription>Cherish your kidneys.</CardDescription>
-        <Link href='/services/medicines/medicinelist/?category=Kidney'><Button>View</Button></Link>
-      </CardHeader>
-    </Card>
-    </div>
+      <div className="flex gap-4 justify-center items-center mb-10 ">
+          <Card className="w-[350px] transform rounded-xl transition duration-300 hover:scale-105">
+            <CardContent>
+            <Image src={kidneyimage} height="100" width="400" alt="labtest"></Image>
+            </CardContent>
+            <CardHeader>
+              <CardTitle>Kidney</CardTitle>
+              <CardDescription>Love is heart</CardDescription>
+              <div>
+              <Link href='/services/medicines/medicinelist/?category=Kidney'><Button className="w-full">Click here</Button></Link>
+              </div>
+              
+            </CardHeader>
+          </Card>
+      </div>
+      </div>
 
     
 
@@ -143,43 +157,57 @@ export function Content()
         </p>
     </div>
 
-    <div className="object-cover">
-    <div className="flex gap-4 justify-center mb-20   ">
+    <div className="flex gap-4 ml-52"> 
+    <div className="flex gap-4 justify-center items-center mb-10 ">
+          <Card className="w-[350px] transform rounded-xl transition duration-300 hover:scale-105">
+            <CardContent>
+            <Image src={musthave} height="100" width="400" alt="labtest"></Image>
+            </CardContent>
+            <CardHeader>
+              <CardTitle>MustHaves</CardTitle>
+              <CardDescription>Love is heart</CardDescription>
+              <div>
+              <Link href='/services/medicines/medicinelist/?category=MustHaves'><Button className="w-full">Click here</Button></Link>
+              </div>
+              
+            </CardHeader>
+          </Card>
+      </div>
 
-      <Card className="w-[350px] transform  rounded-xl transition duration-300 hover:scale-105">
-      <CardContent>
-      <Image src={musthave} height ="50" width="266" alt="banner1"></Image>
-      </CardContent>
-        <CardHeader className="mt-3">
-          <CardTitle>Must Haves</CardTitle>
-          <CardDescription>Essential care, always ready. </CardDescription>
-          <Link href='/services/medicines/medicinelist/?category=MustHaves'><Button>View</Button></Link>
-        </CardHeader>
-      </Card>
+      <div className="flex gap-4 justify-center items-center mb-10 ">
+          <Card className="w-[350px] transform rounded-xl transition duration-300 hover:scale-105">
+            <CardContent>
+            <Image src={skincare} height="100" width="400" alt="labtest"></Image>
+            </CardContent>
+            <CardHeader>
+              <CardTitle>Skin Care</CardTitle>
+              <CardDescription>Love is heart</CardDescription>
+              <div>
+              <Link href='/services/medicines/medicinelist/?category=SkinCare'><Button className="w-full">Click here</Button></Link>
+              </div>
+              
+            </CardHeader>
+          </Card>
+      </div>
 
-      <Card className="w-[350px] transform  rounded-xl transition duration-300 hover:scale-105">
-      <CardContent>
-      <Image src={skincare} height ="50" width="266" alt="banner1"></Image>
-      </CardContent>
-        <CardHeader className="mt-3">
-          <CardTitle>Skin Care</CardTitle>
-          <CardDescription>Reveal your skin&apos;s true potential.</CardDescription>
-          <Link href='/services/medicines/medicinelist/?category=SkinCare'><Button>View</Button></Link>
-        </CardHeader>
-      </Card>
+      <div className="flex gap-4 justify-center items-center mb-10 ">
+          <Card className="w-[350px] transform rounded-xl transition duration-300 hover:scale-105">
+            <CardContent>
+            <Image src={Elderly} height="100" width="400" alt="labtest"></Image>
+            </CardContent>
+            <CardHeader>
+              <CardTitle>Elderly People</CardTitle>
+              <CardDescription>Love is heart</CardDescription>
+              <div>
+              <Link href='/services/medicines/medicinelist/?category=ElderlyPeople'><Button className="w-full">Click here</Button></Link>
+              </div>
+              
+            </CardHeader>
+          </Card>
+      </div>
+      </div>
 
-      <Card className="w-[350px] transform  rounded-xl transition duration-300 hover:scale-105">
-      <CardContent>
-      <Image src={Elderly} height ="50" width="266" alt="banner1"></Image>
-      </CardContent>
-        <CardHeader className="mt-3">
-          <CardTitle>Elderly Care</CardTitle>
-          <CardDescription>Your golden years, our priority</CardDescription>
-          <Link href='/services/medicines/medicinelist/?category=ElderlyPeople'><Button>View</Button></Link>
-        </CardHeader>
-      </Card>
-    </div>
-    </div>
+    
     </div>
   )
 }
