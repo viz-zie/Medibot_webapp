@@ -161,7 +161,7 @@ export default function Addtocartbar()
           {customerorders.map(({ orders }) =>
             orders.map(({ orderStatus,itemId,qty, drugDetails: { DrugName, Dosage, Manufacturer } }) => (
               <Card className="w-[320px]" key={itemId}>
-                <CardContent className="pt-5">
+                <CardContent className="pt-3">
                   <div className="flex items-center space-x-4 rounded-md p-4">
                       <span className="flex h-2 w-2 translate-y-1 rounded-full bg-sky-500" />
                         <div className="flex-1 space-y-1">

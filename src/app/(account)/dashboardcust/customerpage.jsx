@@ -90,17 +90,106 @@ import { RingChartComponent } from "./ringchart1"
 import { RadialChart } from "./radialchart1"
 import { BarChart1 } from "./barchart1"
 import { MdEdit } from "react-icons/md";
-
-
+import { Textarea } from "@/components/ui/textarea"
+import { Avatar,AvatarFallback,AvatarImage } from "@/components/ui/avatar"
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 export function Dashboard() 
 {
   
   const [data,setData] = useState("nothing")
+
   const getUserDetails = async () => {
     const res = await axios.get('/api/users/user')
     console.log(res.data)
     setData(res.data.data._id)
   }
+
+  
+  const [isEditing, setIsEditing] = useState(false);
+
+  // State to hold user details
+  const [userDetails, setUserDetails] = useState({
+    _id : "",
+    address: "",
+    gender:'',
+    bloodgroup:'',
+    latitude: "",
+    longitude: "",
+    profilepic: null
+  });
+
+ // Handle text and textarea changes
+ const handleChange = (e) => {
+  const { name, value } = e.target;
+  setUserDetails((prevDetails) => ({
+    ...prevDetails,
+    [name]: value,
+  }));
+};
+
+// Handle profile picture change
+const handleImageChange = (event) => {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      setUserDetails((prevDetails) => ({
+        ...prevDetails,
+        profilepic: e.target.result,
+      }));
+    };
+    reader.readAsDataURL(file);
+  }
+};
+
+// Handle select changes for gender and blood group
+const handleSelectChange = (name, value) => {
+  setUserDetails((prevDetails) => ({
+    ...prevDetails,
+    [name]: value,
+  }));
+};
+
+
+  // Function to toggle edit mode and update details
+  const handleUpdate = async () => 
+    {
+    setIsEditing(false);
+    console.log('Updated user details:', userDetails);
+    // Here, you could also make an API request to save the updated details on the server
+
+    try {
+      const response = await fetch('/api/users/user/putUser', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userDetails),
+      });
+  
+      const data = await response.json();
+      if (data.success) {
+        console.log("User details updated successfully");
+      } else {
+        console.error("Failed to update user details:", data.message);
+      }
+    } catch (error) {
+      console.error("Error updating user details:", error);
+    }
+  };
+
+
+
+
+
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40 " >
     {/*
@@ -163,60 +252,55 @@ export function Dashboard()
               className="w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[320px]"
             />
           </div>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button
-                variant="outline"
-                size="icon"
-                className="overflow-hidden rounded-full"
-              >
-                <Image
-                  src={vishphoto2}
-                  width={36}
-                  height={36}
-                  alt="Avatar"
-                  className="overflow-hidden rounded-full"
-                />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Settings</DropdownMenuItem>
-              <DropdownMenuItem>Support</DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Logout</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+
+
+          <Avatar className="w-24 h-24">
+          {userDetails.profilepic ? (
+            <AvatarImage src={userDetails.profilepic} alt="Profile Picture" />
+          ) : (
+            <AvatarFallback>PP</AvatarFallback>
+          )}
+        </Avatar>
+
+
         </header>
         <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 lg:grid-cols-3 xl:grid-cols-3">
           <div className="grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2">
+
+          
+          {!isEditing ? 
+          (
+          
             <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
-              <Card
-                className="sm:col-span-2" x-chunk="dashboard-05-chunk-0"
+              <Card className="sm:col-span-2" x-chunk="dashboard-05-chunk-0"
               >
                 <CardHeader className="pb-3">
-                  <CardTitle>Home Address</CardTitle>
-                  <CardDescription className="text-balance max-w-lg leading-relaxed py-2">
-                    No:5, Kcee Towers, K.K.Nagar, Chennai-78
-                  </CardDescription>
-                  <CardTitle>Contact</CardTitle>
-                  <CardDescription className="text-balance max-w-lg leading-relaxed">
-                    cust_example@gmail.com
-                  </CardDescription>
+                  <CardDescription>Address</CardDescription>
+                  <CardTitle className="text-balance max-w-lg leading-relaxed py-2">
+                  {userDetails.address}
+                  </CardTitle>
+                  <CardDescription>Latitude</CardDescription>
+                  <CardTitle className="text-balance max-w-lg leading-relaxed py-2">
+                  {userDetails.latitude}
+                  </CardTitle>
+                  <CardDescription>Longitude</CardDescription>
+                  <CardTitle className="text-balance max-w-lg leading-relaxed py-2">
+                  {userDetails.longitude}
+                  </CardTitle>
                 </CardHeader>
                 <CardFooter>
-                  <Button onClick={getUserDetails}><MdEdit/>Edit</Button>
+                  <Button onClick={() => setIsEditing(true)}><MdEdit/>Edit</Button>
                 </CardFooter>
+             
               </Card>
               <Card x-chunk="dashboard-05-chunk-1">
                 <CardHeader className="pb-1">
                   <CardDescription>Gender</CardDescription>
-                  <CardTitle className="text-4xl">Male</CardTitle>
+                  <CardTitle className="text-4xl">{userDetails.gender}</CardTitle>
                 </CardHeader>
                 <CardHeader className="pb-2">
                   <CardDescription>Blood Group </CardDescription>
-                  <CardTitle className="text-4xl">O+ve</CardTitle>
+                  <CardTitle className="text-4xl">{userDetails.bloodgroup}</CardTitle>
                 </CardHeader>
               </Card>
               <Card x-chunk="dashboard-05-chunk-2">
@@ -234,6 +318,115 @@ export function Dashboard()
                 </CardFooter>
               </Card>
             </div>
+
+            
+            ) : (
+          
+
+
+            <div>
+                <Card
+                    className="sm:col-span-2" x-chunk="dashboard-05-chunk-0"
+                  >
+                    <CardHeader className="pb-3">
+                      <CardDescription>Address</CardDescription>
+                      <Textarea
+                        placeholder="Enter your full address here."
+                        name="address"
+                        value={userDetails.address}
+                        onChange={handleChange}
+                      />
+                      <div className="flex gap-4">
+                        <div>
+                          <CardDescription className='mt-2'>Latitude</CardDescription>
+                          <input
+                          type="text"
+                          name="latitude"
+                          placeholder="Enter your latitude"
+                          value={userDetails.latitude}
+                          onChange={handleChange}
+                          className="w-full p-2 border rounded mt-2"
+                          />
+                        </div>
+                        <div>
+                        <CardDescription className='mt-2'>Longitude</CardDescription>
+                          <input
+                          type="text"
+                          name="longitude"
+                          placeholder="Enter your longitude"
+                          value={userDetails.longitude}
+                          onChange={handleChange}
+                          className="w-full p-2 border rounded mt-2"
+                          />
+                        </div>
+
+                        <div>
+                        <CardDescription className='mt-2 mb-3'>gender</CardDescription>
+                        <Select
+                        className="w-64"
+                          value={userDetails.gender}
+                          onValueChange={(value) => setUserDetails((prevDetails) => ({ ...prevDetails, gender: value }))}
+                        >
+                          <SelectTrigger className="w-full p-2 border rounded">
+                            <SelectValue placeholder="Select Gender" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="Male">Male</SelectItem>
+                            <SelectItem value="Female">Female</SelectItem>
+                            <SelectItem value="Other">Other</SelectItem>
+                          </SelectContent>
+                        </Select>
+                        </div>
+
+                        <div>
+                        <CardDescription className='mt-2 mb-3'>Blood Group</CardDescription>
+                        <Select
+                          value={userDetails.bloodGroup}
+                          onValueChange={(value) => setUserDetails((prevDetails) => ({ ...prevDetails, bloodgroup: value }))}
+                        >
+                          <SelectTrigger className="w-full p-2 border rounded">
+                            <SelectValue placeholder="Select Blood Group" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="A+">A+</SelectItem>
+                            <SelectItem value="A-">A-</SelectItem>
+                            <SelectItem value="B+">B+</SelectItem>
+                            <SelectItem value="B-">B-</SelectItem>
+                            <SelectItem value="AB+">AB+</SelectItem>
+                            <SelectItem value="AB-">AB-</SelectItem>
+                            <SelectItem value="O+">O+</SelectItem>
+                            <SelectItem value="O-">O-</SelectItem>
+                          </SelectContent>
+                        </Select>
+                        </div>
+                      </div>
+
+                      <div className="flex justify-center">
+
+                      
+                        
+                      
+                      <div className="flex flex-col mt-4">
+                        <CardDescription>Profile Picture</CardDescription>
+                        <Input type="file" onChange={handleImageChange} />
+                      </div>
+                
+                      </div>
+                        
+                      
+                      
+                    </CardHeader>
+                    <CardFooter>
+                      <Button onClick={handleUpdate}><MdEdit/>Update</Button>
+                    </CardFooter>
+                  </Card>
+            </div>
+
+          
+          )}
+          
+
+
             <Tabs defaultValue="week">
               <div className="flex items-center">
                 <div className="ml-auto flex items-center gap-2">
