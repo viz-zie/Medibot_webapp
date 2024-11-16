@@ -190,10 +190,11 @@ export default function Addtocartbar()
         ))
       )}
     </div>
-  
-    <Button className="w-full" onClick={() => updateOrderStatus('672f31dafb66709daea25827','pending')}>
-        <CheckIcon className="mr-2 h-4 w-4" /> Request Quotation
-    </Button>
+    <div className="justify-center items-center flex ">
+      <Button className="w-72" onClick={() => updateOrderStatus('672f31dafb66709daea25827','pending')}>
+          <CheckIcon className="mr-2 h-4 w-4" /> Request Quotation
+      </Button>
+    </div>
     
     </SheetHeader>
     <ScrollBar orientation='vertical'/>
