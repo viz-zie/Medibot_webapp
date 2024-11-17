@@ -40,6 +40,8 @@ import Cookies from 'js-cookie';
 import { jwtDecode } from "jwt-decode";
 import { usePathname } from 'next/navigation'
 
+import Link from "next/link"
+
 
 
 
@@ -215,9 +217,11 @@ export default function Addtocartbar()
       )}
     </div>
     <div className="justify-center items-center flex ">
+      <Link href='/searchvendor'>
       <Button className="w-72" onClick={() => updateOrderStatus({id},'pending')}>
-          <CheckIcon className="mr-2 h-4 w-4" /> Request Quotation
+          <CheckIcon className="mr-2 h-4 w-4" /> Search Vendors
       </Button>
+      </Link>
     </div>
     
     </SheetHeader>
