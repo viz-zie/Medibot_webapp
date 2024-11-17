@@ -38,6 +38,7 @@
     "embla-carousel-autoplay": "^8.1.8",
     "embla-carousel-react": "^8.1.8",
     "express": "^4.19.2",
+    "jose": "^5.9.6",
     "jsonwebtoken": "^9.0.2",
     "ldrs": "^1.0.2",
     "lottie-react": "^2.4.0",
