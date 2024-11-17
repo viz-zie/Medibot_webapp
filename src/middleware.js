@@ -1,56 +1,69 @@
 
 import { NextResponse } from 'next/server';
-import jwt from 'jsonwebtoken'; // Assuming you're using JSON Web Tokens (JWT)
+import { verifyToken } from './helpers/verifyToken';
+import { jwtVerify } from 'jose';
 
-// Middleware function to handle requests
-export function middleware(request) 
+
+// This function can be marked `async` if using `await` inside
+export async function middleware(request) 
 {
-  //console.log('Middleware is triggered.');
-  //console.log('Request URL:', request.url);
   
   {/*
-  // Extract the token from cookies
-  const tokendata = request.cookies.get('mytoken');
-  console.log(tokendata);
-
-  // If no token is found, redirect to the login page
-  if (!tokendata) {
-    console.log('No token found. Redirecting to login.');
-    return NextResponse.redirect(new URL('/loginsignup', request.url));
-  }
-
-
-  try {
-    // Validate the token (replace 'your-secret-key' with your actual secret key)
-    console.log('Token checking valid before:');
-    //const stringifiedTokenData = JSON.stringify(tokendata);
-    console.log(process.env.TOKEN_SECRET);
-    const user = jwt.verify(tokendata, process.env.TOKEN_SECRET,{ algorithm: 'HS256' });
-
-    console.log('Token is valid:',user);
-
-    // Token is valid, proceed to the next response
-    return NextResponse.redirect(new URL('/loginsignup', request.url));
-
-  } catch (error) {
-    console.log(error);
-    console.log('Invalid token. Redirecting to login.');
-    // Token is invalid, redirect to the login page
-  }
   
-  */}
+  console.log('inside middleware')
+  
+  const mytoken = request.cookies.get('token')?.value;
+  //console.log(mytoken)
+  if (!mytoken) return NextResponse.redirect(new URL('/', request.url))   // Decode and verify the JWT to extract the role
+     try{
+
+      const secret = new TextEncoder().encode(process.env.TOKEN_SECRET);
+      const { payload } = await jwtVerify(mytoken, secret);
+      if (!payload) 
+        {
+           // If verification fails, redirect to login
+          return NextResponse.redirect(new URL('/loginsignup', request.url));
+        }
+      
+         // Attach role to request for later use      
+      
+        const userRole = payload.role;  
+        console.log(userRole);
+        // Conditionally redirect based on user role
+        if (userRole === 'Customer') 
+        {
+        return NextResponse.redirect(new URL('/', request.url));
+        } 
+        else if (userRole === 'Vendor') 
+        {
+        return NextResponse.redirect(new URL('/', request.url));
+        }
+      
+        // Allow access to the requested page if role matches
+        return NextResponse.next();
+     }
+     catch{
+
+      return NextResponse.redirect(new URL('/loginsignup', request.url));
+
+     }
+
+ */}
+     
+
+ 
+  
+  
 
 }
-  
-
-
-// Configuration for which paths this middleware applies
-{/*
+ 
+// See "Matching Paths" below to learn more
 export const config = {
   matcher: [
-    '/',             // Root path (optional if you want to protect the root)
-    '/dashboardvend', // Specific route
+           // Root path (optional if you want to protect the root)
+    '/dashboardvend', 
+    '/dashboardcust',
+    // Specific route
   ],
 };
 
-*/}

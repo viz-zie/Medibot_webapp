@@ -1,6 +1,7 @@
 'use client'
 
 import React,{useState} from "react"
+import { useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import vishphoto2 from './assets/vishphoto2.jpg'
@@ -85,7 +86,7 @@ import {
 
 import axios from "axios"
 import  Toast  from "@/components/ui/toast"
-
+import mongoose from 'mongoose';
 import { RingChartComponent } from "./ringchart1"
 import { RadialChart } from "./radialchart1"
 import { BarChart1 } from "./barchart1"
@@ -101,23 +102,18 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-export function Dashboard() 
+
+export function Dashboard(custid) 
 {
-  
-  const [data,setData] = useState("nothing")
-
-  const getUserDetails = async () => {
-    const res = await axios.get('/api/users/user')
-    console.log(res.data)
-    setData(res.data.data._id)
-  }
-
-  
-  const [isEditing, setIsEditing] = useState(false);
-
+  console.log("component",custid);
+    
+   //const custid = new mongoose.Types.ObjectId(customerid);
+    const [isEditing, setIsEditing] = useState(false);
   // State to hold user details
   const [userDetails, setUserDetails] = useState({
-    _id : "",
+    _id : custid.custid,
+    username:"",
+    email:"",
     address: "",
     gender:'',
     bloodgroup:'',
@@ -151,23 +147,65 @@ const handleImageChange = (event) => {
 };
 
 
+const fetchUserDetails = async (custid) => {
 
+  try {
+
+    console.log('beforegetuser',custid)
+
+    const response = await fetch(`/api/users/getUser?custid=${custid.custid}`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+    if (!response.ok) {
+      throw new Error('Failed to fetch user details');
+    }
+    const result = await response.json();
+    console.log (result) 
+      setUserDetails({
+      _id: result._id,
+      username: result.username,
+      email: result.email,
+      address: result.address,
+      gender: result.gender,
+      bloodgroup: result.bloodgroup,
+      latitude: result.latitude,
+      longitude: result.longitude,
+      profilepic: result.profilepic
+    });
+
+    console.log('expectiung',userDetails)
+   
+  } 
+  catch (error) {
+    setError(error.message);
+  } finally {
+    setLoading(false);
+  }
+};
 
   // Function to toggle edit mode and update details
-  const handleUpdate = async () => 
+  const putUserDetails = async (custid) => 
     {
     setIsEditing(false);
     console.log('Updated user details:', userDetails);
+    console.log("inside updating");
     // Here, you could also make an API request to save the updated details on the server
 
-    try {
-      const response = await fetch('/api/users/user/putUser', {
+    try 
+    {
+      const response = await fetch(`/api/users/putUser?custid=${custid.custid}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(userDetails),
       });
+
   
       const data = await response.json();
       if (data.success) {
@@ -179,6 +217,23 @@ const handleImageChange = (event) => {
       console.error("Error updating user details:", error);
     }
   };
+
+
+ 
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+  
+    if (custid) {
+      console.log('useefffect',custid);
+      fetchUserDetails(custid); // Pass custid as an argument
+    }
+
+  }, [custid]); // Runs only once, when the component mounts
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
 
 
 
@@ -230,7 +285,7 @@ const handleImageChange = (event) => {
               </nav>
             </SheetContent>
             <div className="">
-              <p className="text-xl font-bold leading-none">Hi {data === 'nothing' ? "Nothing" :<Link href={'/dashboard/${data}'} >{data}</Link>} </p>
+              <p className="text-xl font-bold leading-none">Hi {userDetails.username}</p>
               <p className="text-lg text-muted-foreground mb-4">
                 Welcome !
               </p>
@@ -411,7 +466,7 @@ const handleImageChange = (event) => {
                       
                     </CardHeader>
                     <CardFooter>
-                      <Button onClick={handleUpdate}><MdEdit/>Update</Button>
+                      <Button onClick={() => { putUserDetails(custid) }}><MdEdit/>Update</Button>
                     </CardFooter>
                   </Card>
             </div>
@@ -774,9 +829,9 @@ const handleImageChange = (event) => {
                   <div className="grid gap-3">
                     <div className="font-semibold">Customer Address</div>
                     <address className="grid gap-0.5 not-italic text-muted-foreground">
-                      <span>{data === 'nothing' ? "Nothing" :<Link href={'/dashboard/${data}'} >{data}</Link>}</span>
+                      <span>{userDetails.username}</span>
                       <div className="text-muted-foreground">
-                        No.4, Kcee Towers, K.K.Nagar, Chennai-78
+                        {userDetails.address}
                       </div>
                     </address>
                   </div>
@@ -793,12 +848,12 @@ const handleImageChange = (event) => {
                   <dl className="grid gap-3">
                     <div className="flex items-center justify-between">
                       <dt className="text-muted-foreground">Customer</dt>
-                      <dd>{data === 'nothing' ? "Nothing" :<Link href={'/dashboard/${data}'} >{data}</Link>}</dd>
+                      <dd></dd>
                     </div>
                     <div className="flex items-center justify-between">
                       <dt className="text-muted-foreground">Email</dt>
                       <dd>
-                        <a href="mailto:">cust_example@hotmail.com</a>
+                        <a href="mailto:">{userDetails.email}</a>
                       </dd>
                     </div>
                     <div className="flex items-center justify-between">

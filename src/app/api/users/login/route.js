@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from "next/server"
 import bcryptjs from "bcryptjs"
 import jwt from 'jsonwebtoken'
 
+
 connect()
 
 
@@ -17,6 +18,7 @@ export async function POST(request)
 
         //check if user already exists
         const user = await User.findOne({email})
+        console.log("kanguvaa")
 
         if (!user){
             return NextResponse.json({error:"User does not exist"},{status:400})
@@ -30,33 +32,47 @@ export async function POST(request)
             return NextResponse.json({error:"Invalid password"},{status:400})
         }
 
+        console.log(user.isVerified);
 
-        //create tokenData
-        const tokenData = {
-            id: user._id,
-            username: user.username,
-            email:user.email
+        if (user.isVerified)
+        {
+                //create tokenData
+               
+                const tokenData = {
+                    id: user._id,
+                    username: user.username,
+                    email:user.email,
+                    role:user.role
+                }
+
+                //create token
+                console.log("signing ",process.env.TOKEN_SECRET);
+                const token = await jwt.sign(tokenData,process.env.TOKEN_SECRET,{ algorithm: 'HS256', expiresIn:"1d"})
+                console.log('chki',token);
+                const response = NextResponse.json({
+                    message: "Login Successful",
+                    success : true,
+                })
+                
+
+                response.cookies.set("token",token,{
+                    httpOnly : false,
+                    path: "/",
+                    maxAge: 1 * 24 * 60 * 60,
+                })       
+                return response;
         }
 
-        //create token
-        console.log("signing ",process.env.TOKEN_SECRET);
-        const token = await jwt.sign(tokenData,process.env.TOKEN_SECRET,{ algorithm: 'HS256' },{expiresIn:"1d"})
-        console.log('chki',token);
-        const response = NextResponse.json({
-            message: "Login Successful",
-            success : true,
-        })
-        
-
-        response.cookies.set("mytoken",token,{
-            httpOnly : true,
-        })       
-        return response;
 
     }
     catch (error)
     {
-        return NextResponse.json({error:error.message},{status:500})
+        const response = NextResponse.json({
+            message: " Your Signup Expired due to unverified email id",
+            success : true,
+        })
+        return response;
+        //return NextResponse.json({error:error.message},{status:500})
     }
 }
 

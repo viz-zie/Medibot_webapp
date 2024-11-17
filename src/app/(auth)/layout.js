@@ -1,6 +1,6 @@
 import { Inter } from "next/font/google";
 import '../../../src/app/globals.css'
-import { MenubarDemowithoutloginandnotifanddashboardbtn } from '@/components/ui/headerloginpage'
+import MenubarDemo from "@/components/ui/header";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner"
 import Footer from "@/components/ui/footer";
@@ -18,7 +18,7 @@ export default function loginpagelayout({ children }) {
     <body className={inter.className}>
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
         
-        <MenubarDemowithoutloginandnotifanddashboardbtn/>
+        <MenubarDemo/>
         {children}
         <Toaster />
         <Footer/>

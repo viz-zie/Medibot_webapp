@@ -31,8 +31,13 @@ import {
   Users2,
 } from "lucide-react"
 
+import { useSearchParams } from 'next/navigation';
 
-export default function vendorpage(){
+export default function customerpage()
+{
+  const searchParams = useSearchParams();
+  const custid = searchParams.get('custid');
+  console.log(custid);
   return (
     <div>
     <aside className="fixed  left-0 z-10  w-14 h-0 flex-col border-r bg-background sm:flex "> 
@@ -114,7 +119,7 @@ export default function vendorpage(){
     </nav>
     
   </aside>
-      <Dashboard/>
+      <Dashboard custid={custid}/>
       </div>
     
   );

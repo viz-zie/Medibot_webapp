@@ -5,24 +5,17 @@ import { NextResponse } from 'next/server';
 connect();
 export async function PUT(request) 
 {
-  const body = await request.json(); // Parse JSON body
-  const { userId,address,gender,bloodgroup, latitude,longitude,profilepic } = body;
+  console.log("putkanguva")
+  const body = await request.json();
+  console.log("api",body); // Parse JSON body
+  const {_id,address,gender,bloodgroup,latitude,longitude,profilepic } = body;
 
-  console.log(body);
-  // Check if required parameters are provided
-  {/*
-  if (!userId || !address || !gender || !bloodgroup || !latitude || !longitude || !profilepic) {
-    return NextResponse.json(
-      { success: false, message: 'user ID , address , latitude , longitude and profile pic  are required' },
-      { status: 400 }
-    );
-  }
-    */}
+
 
   try {
     // Update all `orderStatus` fields in the `orders` array for the given `customerId`
     const result = await User.updateOne(
-        { _id: "67389a415c5bb8ae0176b9d0" },  // Filter to find the document by _id
+        { _id: _id },  // Filter to find the document by _id
         { 
            $set: { 
               address: address,

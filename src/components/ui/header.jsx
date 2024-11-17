@@ -32,21 +32,39 @@ import {
   } from "@/components/ui/command"
   
 import { SheetDemo } from '@/components/ui/sidenotificationbar'
+import Addtocartbar from './addtocartsidebar'
 import { DrawerDemo } from '@/components/ui/chatbotpage'
 import Image from 'next/image'
 import headericon from '@/components/assets/headerlogo6.png'
 import { usePathname } from 'next/navigation'
 import classes from './header.module.css'
+import { Toaster } from "@/components/ui/sonner"
  
+import { useEffect, useState } from 'react';
+import Cookies from 'js-cookie';
+import { jwtDecode } from "jwt-decode";
 
-
-  export function MenubarDemo() 
+  export default function MenubarDemo() 
   {
+    const [role, setRole] = useState(null);
+    const [id, setId] = useState(null);
+    
+    useEffect(() => {
+      // Get the token from cookies
+      const token = Cookies.get('token');
+      if (token) {
+        try {
+          // Decode the token to get the user's role
+          const decoded = jwtDecode(token);
+          setRole(decoded.role);
+          setId(decoded.id); // Set the user's role in state
+        } catch (error) {
+          console.error("Error decoding token:", error);
+        }
+      }
+    }, []);
     const path = usePathname();
 
-    
-
-   
     return (
       <div>
 
@@ -65,10 +83,22 @@ import classes from './header.module.css'
           <MenubarMenu>
             <MenubarTrigger><Link href="/services" className={path.startsWith('/services')? classes.active:undefined}>Services</Link></MenubarTrigger>
           </MenubarMenu>
-          
+
+          {role === 'Customer' && (
+          <>
           <MenubarMenu>
-          <MenubarTrigger><Link href="/dashboardcust" className={path.startsWith('/dashboardcust')? classes.active:undefined} >My Dashboard</Link></MenubarTrigger>
+          <MenubarTrigger><Link href={`/dashboardcust?custid=${id}`} className={path.startsWith('/dashboardcust')? classes.active:undefined} >My Dashboard</Link></MenubarTrigger>
           </MenubarMenu>
+          </>
+          )}
+
+          {role === 'Vendor' && (
+            <>
+            <MenubarMenu>
+            <MenubarTrigger><Link href={`/dashboardvend?vendid=${id}`} className={path.startsWith('/dashboardvend')? classes.active:undefined} >My Dashboard</Link></MenubarTrigger>
+            </MenubarMenu>
+            </>
+          )}
 
           <MenubarMenu>
           <MenubarTrigger><Link href="/aboutus" className={path.startsWith('/aboutus')? classes.active:undefined}>About Us</Link></MenubarTrigger>
@@ -81,10 +111,19 @@ import classes from './header.module.css'
         </MenubarMenu>
       </div>
 
+        
+        
         <MenubarMenu>
         <div className=" container ml-auto flex items-center gap-4 justify-end">
+            <Addtocartbar className="flex items-center justify-end"/>
             <SheetDemo className="flex items-center justify-end"/>
-            <Link href='./loginsignup'><Button>Login / Signup</Button></Link>
+            {role === 'Vendor' || role === 'Customer' ? (
+              <Link href='/loginsignup'><Button onClick={() => alert('Logging out...')}>Logout</Button></Link>
+            ) : (
+              
+              <Link href='/loginsignup'><Button onClick={() => alert('Logging out...')}>Login</Button></Link>
+            )}
+
         </div>
         </MenubarMenu>
       </Menubar>

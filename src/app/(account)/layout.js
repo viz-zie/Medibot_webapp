@@ -1,6 +1,6 @@
 import { Inter } from "next/font/google";
 import "@/app/globals.css";
-import { MenubarDemowithoutloginbtn } from '@/components/ui/headerdashboard'
+import MenubarDemo from "@/components/ui/header";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner"
 import Footer from "@/components/ui/footer";
@@ -20,7 +20,7 @@ export default function RootLayout({ children }) {
       <main>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
         
-        <MenubarDemowithoutloginbtn/>
+        <MenubarDemo/>
         {children}
         <Toaster />
         <Footer/>
