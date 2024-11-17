@@ -10,6 +10,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import Link from "next/link";
+import { useSearchParams } from 'next/navigation';
 
 import {
   ChevronLeft,
@@ -32,7 +33,11 @@ import {
 } from "lucide-react"
 
 
-export default function vendorpage(){
+export default function vendorpage()
+{
+  const searchParams = useSearchParams();
+  const vendid = searchParams.get('vendid');
+  console.log(vendid);
   return (
     <div>
     <aside className="fixed  left-0 z-10  w-14 h-0 flex-col border-r bg-background sm:flex "> 
@@ -112,7 +117,7 @@ export default function vendorpage(){
     </nav>
     
   </aside>
-      <Dashboard/>
+      <Dashboard vendid={vendid}/>
   </div>
     
   );

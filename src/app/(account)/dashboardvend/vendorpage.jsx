@@ -106,19 +106,155 @@ import {
 
 import axios from "axios"
 import  Toast  from "@/components/ui/toast"
-
+import { useEffect } from "react"
 import { BarChart1 } from "./barchart1"
 import { RadialChart } from "./radialchart1"
-
-export function Dashboard() 
+import { Avatar,AvatarFallback,AvatarImage } from "@/components/ui/avatar"
+import { MdEdit } from "react-icons/md";
+import { Progress } from "@/components/ui/progress"
+import { Textarea } from "@/components/ui/textarea"
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+export function Dashboard(vendid) 
 {
   
-  const [data,setData] = useState("nothing")
-  const getUserDetails = async () => {
-    const res = await axios.get('/api/users/user')
-    console.log(res.data)
-    setData(res.data.data._id)
+  console.log("component",vendid);
+    
+   //const custid = new mongoose.Types.ObjectId(customerid);
+    const [isEditing, setIsEditing] = useState(false);
+  // State to hold user details
+  const [userDetails, setUserDetails] = useState({
+    _id : vendid.vendid,
+    username:"",
+    email:"",
+    address: "",
+    gender:'',
+    bloodgroup:'',
+    latitude: "",
+    longitude: "",
+    profilepic: null
+  });
+
+ // Handle text and textarea changes
+ const handleChange = (e) => {
+  const { name, value } = e.target;
+  setUserDetails((prevDetails) => ({
+    ...prevDetails,
+    [name]: value,
+  }));
+};
+
+// Handle profile picture change
+const handleImageChange = (event) => {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      setUserDetails((prevDetails) => ({
+        ...prevDetails,
+        profilepic: e.target.result,
+      }));
+    };
+    reader.readAsDataURL(file);
   }
+};
+
+
+const fetchUserDetails = async (vendid) => {
+
+  try {
+
+    console.log('beforegetuser',vendid)
+
+    const response = await fetch(`/api/users/getUser?custid=${vendid.vendid}`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+    if (!response.ok) {
+      throw new Error('Failed to fetch user details');
+    }
+    const result = await response.json();
+    console.log (result) 
+      setUserDetails({
+      _id: result._id,
+      username: result.username,
+      email: result.email,
+      address: result.address,
+      gender: result.gender,
+      bloodgroup: result.bloodgroup,
+      latitude: result.latitude,
+      longitude: result.longitude,
+      profilepic: result.profilepic
+    });
+
+    console.log('expectiung',userDetails)
+   
+  } 
+  catch (error) {
+    setError(error.message);
+  } finally {
+    setLoading(false);
+  }
+};
+
+  // Function to toggle edit mode and update details
+  const putUserDetails = async (vendid) => 
+    {
+    setIsEditing(false);
+    console.log('Updated user details:', userDetails);
+    console.log("inside updating");
+    // Here, you could also make an API request to save the updated details on the server
+
+    try 
+    {
+      const response = await fetch(`/api/users/putUser?custid=${vendid.vendid}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userDetails),
+      });
+
+  
+      const data = await response.json();
+      if (data.success) {
+        console.log("User details updated successfully");
+      } else {
+        console.error("Failed to update user details:", data.message);
+      }
+    } catch (error) {
+      console.error("Error updating user details:", error);
+    }
+  };
+
+
+ 
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+  
+    if (vendid) {
+      console.log('useefffect',vendid);
+      fetchUserDetails(vendid); // Pass custid as an argument
+    }
+
+  }, [vendid]); // Runs only once, when the component mounts
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
+
   
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40 " >
@@ -173,16 +309,11 @@ export function Dashboard()
               </nav>
             </SheetContent>
             <div className="" section id="Home">
-              <p className="text-xl font-bold leading-none">Hi {data === 'nothing' ? "Nothing" :<Link href={'/dashboard/${data}'} >{data}</Link>} </p>
+            <p className="text-xl font-bold leading-none">Hi {userDetails.username}</p>
               <p className="text-lg text-muted-foreground mb-4">
                 Welcome back!
               </p>
-              <Alert>
-                <AlertTitle>Saravana Medicals , ID: #0571</AlertTitle>
-                <AlertDescription>
-                  No.35, Pillayar Koil St, Raghavendra Nagar, Nesapakkam, Chennai, Tamil Nadu 600078
-                </AlertDescription>
-              </Alert>
+              
   
             </div>
             
@@ -196,80 +327,176 @@ export function Dashboard()
               className="w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[320px]"
             />
           </div>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button
-                variant="outline"
-                size="icon"
-                className="overflow-hidden rounded-full"
-              >
-                <Image
-                  src={Harsh}
-                  width={36}
-                  height={36}
-                  alt="Avatar"
-                  className="overflow-hidden rounded-full"
-                />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Settings</DropdownMenuItem>
-              <DropdownMenuItem>Support</DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Logout</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <Avatar className="w-24 h-24">
+          {userDetails.profilepic ? (
+            <AvatarImage src={userDetails.profilepic} alt="Profile Picture" />
+          ) : (
+            <AvatarFallback>PP</AvatarFallback>
+          )}
+        </Avatar>
+          
         </header>
         <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 lg:grid-cols-3 xl:grid-cols-3">
           <div className="grid auto-rows-max items-start lg:col-span-2">
-            <div className="grid gap-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
-              {/*<Card
-                className="sm:col-span-2" x-chunk="dashboard-05-chunk-0"
+          {!isEditing ? 
+          (
+          
+            <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
+              <Card className="sm:col-span-2" x-chunk="dashboard-05-chunk-0"
               >
                 <CardHeader className="pb-3">
-                  <CardTitle>Your Orders</CardTitle>
-                  <CardDescription className="text-balance max-w-lg leading-relaxed">
-                    Order Smarter, Grow Faster! Dashboard for Seamless
-                    Management and Insightful Analysis.
-                  </CardDescription>
+                  <CardDescription>Address</CardDescription>
+                  <CardTitle className="text-balance max-w-lg leading-relaxed py-2">
+                  {userDetails.address}
+                  </CardTitle>
+                  <CardDescription>Latitude</CardDescription>
+                  <CardTitle className="text-balance max-w-lg leading-relaxed py-2">
+                  {userDetails.latitude}
+                  </CardTitle>
+                  <CardDescription>Longitude</CardDescription>
+                  <CardTitle className="text-balance max-w-lg leading-relaxed py-2">
+                  {userDetails.longitude}
+                  </CardTitle>
                 </CardHeader>
                 <CardFooter>
-                  <Button onClick={getUserDetails}>View Orders</Button>
+                  <Button onClick={() => setIsEditing(true)}><MdEdit/>Edit</Button>
                 </CardFooter>
+             
               </Card>
               <Card x-chunk="dashboard-05-chunk-1">
-                <CardHeader className="pb-2">
-                  <CardDescription>This Week</CardDescription>
-                  <CardTitle className="text-4xl">₹1,982</CardTitle>
+                <CardHeader className="pb-1">
+                  <CardDescription>Gender</CardDescription>
+                  <CardTitle className="text-4xl">{userDetails.gender}</CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <div className="text-xs text-muted-foreground">
-                    +25% from last week
-                  </div>
-                </CardContent>
-                <CardFooter>
-                  <Progress value={25} aria-label="25% increase" />
-                </CardFooter>
+                <CardHeader className="pb-2">
+                  <CardDescription>Blood Group </CardDescription>
+                  <CardTitle className="text-4xl">{userDetails.bloodgroup}</CardTitle>
+                </CardHeader>
               </Card>
               <Card x-chunk="dashboard-05-chunk-2">
                 <CardHeader className="pb-2">
-                  <CardDescription>This Month</CardDescription>
-                  <CardTitle className="text-4xl">₹5,329</CardTitle>
+                  <CardDescription>This Month Savings </CardDescription>
+                  <CardTitle className="text-4xl">₹529</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="text-xs text-muted-foreground">
-                    +10% from last month
+                    +10% saved from last month using vouchers and membership
                   </div>
                 </CardContent>
                 <CardFooter>
-                  <Progress value={12} aria-label="12% increase" />
+                  <Progress value={50} aria-label="12% increase" />
                 </CardFooter>
-              </Card>*/}
+              </Card>
             </div>
+
+            
+            ) : (
+          
+
+
+            <div>
+                <Card
+                    className="sm:col-span-2" x-chunk="dashboard-05-chunk-0"
+                  >
+                    <CardHeader className="pb-3">
+                      <CardDescription>Address</CardDescription>
+                      <Textarea
+                        placeholder="Enter your full address here."
+                        name="address"
+                        value={userDetails.address}
+                        onChange={handleChange}
+                      />
+                      <div className="flex gap-4">
+                        <div>
+                          <CardDescription className='mt-2'>Latitude</CardDescription>
+                          <input
+                          type="text"
+                          name="latitude"
+                          placeholder="Enter your latitude"
+                          value={userDetails.latitude}
+                          onChange={handleChange}
+                          className="w-full p-2 border rounded mt-2"
+                          />
+                        </div>
+                        <div>
+                        <CardDescription className='mt-2'>Longitude</CardDescription>
+                          <input
+                          type="text"
+                          name="longitude"
+                          placeholder="Enter your longitude"
+                          value={userDetails.longitude}
+                          onChange={handleChange}
+                          className="w-full p-2 border rounded mt-2"
+                          />
+                        </div>
+
+                        <div>
+                        <CardDescription className='mt-2 mb-3'>gender</CardDescription>
+                        <Select
+                        className="w-64"
+                          value={userDetails.gender}
+                          onValueChange={(value) => setUserDetails((prevDetails) => ({ ...prevDetails, gender: value }))}
+                        >
+                          <SelectTrigger className="w-full p-2 border rounded">
+                            <SelectValue placeholder="Select Gender" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="Male">Male</SelectItem>
+                            <SelectItem value="Female">Female</SelectItem>
+                            <SelectItem value="Other">Other</SelectItem>
+                          </SelectContent>
+                        </Select>
+                        </div>
+
+                        <div>
+                        <CardDescription className='mt-2 mb-3'>Blood Group</CardDescription>
+                        <Select
+                          value={userDetails.bloodGroup}
+                          onValueChange={(value) => setUserDetails((prevDetails) => ({ ...prevDetails, bloodgroup: value }))}
+                        >
+                          <SelectTrigger className="w-full p-2 border rounded">
+                            <SelectValue placeholder="Select Blood Group" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="A+">A+</SelectItem>
+                            <SelectItem value="A-">A-</SelectItem>
+                            <SelectItem value="B+">B+</SelectItem>
+                            <SelectItem value="B-">B-</SelectItem>
+                            <SelectItem value="AB+">AB+</SelectItem>
+                            <SelectItem value="AB-">AB-</SelectItem>
+                            <SelectItem value="O+">O+</SelectItem>
+                            <SelectItem value="O-">O-</SelectItem>
+                          </SelectContent>
+                        </Select>
+                        </div>
+                      </div>
+
+                      <div className="flex justify-center">
+
+                      
+                        
+                      
+                      <div className="flex flex-col mt-4">
+                        <CardDescription>Profile Picture</CardDescription>
+                        <Input type="file" onChange={handleImageChange} />
+                      </div>
+                
+                      </div>
+                        
+                      
+                      
+                    </CardHeader>
+                    <CardFooter>
+                      <Button onClick={() => { putUserDetails(vendid) }}><MdEdit/>Update</Button>
+                    </CardFooter>
+                  </Card>
+            </div>
+
+          
+          )}
+          
             <Tabs defaultValue="week">
-              <div className="flex items-center">
+              <div className="flex items-center mt-2">
                 <div className="ml-auto flex items-center gap-1">
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>

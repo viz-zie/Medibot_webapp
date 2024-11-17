@@ -1,5 +1,7 @@
 import * as React from "react"
 import Link from "next/link"
+import { useState,useEffect } from "react"
+import { usePathname } from 'next/navigation'
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -19,11 +21,31 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-
+import Cookies from 'js-cookie';
+import { jwtDecode } from "jwt-decode";
 import details from "./servicesdetails"
 import Image from "next/image"
 
-export function CardServices(props) {
+export function CardServices(props) 
+{
+  const [role, setRole] = useState(null);
+    const [id, setId] = useState(null);
+    
+    useEffect(() => {
+      // Get the token from cookies
+      const token = Cookies.get('token');
+      if (token) {
+        try {
+          // Decode the token to get the user's role
+          const decoded = jwtDecode(token);
+          setRole(decoded.role);
+          setId(decoded.id); // Set the user's role in state
+        } catch (error) {
+          console.error("Error decoding token:", error);
+        }
+      }
+    }, []);
+    const path = usePathname();
   return (
     
         <div className="flex gap-4 justify-center items-center mb-10 ">
@@ -33,10 +55,18 @@ export function CardServices(props) {
             </CardContent>
             <CardHeader>
               <CardTitle>{props.title}</CardTitle>
-              <CardDescription>{props.description}</CardDescription>
+              
+              
+              {role === 'Vendor' || role === 'Customer' ? (
+              <>
               <div>
+                <CardDescription className='mb-3'>{props.description}</CardDescription>
                 <Link href={props.link}><Button className="w-full">Click here</Button></Link>
               </div>
+              </>
+              ) : (
+              <CardDescription>{props.description}</CardDescription>
+            )}
               
             </CardHeader>
           </Card>

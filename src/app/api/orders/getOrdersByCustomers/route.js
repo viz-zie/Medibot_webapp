@@ -16,30 +16,33 @@ export async function GET(request)
   {
     const orderresult = await Order.aggregate([
       {
+        $match: { customerId: userObjectId }, // Replace `customerId` with the actual value you want to filter by
+      },
+      {
         $lookup: {
-          from: 'drugs',         // The name of the Drug collection in MongoDB
-          localField: 'itemId',  // Field in the Order schema
-          foreignField: '_id',   // Field in the Drug schema
-          as: 'drugDetails',     // The resulting array field for joined documents
+          from: 'drugs',               // The name of the Drug collection in MongoDB
+          localField: 'itemId',        // Field in the Order schema
+          foreignField: '_id',         // Field in the Drug schema
+          as: 'drugDetails',           // The resulting array field for joined documents
         },
       },
       {
-        $unwind: '$drugDetails',  // Unwind to get a flat document structure
+        $unwind: '$drugDetails',       // Unwind to get a flat document structure
       },
       {
         $group: {
-          _id: '$customerId',       // Group by customerId
+          _id: '$customerId',          // Group by customerId
           orders: {
             $push: {
               itemId: '$itemId',
               qty: '$qty',
               orderStatus: '$orderStatus',
-              drugDetails: '$drugDetails',  // Include drug details
+              drugDetails: '$drugDetails', // Include drug details
             },
           },
         },
       },
-      ]);
+    ]);
 
 
     console.log(orderresult);

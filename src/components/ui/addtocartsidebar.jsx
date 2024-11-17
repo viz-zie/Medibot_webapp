@@ -12,7 +12,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 import React from "react"
-import { useState } from "react"
+
 import Image from "next/image"
 import addtocartimg from '../assets/addcart.png'
 //import { NotifCardDemo } from "./notifications"
@@ -35,6 +35,10 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 import { ItemIndicator } from "@radix-ui/react-select"
 import mongoose from 'mongoose';
 
+import { useEffect, useState } from 'react';
+import Cookies from 'js-cookie';
+import { jwtDecode } from "jwt-decode";
+import { usePathname } from 'next/navigation'
 
 
 
@@ -44,13 +48,33 @@ import mongoose from 'mongoose';
 
 export default function Addtocartbar() 
 {
+
+  
+    const [id, setId] = useState(null);
+    
+    useEffect(() => {
+      // Get the token from cookies
+      const token = Cookies.get('token');
+      if (token) {
+        try {
+          // Decode the token to get the user's role
+          const decoded = jwtDecode(token);
+          
+          setId(decoded.id); // Set the user's role in state
+        } catch (error) {
+          console.error("Error decoding token:", error);
+        }
+      }
+    }, []);
+    const path = usePathname();
   
   const [customerorders, setCustomerOrders] = useState([]);
-
+  
   const getCustomerMedList = async (uservalue) => {
     try 
     {
-        const res = await fetch(`/api/orders/getOrdersByCustomers?customerId=${uservalue}`)
+        console.log("user value : ",uservalue.id)
+        const res = await fetch(`/api/orders/getOrdersByCustomers?customerId=${uservalue.id}`)
         const data = await res.json();
         console.log("after fetch")
         setCustomerOrders(data);
@@ -139,7 +163,7 @@ export default function Addtocartbar()
       <Sheet>
       
       <SheetTrigger asChild>
-        <Button variant="Ghost" onClick={() => getCustomerMedList('672f31dafb66709daea25827')}><Image src={addtocartimg} width="40" height="auto" alt="bellicon"></Image></Button>
+        <Button variant="Ghost" onClick={() => getCustomerMedList({id})}><Image src={addtocartimg} width="40" height="auto" alt="bellicon"></Image></Button>
       </SheetTrigger>
       <SheetContent>
       <ScrollArea className="h-full w-90 rounded-md ">
@@ -182,7 +206,7 @@ export default function Addtocartbar()
                           </p>
                         </div>
             
-                      <Button variant='Ghost' size='icon' onClick={() => deleteitemsfromcart('672f31dafb66709daea25827',itemId)}><TrashIcon className="w-5 h-5 text-red-500 cursor-pointer" /></Button>
+                      <Button variant='Ghost' size='icon' onClick={() => deleteitemsfromcart({id},itemId)}><TrashIcon className="w-5 h-5 text-red-500 cursor-pointer" /></Button>
                       
                   </div>
                 </CardContent>
@@ -191,7 +215,7 @@ export default function Addtocartbar()
       )}
     </div>
     <div className="justify-center items-center flex ">
-      <Button className="w-72" onClick={() => updateOrderStatus('672f31dafb66709daea25827','pending')}>
+      <Button className="w-72" onClick={() => updateOrderStatus({id},'pending')}>
           <CheckIcon className="mr-2 h-4 w-4" /> Request Quotation
       </Button>
     </div>
