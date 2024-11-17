@@ -4,10 +4,11 @@ import  jwt  from "jsonwebtoken";
 export const getDataFromToken = (request) =>{
     try
     {
-        const token = request.cookies.get("mytoken")?.value || '';
+        const token = request.cookies.get("token")?.value || '';
         const decodedToken = jwt.verify(token,process.env.TOKEN_SECRET);
         console.log('decoded',decodedToken);
-        return decodedToken.id;
+        return decodedToken;
+
     }
     catch(error)
     {

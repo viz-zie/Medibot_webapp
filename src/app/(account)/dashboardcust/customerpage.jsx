@@ -150,13 +150,7 @@ const handleImageChange = (event) => {
   }
 };
 
-// Handle select changes for gender and blood group
-const handleSelectChange = (name, value) => {
-  setUserDetails((prevDetails) => ({
-    ...prevDetails,
-    [name]: value,
-  }));
-};
+
 
 
   // Function to toggle edit mode and update details
