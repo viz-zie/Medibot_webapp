@@ -1,42 +1,35 @@
 import mongoose from 'mongoose';
 
 const quotationSchema = new mongoose.Schema({
-  quotationId: {
-    type: String,
-    required: true,
-    unique: true, // Simulates a primary key by ensuring unique values
-  },
-  userId: {
-    type: String,
+  vendId: {
+    type: mongoose.Schema.Types.ObjectId,
     required: true, // Simulating a foreign key to another collection
   },
   orderId: {
-    type: String,
-    required: true, // Simulating a foreign key to another collection
-  },
-  itemId: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
     required: true, // Simulating a foreign key to another collection
   },
   rate: {
     type: Number,
-    required: true, // Ensures this field is not null
+    required: false, // Ensures this field is not null
     min: [0, 'rate must be at least 0'], // Optional: validation for qty
   },
   amount: {
     type: Number,
-    required: true, // Ensures this field is not null
+    required: false, // Ensures this field is not null
     min: [0, 'amount must be at least 0'], // Optional: validation for qty
   },
   quotationStatus: {
     type: String,
-    required: true, // Ensures this field is not null
+    required: false, // Ensures this field is not null
     enum: ['pending', 'sent','canceled'], // Optional: define allowed values
   },
 }, {
   timestamps: true, // Automatically add createdAt and updatedAt timestamps
 });
 
+// Set up a unique compound index
+quotationSchema.index({ orderId: 1, vendId: 1 }, { unique: true });
 // Export the model, avoiding redefinition issues in Next.js
 const Quotation =  mongoose.models.quotations || mongoose.model('quotations', quotationSchema);
 

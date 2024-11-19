@@ -217,8 +217,8 @@ export default function Addtocartbar()
       )}
     </div>
     <div className="justify-center items-center flex ">
-      <Link href='/searchvendor'>
-      <Button className="w-72" onClick={() => updateOrderStatus({id},'pending')}>
+    <Link href={`/searchvendor?custidwhosearchvendor=${id}`}>
+    <Button className="w-72" onClick={() => updateOrderStatus({id},'pending')}>
           <CheckIcon className="mr-2 h-4 w-4" /> Search Vendors
       </Button>
       </Link>

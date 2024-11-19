@@ -21,7 +21,7 @@ export default function searchvendorlayout({ children }) {
         <MenubarDemo/>
         {children}
         <Toaster />
-        <Footer/>
+        
         
         </ThemeProvider>
     </body>
