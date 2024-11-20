@@ -41,8 +41,10 @@ export async function POST(request)
         
         listOfOrderIds.map(order => ({
             vendId: new mongoose.Types.ObjectId(vendId), //this is converted to objectid
-            orderId: order.orderId                       // it is already an objectid
-         
+            orderId: order.orderId,                       // it is already an objectid
+            rate:null,
+            amount:null,
+            quotationStatus:null
         }))
     );
 

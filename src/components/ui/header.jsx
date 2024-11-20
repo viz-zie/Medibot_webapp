@@ -116,15 +116,17 @@ import { jwtDecode } from "jwt-decode";
         <MenubarMenu>
         <div className=" container ml-auto flex items-center gap-4 justify-end">
             
-            {role === 'Vendor' || role === 'Customer' ? (
+            {role === 'Customer' ? (
               <>
               <Addtocartbar className="flex items-center justify-end"/>
               <SheetDemo className="flex items-center justify-end"/>
               <Link href='/loginsignup'><Button onClick={() => alert('Logging out...')}>Logout</Button></Link>
               </>
             ) : (
-              
+              <>
+              <SheetDemo className="flex items-center justify-end"/>
               <Link href='/loginsignup'><Button onClick={() => alert('Logging out...')}>Login</Button></Link>
+              </>
             )}
 
         </div>

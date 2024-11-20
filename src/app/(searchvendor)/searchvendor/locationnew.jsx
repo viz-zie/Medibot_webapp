@@ -67,7 +67,7 @@ const LocationPage = () => {
 
   return (
     <div>
-      <Button onClick={fetchLocationData}>Fetch Location and Find Shops</Button>
+      <Button className='mt-5' onClick={fetchLocationData}>Fetch Location and Find Shops</Button>
       {/*
       <div>
       

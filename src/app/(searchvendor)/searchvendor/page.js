@@ -8,7 +8,7 @@ import vishphoto2 from '@/app/(about)/aboutus/assets/vishphoto2.jpg'
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import Image from "next/image";
-import LocationPage from "./locationnew";
+import LocationPage from "./location";
 import {
     Card,
     CardContent,
@@ -130,20 +130,11 @@ export default function searchvendor()
         <div>
         
         <main className="flex max-h-screen flex-col items-center justify-between  ">
-        <div className=" justify-center items-center gap-4 ">
-            <div className="justify-center m-5" style={{ width: '400px', height: '400px', borderRadius: '50%', overflow: 'hidden' }} >
-                {/*<Image src={vishphoto2} width={400} height={400} className="rounded-full"></Image>*/}
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.806290366249!2d80.18242507482074!3d13.047998813199259!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a52613306b96323%3A0xb41f2be500c87f40!2s196%2C%20Agathiyar%20St%2C%20Thirumalai%20Nagar%2C%20Alwartirunagar%2C%20Valasaravakkam%2C%20Chennai%2C%20Tamil%20Nadu%20600087!5e0!3m2!1sen!2sin!4v1731862784832!5m2!1sen!2sin" 
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen=""
-                loading="lazy"
-                ></iframe>
-            </div>
+        <div className=" flex justify-center items-center gap-4 m-5">
+        <LocationPage/>
         </div>
         <div>
-          <LocationPage/>
+          
         </div>
         <div className="m-3">
           <h1>Matching Associated Vendors</h1>
